@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/* CrewJio tokens. Source of truth: CLAUDE.md "Design". The site is dark by brand,
+   in every colour scheme, so there is one theme only. */
+@theme {
+  --color-night: #0e1726;
+  --color-night-deep: #0a111d;
+  --color-card: #17233a;
+  --color-card-raised: #1e2c46;
+  --color-line: #26354f;
+  --color-cloud: #eef2f7;
+  --color-muted: #9aa8bf;
+  --color-faint: #7a89a3;
+  --color-amber: #f5b642;
+  --color-on-amber: #1a1405;
+  --color-teal: #4fd1c5;
+  --color-lavender: #c9b6ff;
+  --color-pink: #f59bb8;
+  --color-danger: #ff8a80;
+
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-night);
+  color: var(--color-cloud);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-amber) 35%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+}
+
+/* Ambient glow. Fixed and non-interactive so it never repaints while scrolling. */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(42rem 30rem at 85% -5%, rgb(245 182 66 / 0.09), transparent 70%),
+    radial-gradient(38rem 30rem at -10% 35%, rgb(79 209 197 / 0.07), transparent 70%);
+}
+
+/* Scroll reveal: Reveal.tsx flips data-shown once the element enters the viewport. */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 2.5rem, 0);
+  transition:
+    opacity 900ms var(--ease-out-soft),
+    transform 1000ms var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero arc: the two flight paths draw in, then the meeting point lands. */
+.arc-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: arc-draw 1600ms var(--ease-out-soft) 200ms forwards;
+}
+.arc-path-b {
+  animation-delay: 380ms;
+}
+.arc-dot {
+  opacity: 0;
+  transform: scale(0.4);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: arc-dot 700ms var(--ease-fluid) 1350ms forwards;
+}
+.arc-label {
+  opacity: 0;
+  animation: fade-in 800ms var(--ease-out-soft) 1500ms forwards;
+}
+@keyframes arc-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes arc-dot {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* FAQ disclosure: animate the chevron and content without touching layout props. */
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+.faq-item[open] .faq-body {
+  animation: faq-open 500ms var(--ease-out-soft);
+}
+@keyframes faq-open {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -0.5rem, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal[data-shown="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .arc-path,
+  .arc-dot,
+  .arc-label {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transform: none;
+  }
+  .faq-item[open] .faq-body {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+  }
+}
+
+/* Hero entrance: CSS only, so the headline never waits for JavaScript. */
+.rise {
+  opacity: 0;
+  animation: rise 1000ms var(--ease-out-soft) forwards;
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.75rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    opacity: 1;
+    animation: none;
+  }
+}
