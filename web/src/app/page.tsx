@@ -82,11 +82,16 @@ export default function Home() {
             <p className="text-lg leading-relaxed text-muted">Three steps from roster screenshot to a day everyone can make.</p>
           </Reveal>
 
-          <ol className="grid gap-16 md:grid-cols-3 md:gap-8">
+          {/* Phones: a sideways swipe with the next step peeking in. Tablet and up: staggered columns. */}
+          <Reveal>
+          <ol className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-8 md:overflow-visible md:px-0 md:pb-0">
             {STEPS.map((s, i) => (
-              <li key={s.title} className={i === 1 ? "md:mt-20" : i === 2 ? "md:mt-40" : ""}>
-                <Reveal delay={i * 120} className="flex flex-col gap-6">
-                  <PhoneShot src={s.src} alt={s.alt} className="mx-auto w-full max-w-[19rem]" sizes="(min-width: 768px) 30vw, 80vw" />
+              <li
+                key={s.title}
+                className={`w-[74vw] max-w-[18rem] shrink-0 snap-start md:w-auto md:max-w-none ${i === 1 ? "md:mt-20" : i === 2 ? "md:mt-40" : ""}`}
+              >
+                <div className="flex flex-col gap-6">
+                  <PhoneShot src={s.src} alt={s.alt} className="mx-auto w-full max-w-[19rem]" sizes="(min-width: 768px) 30vw, 74vw" />
                   <div className="flex gap-4 px-1">
                     <span
                       aria-hidden
@@ -99,10 +104,11 @@ export default function Home() {
                       <p className="leading-relaxed text-muted">{s.body}</p>
                     </div>
                   </div>
-                </Reveal>
+                </div>
               </li>
             ))}
           </ol>
+          </Reveal>
         </section>
 
         {/* Privacy */}

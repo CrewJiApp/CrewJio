@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, CopyIcon, SpinnerGapIcon } from "@phosphor-icons/react";
+import { CheckIcon, CopyIcon, ShareNetworkIcon, SpinnerGapIcon } from "@phosphor-icons/react";
 import { useId, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { CONTACT_EMAIL, SITE_URL } from "@/lib/site";
@@ -115,6 +115,8 @@ export function WaitlistForm() {
             id={`${id}-firstName`}
             name="firstName"
             autoComplete="given-name"
+            autoCapitalize="words"
+            enterKeyHint="next"
             className={inputClass}
             aria-invalid={!!errors.firstName}
             aria-describedby={described("firstName")}
@@ -129,6 +131,9 @@ export function WaitlistForm() {
             id={`${id}-email`}
             name="email"
             type="email"
+            autoCapitalize="none"
+            spellCheck={false}
+            enterKeyHint="next"
             inputMode="email"
             autoComplete="email"
             className={inputClass}
@@ -150,6 +155,7 @@ export function WaitlistForm() {
           <input
             id={`${id}-instagram`}
             name="instagram"
+            enterKeyHint="next"
             autoComplete="off"
             autoCapitalize="none"
             spellCheck={false}
@@ -296,17 +302,24 @@ function Choice({
 
 function ThankYou({ already, firstName }: { already: boolean; firstName: string }) {
   const [copied, setCopied] = useState<"idle" | "copied" | "manual">("idle");
+  // Phones get the native share sheet (WhatsApp, Telegram...). Desktops copy the link.
+  const [canShare] = useState(
+    () => typeof navigator !== "undefined" && typeof navigator.share === "function" && window.matchMedia("(pointer: coarse)").matches,
+  );
   const headingRef = useRef<HTMLHeadingElement>(null);
 
-  // Move focus to the result so screen readers announce it.
+  // The thank-you is shorter than the form, so bring it into view (on a phone the
+  // page would otherwise be left showing the footer), then focus it for screen readers.
   const focusOnMount = (el: HTMLHeadingElement | null) => {
     if (el && headingRef.current !== el) {
       headingRef.current = el;
-      el.focus();
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.closest("[data-thank-you]")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+      el.focus({ preventScroll: true });
     }
   };
 
-  async function share() {
+  async function copyLink() {
     try {
       await navigator.clipboard.writeText(SITE_URL);
       setCopied("copied");
@@ -316,8 +329,22 @@ function ThankYou({ already, firstName }: { already: boolean; firstName: string 
     }
   }
 
+  async function share() {
+    if (!canShare) return copyLink();
+    try {
+      await navigator.share({
+        title: "CrewJio",
+        text: "Find the days you're both home. Join the CrewJio waitlist:",
+        url: SITE_URL,
+      });
+    } catch (err) {
+      // Closing the share sheet is not an error. Anything else: fall back to copying.
+      if (!(err instanceof DOMException && err.name === "AbortError")) await copyLink();
+    }
+  }
+
   return (
-    <div className="flex flex-col items-start gap-5 py-4" aria-live="polite">
+    <div data-thank-you className="flex flex-col items-start gap-5 py-4" aria-live="polite">
       <span className="flex size-12 items-center justify-center rounded-full bg-teal/15 text-teal ring-1 ring-teal/30">
         <CheckIcon size={22} weight="bold" aria-hidden />
       </span>
@@ -336,7 +363,13 @@ function ThankYou({ already, firstName }: { already: boolean; firstName: string 
       >
         {copied === "copied" ? "Link copied" : "Jio your crew"}
         <span className="flex size-8 items-center justify-center rounded-full bg-on-amber/10 transition-transform duration-500 ease-fluid group-hover:scale-105">
-          {copied === "copied" ? <CheckIcon size={16} weight="bold" aria-hidden /> : <CopyIcon size={16} weight="bold" aria-hidden />}
+          {copied === "copied" ? (
+            <CheckIcon size={16} weight="bold" aria-hidden />
+          ) : canShare ? (
+            <ShareNetworkIcon size={16} weight="bold" aria-hidden />
+          ) : (
+            <CopyIcon size={16} weight="bold" aria-hidden />
+          )}
         </span>
       </button>
       <p className="sr-only" aria-live="polite">

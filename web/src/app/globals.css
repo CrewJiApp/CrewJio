@@ -180,3 +180,12 @@ body {
     animation: none;
   }
 }
+
+/* Swipe rows: keep native momentum scrolling, hide the bar. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

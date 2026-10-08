@@ -1,15 +1,16 @@
 "use client";
 
 import { AirplaneIcon } from "@phosphor-icons/react";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CtaLink } from "@/components/CtaLink";
 
 /**
  * Hero based on media/crewjio-tally-cover.png, drawn live so it fits any screen.
- * Two flight paths (yours amber, theirs teal) meet over SIN. While the hero is pinned,
- * scrolling flies one plane along each path; they cross at SIN, the day you're both
- * home, and carry on to the other side.
+ * Two flight paths (yours amber, theirs teal) meet over SIN. The page scrolls freely:
+ * the first part of the scroll flies one plane along each path, they cross at SIN
+ * (the day you're both home) and land on the other side. The artwork drifts slower
+ * than the text so the crossing stays in view.
  */
 
 interface Geometry {
@@ -36,7 +37,8 @@ const CITIES = [
 function buildGeometry(w: number, h: number): Geometry {
   const cx = w / 2;
   const portrait = w / h < 1.1;
-  const apexY = Math.max(portrait ? 130 : 104, h * 0.17);
+  // Phones sit the apex lower, clear of the floating menu bar while the hero scrolls.
+  const apexY = portrait ? Math.max(150, h * 0.23) : Math.max(130, h * 0.21);
   const exitY = h + 24;
 
   // Wide screens: an ellipse centred well below the fold, leaving through the bottom
@@ -93,20 +95,30 @@ function buildGeometry(w: number, h: number): Geometry {
 const EDGE_INSET = 84;
 // Where planes sit when motion is reduced.
 const STILL_PROGRESS = 0.16;
+// Share of the hero's height scrolled by the time the planes land (one short flick).
+const FLIGHT_END = 0.3;
+// The artwork moves at half scroll speed, so it lingers while the text scrolls on.
+const ART_DRIFT = "50%";
 
 export function FlightHero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLElement>(null);
   const routeRef = useRef<SVGPathElement>(null);
   const amberPlane = useRef<SVGGElement>(null);
   const tealPlane = useRef<SVGGElement>(null);
   const [geo, setGeo] = useState<Geometry | null>(null);
   const reduce = useReducedMotion();
 
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  // 0 when the hero's top is at the top of the screen, 1 once it has scrolled fully away.
+  const { scrollYProgress } = useScroll({ target: stageRef, offset: ["start start", "end start"] });
+  const flight = useTransform(scrollYProgress, [0, FLIGHT_END], [0, 1], { clamp: true });
+  // A spring so a fast flick on a phone glides the planes instead of teleporting them.
+  const smoothFlight = useSpring(flight, { stiffness: 140, damping: 26, mass: 0.5 });
+  const artY = useTransform(scrollYProgress, [0, 1], ["0%", ART_DRIFT]);
+  // Once the planes have landed the art fades back, so the text scrolling up over it stays clean.
+  const artOpacity = useTransform(scrollYProgress, [FLIGHT_END, FLIGHT_END + 0.08], [1, 0.12]);
   // The meeting point glows as the planes pass over SIN.
-  const haloScale = useTransform(scrollYProgress, [0.4, 0.5, 0.6], [1, 1.45, 1]);
-  const haloOpacity = useTransform(scrollYProgress, [0.4, 0.5, 0.6], [0.07, 0.15, 0.07]);
+  const haloScale = useTransform(smoothFlight, [0.38, 0.5, 0.62], [1, 1.45, 1]);
+  const haloOpacity = useTransform(smoothFlight, [0.38, 0.5, 0.62], [0.07, 0.15, 0.07]);
 
   useLayoutEffect(() => {
     const stage = stageRef.current;
@@ -121,7 +133,7 @@ export function FlightHero() {
     return () => ro.disconnect();
   }, []);
 
-  // Places both planes for a scroll progress 0..1. Writes SVG attributes directly,
+  // Places both planes for a flight progress 0..1. Writes SVG attributes directly,
   // so scrolling never re-renders React.
   const place = useCallback((progress: number) => {
     const path = routeRef.current;
@@ -136,32 +148,34 @@ export function FlightHero() {
       el.setAttribute("transform", `translate(${p.x} ${p.y}) rotate(${angle})`);
     };
     const inset = Math.min(0.2, EDGE_INSET / length);
-    const s = inset + (1 - 2 * inset) * progress;
+    const s = inset + (1 - 2 * inset) * Math.min(1, Math.max(0, progress));
     put(amberPlane.current, s, true);
     put(tealPlane.current, 1 - s, false);
   }, []);
 
   useEffect(() => {
-    if (geo) place(reduce ? STILL_PROGRESS : scrollYProgress.get());
-  }, [geo, reduce, place, scrollYProgress]);
+    if (geo) place(reduce ? STILL_PROGRESS : smoothFlight.get());
+  }, [geo, reduce, place, smoothFlight]);
 
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
+  useMotionValueEvent(smoothFlight, "change", (v) => {
     if (!reduce) place(v);
   });
 
   return (
-    // Tall section + sticky stage = pinned hero. Without motion it's one screen.
-    <section ref={sectionRef} className={`relative ${reduce ? "" : "h-[210vh]"}`} aria-labelledby="hero-title">
-      <div
-        ref={stageRef}
-        className="sticky top-0 flex h-[100dvh] min-h-[560px] flex-col items-center justify-end overflow-hidden pb-[9dvh] [@media(min-aspect-ratio:11/10)]:justify-center [@media(min-aspect-ratio:11/10)]:pb-0 bg-[radial-gradient(rgb(154_168_191/0.13)_1px,transparent_1.6px)] bg-[length:52px_52px] bg-center px-4"
+    // One screen tall, scrolls like any section. svh (not dvh) so the arc doesn't
+    // reshape while the phone's address bar shows and hides.
+    <section
+      ref={stageRef}
+      aria-labelledby="hero-title"
+      className="relative flex h-[100svh] min-h-[560px] flex-col items-center justify-end overflow-hidden px-4 pb-[9svh] [@media(min-aspect-ratio:11/10)]:justify-center [@media(min-aspect-ratio:11/10)]:pb-0"
+    >
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgb(154_168_191/0.13)_1px,transparent_1.6px)] bg-[length:52px_52px] bg-center will-change-transform"
+        style={reduce ? undefined : { y: artY, opacity: artOpacity }}
       >
         {geo && (
-          <svg
-            className="pointer-events-none absolute inset-0 h-full w-full"
-            viewBox={`0 0 ${geo.w} ${geo.h}`}
-            aria-hidden
-          >
+          <svg className="absolute inset-0 h-full w-full" viewBox={`0 0 ${geo.w} ${geo.h}`}>
             <path d={geo.dotted} fill="none" stroke="rgb(154 168 191 / 0.3)" strokeWidth="1.5" strokeDasharray="1.5 7" strokeLinecap="round" />
             {geo.cities.map((c) => (
               <g key={c.code} className="arc-label" transform={`translate(${c.x} ${c.y})`}>
@@ -198,24 +212,24 @@ export function FlightHero() {
             </g>
           </svg>
         )}
+      </motion.div>
 
-        <div className="relative flex [@media(min-aspect-ratio:11/10)]:mt-[12vh] max-w-[56rem] flex-col items-center gap-6 text-center">
-          <p className="rise font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-amber sm:text-[13px] sm:tracking-[0.32em]">
-            Early access · SG crew &amp; pilots
-          </p>
-          <h1
-            id="hero-title"
-            className="rise text-[2.6rem] font-bold leading-[1.04] tracking-[-0.035em] text-balance sm:text-6xl lg:text-7xl"
-            style={{ animationDelay: "80ms" }}
-          >
-            Find the days you&apos;re both home.
-          </h1>
-          <p className="rise max-w-[34ch] text-lg leading-relaxed text-muted md:text-xl" style={{ animationDelay: "160ms" }}>
-            Share rosters with your crew friends and partner. No more group-chat date juggling.
-          </p>
-          <div className="rise" style={{ animationDelay: "240ms" }}>
-            <CtaLink href="#waitlist">Get early access</CtaLink>
-          </div>
+      <div className="relative flex max-w-[56rem] flex-col items-center gap-6 text-center [@media(min-aspect-ratio:11/10)]:mt-[12vh]">
+        <p className="rise font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-amber sm:text-[13px] sm:tracking-[0.32em]">
+          Early access · SG crew &amp; pilots
+        </p>
+        <h1
+          id="hero-title"
+          className="rise text-[2.6rem] font-bold leading-[1.04] tracking-[-0.035em] text-balance sm:text-6xl lg:text-7xl"
+          style={{ animationDelay: "80ms" }}
+        >
+          Find the days you&apos;re both home.
+        </h1>
+        <p className="rise max-w-[34ch] text-lg leading-relaxed text-muted md:text-xl" style={{ animationDelay: "160ms" }}>
+          Share rosters with your crew friends and partner. No more group-chat date juggling.
+        </p>
+        <div className="rise" style={{ animationDelay: "240ms" }}>
+          <CtaLink href="#waitlist">Get early access</CtaLink>
         </div>
       </div>
     </section>
