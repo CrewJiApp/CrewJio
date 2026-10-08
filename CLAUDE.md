@@ -64,7 +64,7 @@ Users can edit any imported flight after the fact: Delayed, AOG / stuck, Cancell
 - A later roster re-import replaces manual edits for those days, after asking the user.
 
 ## Waitlist (web/)
-- Supabase table `waitlist`: first_name, email (unique), instagram, role, airline, pain_point, wants_beta, consent_at, source (site | tally_import), created_at. RLS on; inserts only via the server route with the service role key.
+- Supabase table `waitlist`: first_name, email (unique, stored lowercase), instagram, role (cabin_crew | pilot | partner_or_friend), airline (SIA | Scoot | other), pain_point, wants_beta, consent_at, source (site | tally_import), confirmation_sent_at, unsubscribed_at, created_at. RLS on; inserts only via the server route with the service role key. Never email rows with unsubscribed_at set.
 - Confirmation email via Resend, from `CrewJio <hello@mail.crewjio.com>`, reply-to `hello@crewjio.com`. Built with React Email in the app's dark navy / amber style. Copy:
   - Subject: "You're on the CrewJio list ✈️"
   - Body: "Hi {first_name}, you're on the list. CrewJio helps SG crew and pilots find the days you're all home, without the group-chat juggling. We're opening the beta to a small group first, and we'll email you when your spot is ready. Want in faster? Jio your crew and share crewjio.com with your batch. Just reply if you have ideas or questions. We read everything. — Nick, CrewJio"
