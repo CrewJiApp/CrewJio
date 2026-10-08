@@ -5,8 +5,7 @@ import {
   ShieldCheckIcon,
   TrashIcon,
 } from "@phosphor-icons/react/ssr";
-import { ArcMark } from "@/components/ArcMark";
-import { CtaLink } from "@/components/CtaLink";
+import { FlightHero } from "@/components/FlightHero";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { PhoneShot } from "@/components/PhoneShot";
@@ -74,44 +73,7 @@ export default function Home() {
     <>
       <Nav />
       <main id="top">
-        {/* Hero */}
-        <section className="mx-auto grid min-h-[100dvh] max-w-[1200px] items-center gap-10 px-4 pb-16 pt-24 md:px-8 md:pt-32 lg:grid-cols-[1.05fr_0.95fr] lg:gap-6">
-          <div className="order-2 flex flex-col items-start gap-6 lg:order-1">
-            <div className="rise">
-              <Eyebrow>For SG cabin crew and pilots</Eyebrow>
-            </div>
-            <div className="rise" style={{ animationDelay: "80ms" }}>
-              <h1 className="max-w-[13ch] text-[2.75rem] font-bold leading-[1.02] tracking-[-0.035em] sm:text-6xl lg:text-7xl">
-                Find the days you&apos;re both home.
-              </h1>
-            </div>
-            <div className="rise" style={{ animationDelay: "160ms" }}>
-              <p className="max-w-[38ch] text-lg leading-relaxed text-muted md:text-xl">
-                Share rosters with your crew friends and partner. No more group-chat date juggling.
-              </p>
-            </div>
-            <div className="rise" style={{ animationDelay: "240ms" }}>
-              <CtaLink href="#waitlist">Get early access</CtaLink>
-            </div>
-          </div>
-
-          <div className="relative order-1 mx-auto w-full max-w-[17rem] sm:max-w-[22rem] lg:order-2 lg:max-w-none">
-            <ArcMark className="w-full lg:hidden" />
-            {/* Desktop: the mark behind a tilted phone showing a real roster */}
-            <div className="relative hidden h-[640px] lg:block">
-              <ArcMark className="absolute inset-x-0 top-6 w-full" />
-              <div style={{ animationDelay: "350ms" }} className="rise absolute left-1/2 top-[150px] w-[290px] -translate-x-1/2">
-                <PhoneShot
-                  src="/screens/roster.png"
-                  alt="CrewJio roster for October 2026 with flights, training and standby days"
-                  priority
-                  sizes="290px"
-                  className="rotate-[3deg]"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <FlightHero />
 
         {/* How it works */}
         <section id="how" className="mx-auto max-w-[1200px] px-4 py-24 md:px-8 md:py-36">
