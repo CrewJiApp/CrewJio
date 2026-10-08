@@ -1,0 +1,18 @@
+{
+  "name": "crewjio",
+  "private": true,
+  "description": "CrewJio monorepo. web/ is NOT a workspace: it has its own lockfile and Vercel builds it alone.",
+  "workspaces": [
+    "app",
+    "shared"
+  ],
+  "scripts": {
+    "test": "npm test -w @crewjio/shared && npm run test:db",
+    "test:db": "node --test supabase/tests/*.test.mjs",
+    "typecheck": "npm run typecheck -w @crewjio/shared && npm run typecheck -w app",
+    "app": "npm start -w app"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8"
+  }
+}
