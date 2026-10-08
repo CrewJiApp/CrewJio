@@ -68,7 +68,11 @@ export default function WaitlistConfirmation({ firstName, unsubscribeUrl, siteUr
               <Link href={siteUrl} style={{ color: c.amber, fontWeight: 700, textDecoration: "none" }}>
                 Jio your crew
               </Link>{" "}
-              and share crewjio.com with your batch.
+              and share{" "}
+              <Link href={siteUrl} style={{ color: c.cloud, textDecoration: "none" }}>
+                crewjio.com
+              </Link>{" "}
+              with your batch.
             </Text>
             <Text style={p}>Just reply if you have ideas or questions. We read everything.</Text>
             <Text style={{ ...p, color: c.muted }}>— Nick, CrewJio</Text>
@@ -76,7 +80,11 @@ export default function WaitlistConfirmation({ firstName, unsubscribeUrl, siteUr
 
           <Hr style={{ borderColor: c.border, margin: "28px 0 16px" }} />
           <Text style={{ color: c.faint, fontSize: "12px", lineHeight: "19px", margin: "0 0 6px" }}>
-            You&apos;re getting this because you joined the CrewJio waitlist at crewjio.com.{" "}
+            You&apos;re getting this because you joined the CrewJio waitlist at{" "}
+            <Link href={siteUrl} style={{ color: c.faint, textDecoration: "none" }}>
+              crewjio.com
+            </Link>
+            .{" "}
             <Link href={unsubscribeUrl} style={{ color: c.muted, textDecoration: "underline" }}>
               Unsubscribe
             </Link>
