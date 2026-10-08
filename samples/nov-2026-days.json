@@ -1,0 +1,182 @@
+[
+ {
+  "date": "2026-11-01",
+  "day": "Sun",
+  "status": "Great",
+  "note": "Off"
+ },
+ {
+  "date": "2026-11-02",
+  "day": "Mon",
+  "status": "Evening",
+  "note": "Turnaround, back 1430"
+ },
+ {
+  "date": "2026-11-03",
+  "day": "Tue",
+  "status": "Great",
+  "note": "Off"
+ },
+ {
+  "date": "2026-11-04",
+  "day": "Wed",
+  "status": "Morning",
+  "note": "Reports 1755"
+ },
+ {
+  "date": "2026-11-05",
+  "day": "Thu",
+  "status": "Away",
+  "note": "Layover SFO"
+ },
+ {
+  "date": "2026-11-06",
+  "day": "Fri",
+  "status": "Away",
+  "note": "Layover SFO"
+ },
+ {
+  "date": "2026-11-07",
+  "day": "Sat",
+  "status": "Away",
+  "note": ""
+ },
+ {
+  "date": "2026-11-08",
+  "day": "Sun",
+  "status": "Tired",
+  "note": "Lands 1905 from SFO"
+ },
+ {
+  "date": "2026-11-09",
+  "day": "Mon",
+  "status": "Tired",
+  "note": "Off, day after long-haul"
+ },
+ {
+  "date": "2026-11-10",
+  "day": "Tue",
+  "status": "Great",
+  "note": "Off"
+ },
+ {
+  "date": "2026-11-11",
+  "day": "Wed",
+  "status": "Morning",
+  "note": "Reports 1235"
+ },
+ {
+  "date": "2026-11-12",
+  "day": "Thu",
+  "status": "Away",
+  "note": ""
+ },
+ {
+  "date": "2026-11-13",
+  "day": "Fri",
+  "status": "Tired",
+  "note": "Lands 0455 from ICN"
+ },
+ {
+  "date": "2026-11-14",
+  "day": "Sat",
+  "status": "Daytime",
+  "note": "Off, but reports 0010 next morning"
+ },
+ {
+  "date": "2026-11-15",
+  "day": "Sun",
+  "status": "Away",
+  "note": "Departs 0210"
+ },
+ {
+  "date": "2026-11-16",
+  "day": "Mon",
+  "status": "Away",
+  "note": "Layover MAN"
+ },
+ {
+  "date": "2026-11-17",
+  "day": "Tue",
+  "status": "Away",
+  "note": ""
+ },
+ {
+  "date": "2026-11-18",
+  "day": "Wed",
+  "status": "Tired",
+  "note": "Lands 0715 from MAN"
+ },
+ {
+  "date": "2026-11-19",
+  "day": "Thu",
+  "status": "Tired",
+  "note": "Off, day after long-haul"
+ },
+ {
+  "date": "2026-11-20",
+  "day": "Fri",
+  "status": "Great",
+  "note": "Off"
+ },
+ {
+  "date": "2026-11-21",
+  "day": "Sat",
+  "status": "Busy",
+  "note": "Turnaround, back 2050"
+ },
+ {
+  "date": "2026-11-22",
+  "day": "Sun",
+  "status": "Great",
+  "note": "Off"
+ },
+ {
+  "date": "2026-11-23",
+  "day": "Mon",
+  "status": "Blocked",
+  "note": "Reservist (untouchable)"
+ },
+ {
+  "date": "2026-11-24",
+  "day": "Tue",
+  "status": "Blocked",
+  "note": "Reservist (untouchable)"
+ },
+ {
+  "date": "2026-11-25",
+  "day": "Wed",
+  "status": "Blocked",
+  "note": "Reservist (untouchable)"
+ },
+ {
+  "date": "2026-11-26",
+  "day": "Thu",
+  "status": "Blocked",
+  "note": "Reservist (untouchable)"
+ },
+ {
+  "date": "2026-11-27",
+  "day": "Fri",
+  "status": "Morning",
+  "note": "Reports 1655"
+ },
+ {
+  "date": "2026-11-28",
+  "day": "Sat",
+  "status": "Away",
+  "note": "Layover HKG"
+ },
+ {
+  "date": "2026-11-29",
+  "day": "Sun",
+  "status": "Evening",
+  "note": "Lands 1255"
+ },
+ {
+  "date": "2026-11-30",
+  "day": "Mon",
+  "status": "Great",
+  "note": "Off"
+ }
+]

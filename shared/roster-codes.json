@@ -1,0 +1,7607 @@
+{
+ "meta": {
+  "source": "CM_ROSTER_CODES_24JUN21.pdf",
+  "count": 1083,
+  "categories": [
+   "busy",
+   "flight",
+   "layover",
+   "leave",
+   "national_service",
+   "off",
+   "part_off",
+   "private",
+   "reserve",
+   "standby",
+   "training"
+  ],
+  "notes": [
+   "Unknown codes must be flagged 'needs a look' in import, never guessed.",
+   "category 'private' (medical, suspension, interviews, tests, family leave) is never shown to friends: they see 'Unavailable'.",
+   "national_service, leave and private always block matching (untouchable)."
+  ]
+ },
+ "codes": {
+  "SN15": {
+   "description": "NB STANDBY (0000-1500)",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SN22": {
+   "description": "NB STANDBY (0000-2200)",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SN60": {
+   "description": "NB STANDBY 0600-2200",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SN80": {
+   "description": "NB STANDBY (0800-1500)",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SS22": {
+   "description": "STANDBY AT BASE 0000-2200",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SS33": {
+   "description": "STANDBY for A330 AT BASE",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SS55": {
+   "description": "STANDBY FOR A350 AT BASE",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SS60": {
+   "description": "STANDBY AT BASE 0600-2359",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SS77": {
+   "description": "STANDBY FOR 787 AT BASE",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SS80": {
+   "description": "STANDBY AT BASE 0800-2359",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SS88": {
+   "description": "STANDBY for A380 AT BASE",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSA1": {
+   "description": "STANDBY FOR ATB FLT",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSA2": {
+   "description": "STANDBY FOR ATB FLT",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSN1": {
+   "description": "NB STANDBY 0000-2359",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSN2": {
+   "description": "NB STANDBY (0000-1200)",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSN3": {
+   "description": "NB STANDBY (1200-2359)",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSS0": {
+   "description": "Standby for A350",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSS1": {
+   "description": "STANDBY AT BASE 0001-2359",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSS2": {
+   "description": "STANDBY AT BASE 0001-1200",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSS3": {
+   "description": "STANDBY AT BASE 1201-2359",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSS9": {
+   "description": "ULR STANDBY AT BASE (FULLDAY)",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SSYY": {
+   "description": "STANDBY for GRU AT BASE",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "STAB": {
+   "description": "CONFIGURABLE STBY AT BASE",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "STBY": {
+   "description": "STANDBY DUTY",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33A1": {
+   "description": "A330 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33A2": {
+   "description": "A330 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33A3": {
+   "description": "A330 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33A4": {
+   "description": "A330 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33A5": {
+   "description": "A330 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33RE": {
+   "description": "CCRP A330 REINFORCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33RP": {
+   "description": "A330 Second Fleet ST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33S1": {
+   "description": "CCRP - 330 2nd Fleet Training",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33S1T": {
+   "description": "RT-CCRP A330 SVC TRG D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "33S2T": {
+   "description": "RT-CCRP A330 SVC TRG D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "350RP": {
+   "description": "CCRP A350 SVC TRG D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35C1": {
+   "description": "CCCT A350 TRNG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35C2": {
+   "description": "CCCT A350 TRNG-AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35C3": {
+   "description": "CCCT A350 TRNG--DRY RUN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35C4": {
+   "description": "CCCT A350 TRNG--WET RUN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35RE": {
+   "description": "STC-CCRP A350 REF-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35RP": {
+   "description": "STC-CCRP A350 ST/EXAM-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35S1": {
+   "description": "STC-CCRP A350-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35S2": {
+   "description": "STC-CCRP A350 DRY-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35S3": {
+   "description": "STC-CCRP A350 WET-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35S4": {
+   "description": "STC-CCRP A350-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35S5": {
+   "description": "STC-CCRP A350-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "35S6": {
+   "description": "AP-CCRP A350 VISIT-PANTS/FLATS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "380RP": {
+   "description": "CCRP A380 SVC TRG D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "38RE": {
+   "description": "STC-CCRP A380 REF-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "38RP": {
+   "description": "STC-CCRP A380 ST/EXAM-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A01": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A02": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A03": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A04": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A05": {
+   "description": "773ER AC VISIT-IC PPORT WP REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A06": {
+   "description": "773ER AC VISIT-IC PPORT WP REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A07": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A08": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A09": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A10": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A11": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A12": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A13": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A14": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A15": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "3A16": {
+   "description": "B773ER AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4C99": {
+   "description": "747 CHIEF STEWARD PROMOTI",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4L99": {
+   "description": "747 CS/SS PROM/CONV",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4S09": {
+   "description": "STC-CCPP GEN MODULE & TALKS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4S99": {
+   "description": "STC-CCPP INTRO & GROOMING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4SD9": {
+   "description": "STC-CCPP CREW DUTIES & DOC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4SD9T": {
+   "description": "RT-STC-CCPP CREW DUTIES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4SP9": {
+   "description": "STC-CCPP PFS RFSH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4SP9T": {
+   "description": "RT-STC-CCPP PFS RFSH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4SW9": {
+   "description": "STC-CCPP PCL RFSH-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "4SW9T": {
+   "description": "RT-STC-CCPP WET RUN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "5A01": {
+   "description": "A350 FAMILIARISATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "5A02": {
+   "description": "A350 FAMILIARISATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "5A03": {
+   "description": "A350 FAMILIARISATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "5A04": {
+   "description": "A350 FAMILIARISATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "5A05": {
+   "description": "A350 FAMILIARISATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "5A14": {
+   "description": "A345 FAMILIARISATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "73C1": {
+   "description": "STC-CCCT B737 ST/EXAM-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "73C2": {
+   "description": "CCCT B737 TRNG-WET RUN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77RE": {
+   "description": "STC-CCRP B777 REF-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77RP": {
+   "description": "B777 Second Fleet ST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77S1": {
+   "description": "STC-CCRP B777-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77S1T": {
+   "description": "RT-CCRP B777 FLEET CRSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77S2": {
+   "description": "STC-CCRP B777 DR-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77S3": {
+   "description": "STC-CCRP B777 WR-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77S4": {
+   "description": "STC-CCRP B777 GD-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77S5": {
+   "description": "STC-CCRP B777 MEAL-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77S6": {
+   "description": "AP-CCRP B777 AC-PANTS/FLATS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "77WRT": {
+   "description": "RT-CCRP WET RUN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "78RE": {
+   "description": "STC-CCRP B787 REF-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "78RP": {
+   "description": "STC-CCRP B787 ST/EXAM-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "8A01": {
+   "description": "A380 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "8A02": {
+   "description": "A380 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "8A03": {
+   "description": "A380 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "8A04": {
+   "description": "A380 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "8A05": {
+   "description": "A380 AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "8PC2T": {
+   "description": "RT-A380 SUITES TRG(PM)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "8PCL": {
+   "description": "STC-SUITES-PANTS/FLATS-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "8PCLT": {
+   "description": "RT-STC-SUITES-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A331": {
+   "description": "STC-A330 SVC TRG-TOKEN REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A331T": {
+   "description": "RT-STC-A330 SVC TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A332": {
+   "description": "A330 SVC TRG DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A351": {
+   "description": "STC-A350 SVC TRG-TOKEN REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A351T": {
+   "description": "RT-STC-A350 SVC TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A352": {
+   "description": "A350 SERVICE TRAINING DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A35E": {
+   "description": "ONLINE VLE-A350 SVC TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A35ET": {
+   "description": "RT-ONLINE VLE-A350 SVC TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A399": {
+   "description": "A310 CONVERSION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A709": {
+   "description": "B773ER SERVICE TRAINING DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A739": {
+   "description": "B773ER SERVICE TRAINING DAY 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A744": {
+   "description": "B744 SERVICE TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A809": {
+   "description": "A380 SERVICE TRAINING DAY 2/3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A899": {
+   "description": "STC-A380 SVC TRG-TOKEN REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "A899T": {
+   "description": "RT-STC-A380 SVC TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ACA2": {
+   "description": "ASIAN CULINARY ARTS MOD 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ACES": {
+   "description": "ACHIEVE CONT EXCELLENCE SAFETY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ACT1": {
+   "description": "STC-CCRP ACTIVITY-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AD33": {
+   "description": "A330 DIFFERENCE TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AD50": {
+   "description": "A350 DIFFERENCE TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AF99": {
+   "description": "AIRBUS FLEET RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AFE": {
+   "description": "Authorised Flt Examiner Course",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AFTP": {
+   "description": "Advanced Facilitator Trng Prgm",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AG99": {
+   "description": "ANNOUNCEMENT GRADING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AI01": {
+   "description": "STC-CCRP DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AI99": {
+   "description": "AIRLINE INDUSTRY WORKSHOP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AICC": {
+   "description": "AIRLINE INDUSTRY COURSE-CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AO99": {
+   "description": "STC-CCLP APPRAISING OTHERS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AO99T": {
+   "description": "RT-STC-CCLP APPRAISING OTHERS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AO9C": {
+   "description": "STC-CCCT APPRAISING OT-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AQS1": {
+   "description": "STC-CCPP ANALYSE SVC QUAL D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AQS1T": {
+   "description": "RT-STC-CCPP ANALYSE SVC QLT D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AQS2": {
+   "description": "STC-CCPP ANALYSE SVC QUAL D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AQS2T": {
+   "description": "RT-STC-CCPP ANALYSE SVC QLT D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AR91": {
+   "description": "STC-ANNT REGRADING-ANNT TEXT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AR91T": {
+   "description": "RT-STC-ANNT REGRADING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AR92": {
+   "description": "ANNOUNCEMENT REGRADING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AR99": {
+   "description": "ANNOUNCEMENT REGRADING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AR9E": {
+   "description": "ONLINE VLE-ANN REGRDG-ANN TEXT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AR9ET": {
+   "description": "RT-ONLINE VLE-ANNT REGRADING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ARC1": {
+   "description": "STC-CCCT ANNT REGRDG-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ARC1T": {
+   "description": "RT- ANN REGRADING -NB CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AS99": {
+   "description": "SERVICE DEVT ATTACHMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AT99": {
+   "description": "ATTACHMENT TO TRAINING II",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ATTA": {
+   "description": "EXT VENUE-CCAP ATTACHMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "AW99": {
+   "description": "ASST WD LEADER MEETING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "B733": {
+   "description": "STC-B737 SVC TRG-TOKEN REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "B781": {
+   "description": "B787 SERVICE TRAINING DAY 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "B781T": {
+   "description": "RT-787 SERVICE TRNG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "B782": {
+   "description": "B787 SERVICE TRAINING DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "B799": {
+   "description": "B777 CONVERSION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BA99": {
+   "description": "BASIC MANAGEMENT COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BD78": {
+   "description": "B787 DIFFERENCE TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BE01": {
+   "description": "POWER UP SDL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BE01T": {
+   "description": "RT-POWER UP SDL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BE91": {
+   "description": "BEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BE99": {
+   "description": "BEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BF99": {
+   "description": "BOEING FLEET RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BH99": {
+   "description": "FOOD HYGIENE COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BM01": {
+   "description": "STC-CCCT ALC BEV / PROD ID",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BM01T": {
+   "description": "GROUND COURSE - INSTRUCTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BM02": {
+   "description": "STC-CCRP ALC BEV",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BM02T": {
+   "description": "RT-STC-CCRP ALC BEV",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BM99": {
+   "description": "BUSINESS MEETING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BRWC": {
+   "description": "R_SHIP W CUSTOMER/OFFICE ATTIR",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BS99": {
+   "description": "BEHAVIOURAL STUDY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BU99": {
+   "description": "BE UPFRONT COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "BW99": {
+   "description": "SERVICE DISTINCTIVE WORKS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CA99": {
+   "description": "CABIN CREW ASSIGNMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CAU1": {
+   "description": "ONLINE VLE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CAU2": {
+   "description": "ONLINE VLE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CBC1": {
+   "description": "EXT VENUE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CBC2": {
+   "description": "EXT VENUE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CBC3": {
+   "description": "EXT VENUE-ETSP COURSE D3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CC07": {
+   "description": "GRDING @CTRL CTR FOR US VISA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CC91": {
+   "description": "CHARGE UP UR CUSTOMER CARE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CC92": {
+   "description": "CHARGE UP UR CUSTOMER CARE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CC99": {
+   "description": "WRITTEN/ORAL COMMUNICATIO",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCAP": {
+   "description": "CCAP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCHUB": {
+   "description": "HUBEI CREW",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCLP": {
+   "description": "CCLP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCPP": {
+   "description": "CCPP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCR1": {
+   "description": "STC-CCCT CCRM D1-PANTS/FLATS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCR1T": {
+   "description": "RT-STC-CCCT CCRM D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCR2": {
+   "description": "STC-CCCT CCRM D2-PANTS/FLATS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCR2T": {
+   "description": "RT-STC-CCCT CCRM D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCRMT": {
+   "description": "RT-STC-CCRP CCRM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CCRP": {
+   "description": "CCRP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CF09": {
+   "description": "CULINARY SKILLS COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CF90": {
+   "description": "STC-CCLP FOOD",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CF90T": {
+   "description": "RT-STC-CCLP FOOD",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CF91": {
+   "description": "CULINARY SKILLS EXPERIENCE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CF99": {
+   "description": "SATS ICC1-CUL I-SEP ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CG09": {
+   "description": "CULINARY RE-GRADING FINAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CG19": {
+   "description": "CULINARY RE-GRADING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CG99": {
+   "description": "STC-CULINARY GRADING-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CI99": {
+   "description": "COMPANY INQUIRY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CLC": {
+   "description": "Corp Learning Centre Programme",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM11": {
+   "description": "CULINARY 102 MODULE 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM12": {
+   "description": "CULINARY 102 MODULE 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM13": {
+   "description": "CULINARY 102 MODULE 3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM14": {
+   "description": "CULINARY 102 MODULE 4",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM15": {
+   "description": "CULINARY 102 MODULE 5",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM91": {
+   "description": "CULINARY 101 MODULE 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM92": {
+   "description": "CULINARY 101 MODULE 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM93": {
+   "description": "CULINARY 101 MODULE 3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM94": {
+   "description": "CULINARY 101 MODULE 4",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM95": {
+   "description": "CULINARY 101 MODULE 5",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM96": {
+   "description": "CULINARY 101 MODULE 6",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM99": {
+   "description": "SATS ICC1-CUL II-SEP ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CM99T": {
+   "description": "RT-SATS ICC1-CULINARY II",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CMS1": {
+   "description": "CONVERSATIONAL MOT SKILLS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CMTG": {
+   "description": "Command Trainee Meeting",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CN": {
+   "description": "Compassionate positioning duty (Civilian)",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CN99": {
+   "description": "CONNECTING WITH CUSTOMERS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CODP": {
+   "description": "CODP Mentors Workshop",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CP01": {
+   "description": "ATTACHMENT (INC INVESTIGATION)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CP02": {
+   "description": "DUTY TRAVEL (CP WML)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CP04": {
+   "description": "DISCIPLINARY INQUIRY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CP05": {
+   "description": "COMPANYS INQUIRY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CP06": {
+   "description": "GROUNDED BY CP-OPS DISTRUPT",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CP07": {
+   "description": "GROUNDED BY CP-ASTHETICS",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CP08": {
+   "description": "GROUNDED BY CP-BMI",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CP09": {
+   "description": "GROUNDED BY CP-OTHERS",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CP10": {
+   "description": "GROUNDED BY CP-MEDICAL RELATED",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CP11": {
+   "description": "GRD BY CP-NON/WORK ACCIDENTS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CP12": {
+   "description": "CABIN CREW GET TOGETHER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CP88": {
+   "description": "PERFORMANCE IMPROVEMENT PLAN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CP99": {
+   "description": "ATTACHMENT TO CREW PERF",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPAO": {
+   "description": "APPRAISAL TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPC1": {
+   "description": "CLASS PREPARATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPC2": {
+   "description": "CLASS REPORT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPC3": {
+   "description": "FOUNDATION COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPC4": {
+   "description": "INSTRUCTOR-B747 FLEET TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPC5": {
+   "description": "RESERVE FOR A345 RELATED USE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPC7": {
+   "description": "INSTRUCTOR-B777 FLEET TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPC8": {
+   "description": "RESERVE FOR A380 RELATED USE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPC9": {
+   "description": "MAGIC OF SOAR",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPG1": {
+   "description": "PROMOTIONAL EXERCISE INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPG2": {
+   "description": "ATTEND COURSES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPHL": {
+   "description": "HEART OF LEADERSHIP (CL BY CTS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPJC": {
+   "description": "FINE TUNING YOUR SERVICE (CTS)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPN1": {
+   "description": "IFS INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPN2": {
+   "description": "CS/CSS INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPN3": {
+   "description": "LS/LSS INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPR4": {
+   "description": "B747 REINFORCEMENT PROGRAM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPR7": {
+   "description": "B777 REINFORCEMENT PROGRAM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPS1": {
+   "description": "WLIA-GROUNDED FOR TRG TTT CRSE",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPS2": {
+   "description": "WLIA-WARD ADMINISTRATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPS3": {
+   "description": "WLIA-INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPS4": {
+   "description": "WLIA-ECA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPS5": {
+   "description": "WLIA-PROJECT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPS8": {
+   "description": "WLIA-WARD LEADERS QUARTERLY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPS9": {
+   "description": "ADMIN TIME DIFF",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPT1": {
+   "description": "IFS CBT TEST - TOKEN REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPT2": {
+   "description": "CS/CSS CBT TEST - TOKEN REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CPT3": {
+   "description": "LS/LSS CBT TEST - TOKEN REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CQA": {
+   "description": "Conf Cmmd Qualities Assessment",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CR1": {
+   "description": "Dummy Code",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CR10": {
+   "description": "GROUNDED BY CCR-SEP RELATED",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CR1F": {
+   "description": "Recurrent CRM (Facilitator)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CR1P": {
+   "description": "Recurrent CRM (Participant)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CR99": {
+   "description": "CREATIVE THINKING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRM1": {
+   "description": "STC-CCRP CCRM D1-PANTS/FLATS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRM2": {
+   "description": "STC-CCRP CCRM D2-PANTS/FLATS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRMC": {
+   "description": "Command CRM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRMF": {
+   "description": "CRM (Facilitator)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRMI": {
+   "description": "Initail CRM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRMP": {
+   "description": "CRM (Participant)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRMR": {
+   "description": "Recurrent CRM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRMS": {
+   "description": "Sharp CRM (PRIDE & FID CRM)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRMT": {
+   "description": "CRM (PRIDE & SHARP COURSE)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CRNC": {
+   "description": "SDL Craft and Cuisine",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CS01": {
+   "description": "STC-CCRP COMMS I",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CS02": {
+   "description": "STC-CCRP COMMS II",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CSA1": {
+   "description": "COMM SKILLS ASSESMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CSC1": {
+   "description": "STC-CCCT COMMS SKILLS I",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CSC2": {
+   "description": "CCCCT COMMS SKILLS II",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CST1": {
+   "description": "COACH SVC 1/OFFICE ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CST2": {
+   "description": "COACH SVC 2/OFFICE ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CT99": {
+   "description": "TA COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU": {
+   "description": "Compassionate positioning duty (Uniform)",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CU91": {
+   "description": "ACTA CU1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU91T": {
+   "description": "RT-ACTA CU1 / M4",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU92": {
+   "description": "ACTA CU2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU92T": {
+   "description": "RT-ACTA CU2 / M1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU93": {
+   "description": "ACTA CU3A",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU93T": {
+   "description": "RT-ACTA CU3A",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU94": {
+   "description": "ACTA CU4A",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU94T": {
+   "description": "RT-ACTA CU4A / M3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU95": {
+   "description": "ACTA CU5",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU95T": {
+   "description": "RT-ACTA CU5",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU96": {
+   "description": "ACTA CU6",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU96T": {
+   "description": "RT-ACTA CU6 / M5",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CU99": {
+   "description": "CROSS CULTURE AWARENESS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CW99": {
+   "description": "COMMUNICATIONS WORKSHOP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CWR1T": {
+   "description": "RT-LPM SDL CWRS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CWRS": {
+   "description": "LPM CWRS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CWRST": {
+   "description": "RT-LPM CWRS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CZ91": {
+   "description": "COACHING & MENTORING MOD 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "CZ92": {
+   "description": "COACHING & MENTORING MOD 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DA01": {
+   "description": "STC-CCRP D&A",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DA01T": {
+   "description": "RT-STC-CCRP D&A",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DA09": {
+   "description": "BCLS COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DA99": {
+   "description": "BCLS COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DAC1": {
+   "description": "STC-CCCT DS/EQT/FOOD/ISAP D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DAC2": {
+   "description": "STC-CCCT DS/EQT/FOOD/ISAP D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DD99": {
+   "description": "DINNER AND DANCE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DDD": {
+   "description": "Deadheads in other Airline",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DE99": {
+   "description": "DEFIBRILLATING PROGRAM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DF99": {
+   "description": "AED COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DG99": {
+   "description": "DANGEROUS GOODS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DI99": {
+   "description": "DISCIPLINARY INQUIRY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DN": {
+   "description": "Deadheading duty (Civilian)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DNP1": {
+   "description": "STC-CCPP DEV NEW PROD D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DNP1T": {
+   "description": "RT-STC-CCPP DEV NEW PROD",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DNP2": {
+   "description": "STC-CCPP DEV NEW PROD D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DNP2T": {
+   "description": "RT-STC-CCPP DEV NEW PROD",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DR09": {
+   "description": "AED COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DSO1": {
+   "description": "STC-CCAP DEVELOP SVC OPS D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DSO1T": {
+   "description": "RT-STC-CCAP DEV SVC OPS D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DSO2": {
+   "description": "STC-CCAP DEVELOP SVC OPS D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DSO2T": {
+   "description": "RT-STC-CCAP DEV SVC OPS D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DU": {
+   "description": "Deadheading duty (Uniform)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "DY99": {
+   "description": "GROUP DYNAMIC-MED CHECKUP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E299": {
+   "description": "SERVICE EXCELLENCE II",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E4A1": {
+   "description": "4DAY SEP COURSE (SEP A DAY1)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E4A2": {
+   "description": "4DAY SEP COURSE (SEP A DAY2)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E4B1": {
+   "description": "4DAY SEP COURSE (SEP B DAY1)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E4B2": {
+   "description": "4DAY SEP COURSE (SEP B DAY2)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E5A1": {
+   "description": "5DAY SEP COURSE (SEP A DAY1)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E5A2": {
+   "description": "5DAY SEP COURSE (SEP A DAY2)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E5B1": {
+   "description": "5DAY SEP COURSE (SEP B DAY1)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "E5B2": {
+   "description": "5DAY SEP COURSE (SEP B DAY2)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EA01": {
+   "description": "ANNOUNCEMENT TRAINER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EA99": {
+   "description": "STC-PROMO ANNT-ANNT TEXT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EC01T": {
+   "description": "RT-CCRP COMM SKILLS D4",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EC02T": {
+   "description": "RT-CCRP COMM SKILLS P3 EXAM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EC10T": {
+   "description": "RT-CCRP COMM SKILLS F10",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ECML": {
+   "description": "ECML (structured)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ECMS": {
+   "description": "ECMS (SDL)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ED01": {
+   "description": "STC-CCRP EXAM/DEP - UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ED99": {
+   "description": "ADHOC ANNOUNCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EDC1": {
+   "description": "STC-CCCT DEP/GROOM-MAKEUP/HAIR",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EFFC": {
+   "description": "STC-CCAP COMM PASSION & IMPACT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EG99": {
+   "description": "STC-ANNT GRADING-ANNT TEXT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EG99T": {
+   "description": "RT-STC-ANNT PROMO GRADING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EGSD": {
+   "description": "ANNT GRADING (SDL)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EGSDT": {
+   "description": "RT-ANNT GRADING (SDL)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EH99": {
+   "description": "SERVICE ENHANCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ELIC": {
+   "description": "STC-CCPP EFFECTIVE COMM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EN99": {
+   "description": "ENGLISH PROGRAMME",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ENP1T": {
+   "description": "RT-LPM SDL ENABLE PPL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ENPP": {
+   "description": "STC-CCAP ENABLE PPL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ENPPT": {
+   "description": "RT-LPM ENABLE PPL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EOP1": {
+   "description": "SEP-OPR/FR eCOURSEWARE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EOP2": {
+   "description": "SEP-OPR/FR eCOURSEWARE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EP01": {
+   "description": "ENHANCED PCL-TRAINER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EP99": {
+   "description": "SEP-EP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EPA1": {
+   "description": "DAY 1 PROG SEPA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EPA2": {
+   "description": "DAY 2 PROG SEPA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EPB1": {
+   "description": "DAY 1 PROG SEPB",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EPB2": {
+   "description": "DAY 2 PROG SEPB",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EQ01": {
+   "description": "STC-CCRP EQMT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EQ01T": {
+   "description": "RT-STC-CCRP EQPMT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ER08": {
+   "description": "ER FAMILIARISATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ES99": {
+   "description": "EFFECTIVE SPOKEN ENGLISH TRGR",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ESET": {
+   "description": "EFFECTIVE SPOKEN ENGLISH TRGR",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ET99": {
+   "description": "ENGLISH RETEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EX99": {
+   "description": "SERVICE EXCELLENCE PROGRA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXCET": {
+   "description": "RT-EFFECTIVE COMMUNICATIONS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXECT": {
+   "description": "RT-PROFESSIONAL IMAGE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXHCT": {
+   "description": "RT-HANDLING CHALLENGING CUST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXHDT": {
+   "description": "EXT-TRRAINING ASGN(HALFDAY)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXLJT": {
+   "description": "RT-LEARNING JOURNEY WITH SIA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXPGT": {
+   "description": "RT-PROF GROOMING WKSHOP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXPIT": {
+   "description": "RT-PROFESSIONAL IMAGE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXPUT": {
+   "description": "RT-POWER UP YOUR SVC SKILLS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXSDT": {
+   "description": "RT-DELIVER SVC FROM THE HEART",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXSLT": {
+   "description": "RT-SVC LEADERSHIP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXSMT": {
+   "description": "RT-SVC MINDFULNESS & AWARENESS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXSRT": {
+   "description": "RT-SVC REFINEMENT SIA WAY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EXTTT": {
+   "description": "EXT-TRAIN-THE-TRAINER(TTT)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "EZ99": {
+   "description": "ANNT TRG FOR CICS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "F381": {
+   "description": "ONLINE A380 FAM PROG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "F499": {
+   "description": "B747 CONVERSION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FA99": {
+   "description": "FIRST AID",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FAW": {
+   "description": "FUEL AWARENESS WORKSHOP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FB99": {
+   "description": "F/J CLASS REFRESHER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FC01": {
+   "description": "TRAINER FOR FC99",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FC99": {
+   "description": "1ST CLASS TRNG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FCE1": {
+   "description": "STC-CCRP EXAM/HOME-SEP ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FE99": {
+   "description": "FOOD KNOWLEGDE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FG99": {
+   "description": "FRENCH INTENSIVE COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FH99": {
+   "description": "FOOD HEATING COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FIDP": {
+   "description": "Flt Instr Dev Programme",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FK99": {
+   "description": "SHATEC FOOD KNOWLEDGE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FM01": {
+   "description": "STC-CCRP FOOD",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FM01T": {
+   "description": "RT-STC-CCRP FOOD",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FM99": {
+   "description": "FINANCIAL MANAGEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FM9R": {
+   "description": "FINANCIAL MANAGEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FN99": {
+   "description": "FUS3ION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FP99": {
+   "description": "STC-FRENCH TEST-ANNT TEXT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FQ09": {
+   "description": "FRENCH INTENSIVE COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FQ99": {
+   "description": "ALLIANCE FRANCAISE-FRENCH INT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FR91": {
+   "description": "FOREIGN ANNT GRADING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FR91T": {
+   "description": "RT-CCRP FOREIGN CREW TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FR99": {
+   "description": "FOREIGN ANNT GRADING (TTT)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FS99": {
+   "description": "ALLIANCE FRANCAISE-FRENCH ADV",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FSN1": {
+   "description": "STC-CCPP FOSTER SVC INNOV D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FSN1T": {
+   "description": "RT-STC-CCPP SVC INNOV D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FSN2": {
+   "description": "STC-CCPP FOSTER SVC INNOV D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FSN2T": {
+   "description": "RT-STC-CCPP SVC INNOV D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FT99": {
+   "description": "ATTACHMENT - SATS KITCHEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FTD": {
+   "description": "CPT LESSON",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FUS": {
+   "description": "FUS3ION COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "FW99": {
+   "description": "PCL FOOD/WINE ENHANCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GB99": {
+   "description": "GOETHE-GERMAN ADVANCED",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GC01": {
+   "description": "GAME CHANGING CONVERSATIONS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD10": {
+   "description": "CS (SIN)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD11": {
+   "description": "CS (OVERSEAS)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD12": {
+   "description": "Restaurant A380",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD13": {
+   "description": "STAY MASKED SVC (SMSA)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD14": {
+   "description": "BYOB Ambassador",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD15": {
+   "description": "MOH Operations Coordinators",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD16": {
+   "description": "KS Concierge",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD17": {
+   "description": "Ticket Refund volunteer",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD18": {
+   "description": "Operations Ambassadors (OA)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD19": {
+   "description": "GROUNDED CREW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GD22": {
+   "description": "Customer Relations Exec (CRE)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD33": {
+   "description": "Digital Ambassadors (DA)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD55": {
+   "description": "Airport Exp Ambassadors",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD66": {
+   "description": "SAF Contact Tracing Ambassador",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD68": {
+   "description": "CTA (Executive Officers EO)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD70": {
+   "description": "Patient Services Ambassador",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD77": {
+   "description": "SQ TRANSPORT VOLUNTEER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD78": {
+   "description": "B787 TRAINING CODE TEMP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD88": {
+   "description": "SFA Safe Distancing Ambassador",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD91": {
+   "description": "GD for RT 0845-1300h",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD92": {
+   "description": "GD for RT 1300-1730h",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GD99": {
+   "description": "GROUNDED CREW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GDEC": {
+   "description": "GROUNDED CREW FOR ECA activity",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GDEO": {
+   "description": "INCOMPLETE EOP1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GDSF": {
+   "description": "GROUNDED CREW FOR SAFETY BUZZ",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GDSV": {
+   "description": "GROUNDED CREW FOR SVC BUZZ",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GDSW": {
+   "description": "GROUNDED CREW FOR SWAT",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GG99": {
+   "description": "GROUND PROJECT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GM01": {
+   "description": "STC-CCRP GEN MODULE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GM02": {
+   "description": "STC-CCRP GEN MODULE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GM03": {
+   "description": "STC-CCRP GEN MODULE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GM04": {
+   "description": "STC-CCRP GEN MODULE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GM99": {
+   "description": "ADVANCED GROOMING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GMC1": {
+   "description": "STC-CCCT GEN MOD-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GN99": {
+   "description": "STC-CCRP GRAD-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GNAP": {
+   "description": "STC-CCAP GRAD-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GNLP": {
+   "description": "STC-CCLP GRAD-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GNPP": {
+   "description": "STC-CCPP GRAD-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GP01": {
+   "description": "STC-CCRP GROOMING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GQ09": {
+   "description": "GERMAN INTENSIVE COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GQ99": {
+   "description": "GOETHE-GERMAN INTENSIVE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GR99": {
+   "description": "STC-GERMAN TEST-ANNT TEXT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GRCHT": {
+   "description": "RT-STC-CO TRAIN (HALF DAY)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GRCOT": {
+   "description": "RT-STC-CO TRAINER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GRD": {
+   "description": "GROUND DUTY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GRDC": {
+   "description": "STC-GROUND DUTY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GRDCT": {
+   "description": "RT-STC-GROUND DUTY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GROBT": {
+   "description": "RT - STC-OBSERVER TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GROHT": {
+   "description": "RT-STC-OBSERVER (HALF DAY)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GRTTT": {
+   "description": "STC-TRAIN-THE-TRAINER (TTT)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "GS99": {
+   "description": "GROUNDED AT PLANNING",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GT99": {
+   "description": "Cabin Crew get-together",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HA01": {
+   "description": "HINDI ANNOUNCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HA99": {
+   "description": "HINDI ANNOUNCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HD99": {
+   "description": "HAND HELD TERMINAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HF99": {
+   "description": "STC-CC HUMAN FACTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HF99T": {
+   "description": "RT-STC-CC HUMAN FACTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HF9E": {
+   "description": "ONLINE WBT-CC HUMAN FACTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HF9ET": {
+   "description": "RT-Human Factors CC (Online)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HFCR": {
+   "description": "INTRO HUMAN FACTORS & CRM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HJ99": {
+   "description": "HIJACK EXERCISE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HL99": {
+   "description": "HEART OF LEADERSHIP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HM99": {
+   "description": "HR MGMT 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HO99": {
+   "description": "HELPING OTHERS HELPING TH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HPL": {
+   "description": "Human Perf Limitns (CRMF Crse)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HR07": {
+   "description": "GRD BY HRD - EMPLOYMENT DOC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HR99": {
+   "description": "HUMAN RESOURCE MANAGEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HS99": {
+   "description": "SOARING HIGHER SKIES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HS99T": {
+   "description": "RT-CCLP SOARING HIGHER SKIES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HS9C": {
+   "description": "STC-CCCT PAX HANDLING-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "HT99": {
+   "description": "HAND HELD TERMINAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I351": {
+   "description": "SEP-initial A350 -Token req'd",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I352": {
+   "description": "SEP-initial A350 -Token req'd",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I353": {
+   "description": "SEP-initial A350 -Token req'd",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I441": {
+   "description": "INITIAL SEP TRG 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I442": {
+   "description": "INITIAL SEP TRG 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I451": {
+   "description": "INITIAL SEP TRG 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I452": {
+   "description": "INITIAL SEP TRG 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I499": {
+   "description": "INITIAL TRNG & B747 CONV",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I771": {
+   "description": "SEP-initial B777 -Token req'd",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I772": {
+   "description": "SEP-initial B777 -Token req'd",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I773": {
+   "description": "SEP-initial B777 -Token req'd",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "I799": {
+   "description": "INITIAL TRNG & B777 CONV",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IA01": {
+   "description": "INSTR FOR INDO ANCMNT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IA99": {
+   "description": "INDONESIAN ANNONCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IC99": {
+   "description": "HEART OF LEADERSHIP(old c",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ID99": {
+   "description": "ID99 TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IDN": {
+   "description": "Interline deadheading duty (Civilian)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IDU": {
+   "description": "Interline deadheading duty (Uniform)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IF99": {
+   "description": "IFS Mentoring Cycle",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IFEC": {
+   "description": "CC IFEC TRG PROGRAMME",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IMI1": {
+   "description": "MI FS/S Crossover 737 SEP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IMI2": {
+   "description": "MI FS/S Crossover 737 SEP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IMI3": {
+   "description": "MI FS/S Crossover 737 SEP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IMTG": {
+   "description": "INSTRUCTOR MEETING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "INDUCTION": {
+   "description": "737 Induction Briefing",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IPN": {
+   "description": "Interline positioning duty (Civilian)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IPU": {
+   "description": "Interline positioning duty (Uniform)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IRC": {
+   "description": "Instructor Refresher Course",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IS99": {
+   "description": "INITIAL SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ISEP": {
+   "description": "SEP Initial",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IT01": {
+   "description": "STC-CCRP ISAP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IT01T": {
+   "description": "RT-STC-CCRP ISAP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IT02T": {
+   "description": "GROUND COURSE - INSTRUCTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IT99": {
+   "description": "IFS ATTACHMENT TO TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IV01": {
+   "description": "ADVANCED CMIV RANK TRAINER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "IV99": {
+   "description": "ADVANCED CMIV TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC01": {
+   "description": "STC-CCCT NB JCL-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC02": {
+   "description": "CCCT NB JCL TRNG-DAY2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC08": {
+   "description": "STC-CCCT NB JCL DR-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC09": {
+   "description": "STC- JCL COURSE D1-TOKEN REQ",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC09T": {
+   "description": "RT-STC-JCL COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC19": {
+   "description": "STC-JCL RFSH D1-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC19T": {
+   "description": "RT-STC-JCL REFRESHER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC29": {
+   "description": "STC-JCL RFSH D2-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC91": {
+   "description": "STC-JCL CHECK OUT-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC91T": {
+   "description": "RT-STC-JCL CHECK OUT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC99": {
+   "description": "STC-JCL D4-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JC99T": {
+   "description": "RT-STC-JCL COURSE D4",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCC1": {
+   "description": "CCCT JCL TRNG-DAY 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCC2": {
+   "description": "CCCT JCL TRNG-DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCC3": {
+   "description": "STC-CCCT JCL COMMS-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCC4": {
+   "description": "CCCT NB JCL-WET RUN-NB CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCC9": {
+   "description": "CCCT WB JCL-WET RUN-NB CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCEN": {
+   "description": "STC-JCL D2-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCENT": {
+   "description": "RT-STC-JCL COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCWR": {
+   "description": "STC-JCL D3-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JCWRT": {
+   "description": "RT-STC-JCL COURSE D3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JN99": {
+   "description": "JCL ENHANCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JP99": {
+   "description": "JAPANESE PROFICIENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JQ99": {
+   "description": "JAPANESE INTENSIVE COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JR99": {
+   "description": "JSS REFRESHER COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "JT99": {
+   "description": "HANDLING OF JAP TRAVELLER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KA99": {
+   "description": "KOREAN ANNOUNCEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KF99": {
+   "description": "FOOD KNOWLEDGE FOR IFS/CS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KR01": {
+   "description": "STC-CCRP KNOW YOUR RIGHTS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KR99": {
+   "description": "KRISSHOP WORKSHOP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KS99": {
+   "description": "STC-CCLP KRISSHOP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KS99T": {
+   "description": "RT-STC-CCLP KRISSHOP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KS9C": {
+   "description": "CCCT INFLT SALES TRNG-NB CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KSMS": {
+   "description": "KRISSHOP SDL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "KSMST": {
+   "description": "KRISSHOP SDL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "L499": {
+   "description": "LS/LSS B747 CONVERSION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LAD1": {
+   "description": "ONLINE VLE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LAD2": {
+   "description": "ONLINE VLE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LCV1": {
+   "description": "ONLINE VLE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LCV2": {
+   "description": "ONLINE VLE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LD91T": {
+   "description": "RT-LPM SDL LEAD TEAM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LD99": {
+   "description": "STC-CCLP LEAD TEAM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LD99T": {
+   "description": "RT-STC-CCLP LEAD TEAM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LDC": {
+   "description": "Leadership & Decision-making",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LDST": {
+   "description": "LEAD A SVC TEAM/OFFICE ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LE99": {
+   "description": "LAND EVACUATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LET": {
+   "description": "LAND EVACUATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LFC1": {
+   "description": "EXT VENUE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LFC2": {
+   "description": "EXT VENUE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LFT1": {
+   "description": "ONLINE VLE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LFT2": {
+   "description": "ONLINE VLE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LK99": {
+   "description": "CONTINUOUS LEARNING SKILL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LM91": {
+   "description": "TRG ON CAREER COACHING I",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LM92": {
+   "description": "TRG ON CAREER COACHING II",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LM99": {
+   "description": "CAREER TRANSITION PROG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LP99": {
+   "description": "LEADERSHIP & PROBLEM SOLV",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LR19": {
+   "description": "STC-LEADING RFSH D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LR19T": {
+   "description": "RT-STC-LEADING REFRESHER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LR29": {
+   "description": "STC-LEADING RFSH D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LRC1": {
+   "description": "EXT VENUE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LRC2": {
+   "description": "EXT VENUE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LRS1": {
+   "description": "ONLINE VLE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LRS2": {
+   "description": "ONLINE VLE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LS99": {
+   "description": "SAFETY LEADERSHIP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LSV1": {
+   "description": "STC-CCAP LEAD SVC VISION D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LSV1T": {
+   "description": "RT-STC-CCAP LEAD SVC VISION D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LSV2": {
+   "description": "STC-CCAP LEAD SVC VISION D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LSV2T": {
+   "description": "RT-STC-CCAP LEAD SVC VISION D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "LT99": {
+   "description": "LEADERSHIP & TEAMBUILDING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "M299": {
+   "description": "MGT DEVT FOR IFS (2ND)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "M399": {
+   "description": "MANAGEMENT SEMINAR FOR CS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MA99": {
+   "description": "MANDRIN ANNONCEMENT GRADI",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MEC1": {
+   "description": "MANAGEMENT ENGAGEMENT WITH CS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MG99": {
+   "description": "MEETING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MH01": {
+   "description": "74M AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MH02": {
+   "description": "74M AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MH03": {
+   "description": "74M AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MH04": {
+   "description": "74M AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MH05": {
+   "description": "74M AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MH06": {
+   "description": "74M AIRCRAFT VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MIC1": {
+   "description": "MI SFS/S Crossover 737 SEP CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MIC2": {
+   "description": "MI SFS/S Crossover 737 SEP CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MIC3": {
+   "description": "MI SFS/S Crossover 737 SEP CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MING": {
+   "description": "WEIMING DUTY CODE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MM99": {
+   "description": "OFF DAY B/F MENTOR/MENTEE FLT",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "MMTG": {
+   "description": "Mentoring Meeting",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MOFC": {
+   "description": "Management Crew - Office Duty",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MP99": {
+   "description": "CMT TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MPS1": {
+   "description": "STC-CCAP MNG SVC PARTNERS D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MPS1T": {
+   "description": "RT-STC-CCAP MNG SVC PRNS D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MPS2": {
+   "description": "STC-CCAP MNG SVC PARTNERS D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MPS2T": {
+   "description": "RT-STC-CCAP MNG SVC PRNS D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MS09": {
+   "description": "LPM MANAGE SELF",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MS19T": {
+   "description": "RT-LPM SDL MANAGE SELF",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MS99": {
+   "description": "STC-CCPP LPM MANAGE SELF",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MS99T": {
+   "description": "RT-STC-CCPP LPM MANAGE SELF",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MT99": {
+   "description": "CMT TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MTG": {
+   "description": "MEETING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MTVL": {
+   "description": "Management Crew - Duty Travel",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MV99": {
+   "description": "CMT TRAINING PHASE 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MW99": {
+   "description": "CMT TRAINER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MX99": {
+   "description": "MALAY ANNOUNCEMENT GRADIN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MY99": {
+   "description": "MALAY ANNOUNCEMENT GRADIN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "MZ99": {
+   "description": "MALAY ANNOUNCEMENT COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "NC99": {
+   "description": "PREPARE COMPUND SALAD",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ND99": {
+   "description": "NATIONAL DAY PARADE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "NP99": {
+   "description": "NEW PRODUCT LAUNCH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "NSD": {
+   "description": "NON SIMULATOR DUTY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "NTC": {
+   "description": "NON-TECHNICAL COMPETENCY CRS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OA99": {
+   "description": "Onboard Connectivity Training",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OC99": {
+   "description": "IFS ORIENTATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OF99": {
+   "description": "Offday from release fr stby",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OP99": {
+   "description": "OASIS PROGRAMME FOR IFS/C",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OR99": {
+   "description": "ORAL COMMUNICATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OS99": {
+   "description": "ORAL COMMUNICATION SKILL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OWS1": {
+   "description": "STC-CCPP OPT WORKFORCE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OWS1T": {
+   "description": "RT-STC-CCPP OPT WORKFORCE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OWS2": {
+   "description": "STC-CCPP OPT WORKFORCE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "OWS2T": {
+   "description": "RT-STC-CCPP OPT WORKFORCE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "P499": {
+   "description": "747 PCL TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PA": {
+   "description": "Public Address",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PAPI": {
+   "description": "SDL Projecting Prof Image",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PAPIT": {
+   "description": "RT-SDL Projecting Prof Image",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PB19": {
+   "description": "PRE BMC COURSE BRIEFING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PC99": {
+   "description": "BASIC MANAGEMENT COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PD19": {
+   "description": "STC-CCRP EN PAX R/S D1-SEP ATT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PD19T": {
+   "description": "RT-STC-CCRP ENHANCED PAX RS D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PD29": {
+   "description": "STC-CCRP EN PAX R/S D2-SEP ATT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PD29T": {
+   "description": "RT-STC-CCRP ENHANCED PAX RS D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PD91": {
+   "description": "STC-ENHANCED PAX-SEP ATT-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PD91T": {
+   "description": "RT-STC-ENHANCED PAX R/S-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PD99": {
+   "description": "Enhance Passenger Relations",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PDC": {
+   "description": "Pilot Development Course",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PDC1": {
+   "description": "CCCT ENHNCD PAX RELATIONS-DAY1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PDC2": {
+   "description": "CCCT ENHNCD PAX RELATIONS-DAY2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PDCF": {
+   "description": "PDC Facilitator",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PF01": {
+   "description": "STC-CCRP PFS - UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PG91": {
+   "description": "CRISIS AND TRAUMA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PG92": {
+   "description": "CRISIS AND TRAUMA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PG99": {
+   "description": "PEER SUPPORT GROUP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PH01": {
+   "description": "STC-CCRP PAX R/S D1-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PH02": {
+   "description": "STC-CCRP PAX R/S D2-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PH99": {
+   "description": "PAX HANDLING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PHC1": {
+   "description": "STC-CCCT PAX R/S I-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PHC2": {
+   "description": "STC-CCCT PAX R/S II-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PL07": {
+   "description": "OPERATIONAL RECENCY LAPSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PMT2": {
+   "description": "PROMOTE TOURISM DAY2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PMTR": {
+   "description": "PROMOTE TOURISM/OFFICE ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PN": {
+   "description": "Positioning duty in civilian clothes",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PP91": {
+   "description": "COACHING FOR PEAK PERFORMANCE1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PP92": {
+   "description": "COACHING FOR PEAK PERFORMANCE2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PP99": {
+   "description": "COACHING FOR PEAK PERFORMANCE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PPCL": {
+   "description": "Personalising PCL Service",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PRO1": {
+   "description": "TESTED",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PS99": {
+   "description": "PROBLEM SOLVING COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PU": {
+   "description": "Positioning duty in uniform",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PW99": {
+   "description": "PREFLIGHT BRIEFING WORKSH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PWS0": {
+   "description": "PROVIDE WINE SVC DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PWS1": {
+   "description": "STC-PRO WINE SVC-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PWS1T": {
+   "description": "RT-STC-PROVIDE WINE SVC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PWS9": {
+   "description": "SDL PROVIDE WINE SVC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PWS9T": {
+   "description": "RT-PWS SDL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "PWSC": {
+   "description": "CCCT PROVIDE WINE SVC-NB CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R199": {
+   "description": "A310 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R333": {
+   "description": "A330 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R335": {
+   "description": "A330/350 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R33E": {
+   "description": "A330/350 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R34D": {
+   "description": "A330/340 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R350": {
+   "description": "A350 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R355": {
+   "description": "A350 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R399": {
+   "description": "A340 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R499": {
+   "description": "B747 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R73F": {
+   "description": "737 ONLINE REFRESHER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R744": {
+   "description": "B744 SEP RETEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R777": {
+   "description": "B777 SEP RETEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R787": {
+   "description": "B787 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R789": {
+   "description": "B777 787 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R799": {
+   "description": "B777 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "R899": {
+   "description": "A380 TYPE RECENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RC99": {
+   "description": "STC-RCS/RES SVC REFRESHER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RCRF": {
+   "description": "Recurrent CRM (Facilitator)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RCRP": {
+   "description": "Recurrent CRM (Participant)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RE01": {
+   "description": "SO Phase1C (SIM Recency)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RE99": {
+   "description": "SEP RESIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RJ99": {
+   "description": "JAPANESE PROFICIENCY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RL99": {
+   "description": "REINFORCEMENT FOR LS/SS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RM09": {
+   "description": "RESOURCE MANAGEMENT 2ND DAY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RM99": {
+   "description": "SAFE RESOURCE MANAGEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RP99": {
+   "description": "CCRP-REINFORCEMENT PROG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPART": {
+   "description": "RT-CRAFT & CUISINE SDL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPCHT": {
+   "description": "GROUND COURSE - INSTRUCTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPE1": {
+   "description": "STC-CCCT RPE/COMMS- UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPEG": {
+   "description": "STC-CCRP RPE/GROOM - UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPFTT": {
+   "description": "RT-CCRP F10 WET RUN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPHVT": {
+   "description": "RT-CCRP HOME VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPINT": {
+   "description": "GROUND COURSE - INSTRUCTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPJPT": {
+   "description": "GROUND COURSE - INSTRUCTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RPKRT": {
+   "description": "GROUND COURSE - INSTRUCTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RRR": {
+   "description": "RRRRR",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RT99": {
+   "description": "RANK TRAINER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RW92": {
+   "description": "STC-REACT II-SEP ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RW92T": {
+   "description": "RT-STC-REACT II-SEP ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RW99": {
+   "description": "STC-REACT-SEP ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "RW99T": {
+   "description": "RT-REACT INITIAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S331": {
+   "description": "A330 SEP CONVERSION DAY 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S332": {
+   "description": "A330 SEP CONVERSION DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S333": {
+   "description": "A330 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S335": {
+   "description": "A350 SEP CONVERSION DAY 5",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S336": {
+   "description": "A350 SEP CONVERSION DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S33E": {
+   "description": "A330/350 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S34D": {
+   "description": "A330/340 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S351": {
+   "description": "A350 SEP CONVERSION DAY 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S352": {
+   "description": "A350 SEP CONVERSION DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S353": {
+   "description": "A350 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S355": {
+   "description": "A350 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S356": {
+   "description": "A350 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S35T": {
+   "description": "A350 CONV D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S35V": {
+   "description": "A350 CONV D2 VIRTUAL AC VISIT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S399": {
+   "description": "A310 SEP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S441": {
+   "description": "B744 SEP WRITTEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S442": {
+   "description": "B744 SEP WRITTEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S499": {
+   "description": "B747 SEP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S4A1": {
+   "description": "4DAY SEP PROG (SEP A DAY 1)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S4A2": {
+   "description": "4DAY SEP PROG (SEP A DAY 2)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S4B1": {
+   "description": "4DAY SEP PROG (SEP B DAY 1)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S4B2": {
+   "description": "4DAY SEP PROG (SEP B DAY 2)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S4SG": {
+   "description": "SOAR for SG Care",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S519": {
+   "description": "A345 SEP TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S529": {
+   "description": "A345 SEP TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S539": {
+   "description": "A345 SEP TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S549": {
+   "description": "A345 SEP TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S559": {
+   "description": "A345 SEP TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S579": {
+   "description": "A345 SEP TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S599": {
+   "description": "A345 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S5A1": {
+   "description": "5DAY SEP PROG (SEP A DAY 1)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S5A2": {
+   "description": "5DAY SEP PROG (SEP A DAY 2)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S5B1": {
+   "description": "5DAY SEP PROG (SEP B DAY 1)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S5B2": {
+   "description": "5DAY SEP PROG (SEP B DAY 2)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S719": {
+   "description": "B773ER SEP CONVERSION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S731": {
+   "description": "737 Conversion",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S732": {
+   "description": "737 Conversion",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S739": {
+   "description": "B773ER SEP CONVERSION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S771": {
+   "description": "B777 SEP WRITTEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S772": {
+   "description": "B777 SEP WRITTEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S780": {
+   "description": "B787 SEP CONV DAY 1-TEMP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S781": {
+   "description": "B787 SEP CONVERSION DAY 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S782": {
+   "description": "B787 SEP CONVERSION DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S783": {
+   "description": "B787 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S787": {
+   "description": "B787 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S799": {
+   "description": "B777 SEP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S819": {
+   "description": "A380 SEP CONVERSION DAY 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S829": {
+   "description": "A380 SEP CONVERSION DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "S899": {
+   "description": "A380 SEP RECOURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SA99": {
+   "description": "SELF AWARENESS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SAP1": {
+   "description": "CCRP SGP AMBASSADOR PROG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SARL": {
+   "description": "ONLINE VLE-ETSP COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB01": {
+   "description": "STC-CCRP SOARING- UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB01T": {
+   "description": "RT-STC-CCRP SOARING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB02": {
+   "description": "STC-CCLP SOARING AS A TEAM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB02T": {
+   "description": "RT-STC-CCLP SOARING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB03": {
+   "description": "SOARING BY EXAMPLE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB03T": {
+   "description": "RT-CCAP SOARING BY EXAMPLE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB04": {
+   "description": "SOARING AS A LEADER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB04T": {
+   "description": "RT-CCPP SOARING AS A LEADER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SB99": {
+   "description": "MAGIC OF SOARS - BCAP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SBAO": {
+   "description": "STC-CCPP SOAR AS ONE (CIC)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SBC1": {
+   "description": "STC-CCCT SOARING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SBC1T": {
+   "description": "RT-STC-CCCT SOARING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SBC2": {
+   "description": "STC-CCCT SOAR-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SBC2T": {
+   "description": "RT-STC-CCCT SOARING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SC09": {
+   "description": "INITIAL C-I-C TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SC19": {
+   "description": "INITIAL C-I-C TRG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SC99": {
+   "description": "PROG C EVE DTE-WET ODD DT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SCA": {
+   "description": "SEP C PROGRAMME (LET)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SCA2": {
+   "description": "SEP C PROG (LET) PRACTICAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SCB": {
+   "description": "SEP C PROGRAMME (WET)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SCB2": {
+   "description": "SEP C PROG (WET) PRACTICAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SCRE": {
+   "description": "ONLINE VLE-ETSP COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SCSF": {
+   "description": "EXT VENUE-ETSP COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SCWA": {
+   "description": "STC-ETSP COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SD19": {
+   "description": "STEPPED DOWN FR FLT (NO IR)",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SD88": {
+   "description": "STEPPED DOWN FR FLT (NO IR)",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SDHC": {
+   "description": "ONLINE VLE-ETSP COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SEPA": {
+   "description": "SEP Program A",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SEPB": {
+   "description": "SEP Program B",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SEPI": {
+   "description": "SEP Initial",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SEPO": {
+   "description": "SEP Training",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SEPW": {
+   "description": "SEP Written",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SFWW": {
+   "description": "ONLINE VLE-ETSP COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SG99": {
+   "description": "A340 SEP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SH19": {
+   "description": "74M SERVICE/SEP TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SM91": {
+   "description": "STC-SOMM GRAD-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SM99": {
+   "description": "STC-SOMM WORKSHOP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SMC1": {
+   "description": "ONLINE VLE-ETSP COURSE D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SMC2": {
+   "description": "ONLINE VLE-ETSP COURSE D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SN99": {
+   "description": "SNY FLIGHT",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SNB": {
+   "description": "737 Conversion",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SO99": {
+   "description": "REVISED SB99 AND VC99",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SP09": {
+   "description": "IT N SAP/CREWWEB TRNG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SP99": {
+   "description": "SAP/IS/CMIV TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SPRM": {
+   "description": "ONLINE VLE-ETSP COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SQ99": {
+   "description": "SERVICE HIGHEST QUALITY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SR19": {
+   "description": "STC-SVC REFRESHER-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SR29": {
+   "description": "STC-SVC REFRESHER-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SR91": {
+   "description": "STC-SOMM REFRESHER-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SR99": {
+   "description": "SERVICE REFRESHER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SRES": {
+   "description": "EMOTIONAL RESILIENCE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SRF1": {
+   "description": "STC-CCAP MANAGE SVC RECY D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SRF1T": {
+   "description": "RT-STC-CCAP MANAGE SVC RECY D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SRF2": {
+   "description": "STC-CCAP MANAGE SVC RECY D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SRF2T": {
+   "description": "RT-STC-CCAP MANAGE SVC RECY D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SS99": {
+   "description": "SECURITY SEMINAR",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ST01": {
+   "description": "STC-CCRP ST-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ST09": {
+   "description": "CCRP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ST5A": {
+   "description": "SEP THEORY TEST AFTER E5A2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ST5B": {
+   "description": "SEP THEORY TEST AFTER E5B2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ST99": {
+   "description": "SEP THEORY TEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "STC1": {
+   "description": "STC-CCCT SIA SVC TRAD/ALC BEV",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "STDN": {
+   "description": "STAND DOWN DUTY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SU99": {
+   "description": "SUPERVISORY SKILLS COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SV01": {
+   "description": "ATTACHMENT TO SP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SV02": {
+   "description": "DUTY TRAVEL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SW99": {
+   "description": "PROG C EVE DTE-WET ODD DT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SY99": {
+   "description": "STRENGTHENING YOURSELVES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZ00": {
+   "description": "SEP 1ST AID/FIRE-FIGHTING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZ99": {
+   "description": "SEP EVEN DATE-WET ODD DAT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZA1": {
+   "description": "DAY 1 PROG SEPA",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZA2": {
+   "description": "DAY 2 PROG SEPA/1ST AID",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZA3": {
+   "description": "PROG SEPA PRACTICAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZAB": {
+   "description": "SEPA & B",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZB1": {
+   "description": "DAY 1 PROG SEPB",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZB2": {
+   "description": "DAY 2 PROG SEPB",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "SZB3": {
+   "description": "PROG SEPB PRACTICAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "T199": {
+   "description": "TRAIN THE TRAINER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "T299": {
+   "description": "TRAIN THE TRAINER 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "T781": {
+   "description": "STC-B787 SVC TRG-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "T781T": {
+   "description": "RT-STC-B787 SVC-TOKEN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "T782": {
+   "description": "B787 SEP CONVERSION DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "T782T": {
+   "description": "RT-B787 SEP CONVERSION DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TA99": {
+   "description": "TRANSACTIONAL ANALYSIS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TARM": {
+   "description": "TASARM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TB91": {
+   "description": "ADVANCED TRANSACTIONAL ANALYSI",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TB99": {
+   "description": "TA COUNSELLING ACTION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TBI1": {
+   "description": "BEHAVIOURAL INSIGHTS-DAY 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TBI2": {
+   "description": "BEHAVIOURAL INSIGHTS-DAY 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TC99": {
+   "description": "TRANSFORMING CUSTOMER SVC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TCT1": {
+   "description": "STC 3BCRM-TACT-PANTS/FLATS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TCT1T": {
+   "description": "RT-TACT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TCTF": {
+   "description": "TECH & CC TEAMWORK FACILITATOR",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TCTP": {
+   "description": "TECH & CC TEAMWORK PARTIIPANT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TEM": {
+   "description": "THREAT AND ERROR MANAGEMENT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TES007": {
+   "description": "TES007 Desc",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TESC": {
+   "description": "STC-CCCT EXCEL SSE-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TESCT": {
+   "description": "RT- STC-CCCT EXCEL SSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TESS": {
+   "description": "STC-CCRP TESS - UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TESST": {
+   "description": "RT-CCRP TESS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TEST": {
+   "description": "NFA TEST CASE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TF99": {
+   "description": "THINK ON YOUR FEET",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TH99": {
+   "description": "CREATIVE THINKING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TIP": {
+   "description": "Training & Instructor Process",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TM99": {
+   "description": "CERT N TOURISM AMBASSADOR",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TP99": {
+   "description": "CORT THINKING PROG",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TR05": {
+   "description": "CCLD COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TR06": {
+   "description": "GROUND@CCLD DUE REBATCH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TR07": {
+   "description": "GROUND@CCLD - AESTHETIC ISSUES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TR08": {
+   "description": "GROUND@CCLD DUE BMI ISSUES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TS99": {
+   "description": "TOP SALESPERSON AWARD",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TSC1": {
+   "description": "STC-SVC COACH D1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TSC1T": {
+   "description": "RT-STC-SVC COACH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TSC2": {
+   "description": "STC-SVC COACH D2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TT99": {
+   "description": "TRAIN THE TRAINER (ALL TY",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TU99": {
+   "description": "SPORTS CLUB-TEAM UP-SEP ATTIRE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TU99T": {
+   "description": "RT-SPORTS CLUB-TEAM UP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "TW99": {
+   "description": "BRIEF SOLUTION-FOCUSED",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "UMTG": {
+   "description": "UNION MEETING",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "UP99": {
+   "description": "UNLEASH LEADERSHIP POTENTIAL",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "US99": {
+   "description": "USER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "VA99": {
+   "description": "VALUE IN ACTION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "VC99": {
+   "description": "SOAR SHARED - CHERISH IT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "VI99": {
+   "description": "SOAR SHARED - INSPIRE IT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "VJ99": {
+   "description": "SOAR SHARED - IMPACT IT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "VK99": {
+   "description": "VALUES AT WORK",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "VN99": {
+   "description": "SOAR SHARED - NURTURE IT",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "VO99": {
+   "description": "AUDIO-VIDEO ON DEMAND",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "VW99": {
+   "description": "VINE TO WINE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WC99": {
+   "description": "WINE COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WCA1": {
+   "description": "WESTERN CULINARY ARTS 1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WD99": {
+   "description": "SEP PRATICAL RETEST",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WE99": {
+   "description": "WATER EVACUATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WELE": {
+   "description": "WATER AND LAND EVAC (EXEMPT)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WET": {
+   "description": "WATER EVACUATION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WG99": {
+   "description": "WINE APPRECIATION GROUP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WH99": {
+   "description": "WHEELCHAIR TRANSFER TRAINING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WI99": {
+   "description": "WIT-QCC TECHNIQUES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WR99": {
+   "description": "WINE REFRESHER",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WRA1": {
+   "description": "STC-CCRP WRA- UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WS02T": {
+   "description": "RT-WSET INT LVL 2 (SDL)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WS03T": {
+   "description": "RT-WSET ADV LVL 3 (SDL)",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WS92": {
+   "description": "STC-WSET LVL 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WS92T": {
+   "description": "RT-STC-WSET LVL 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WS93": {
+   "description": "WSET ADV LVL 3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WS93T": {
+   "description": "RT-WSET ADV LVL 3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WS99": {
+   "description": "STC-CCRP WELLNESS PROGRAMME",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WSEP": {
+   "description": "SEP Written",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WSL1": {
+   "description": "WSL1",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WSL1T": {
+   "description": "WSL1T",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WSTA": {
+   "description": "WSET Lv 3",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "WSTI": {
+   "description": "WSET Lv 2",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "Z399": {
+   "description": "A310 CONVERSION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "Z499": {
+   "description": "B747 CONVERSION",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZC09": {
+   "description": "STC-CCAP GEN MODULE & TALKS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZC99": {
+   "description": "STC-CCAP INTRO & GROOMING",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZC99T": {
+   "description": "RT-CCAP",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZC9C": {
+   "description": "CCCT GENERAL MODULE-NB CIC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCD9": {
+   "description": "STC-CCAP CREW DUTIES & DOC",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCD9T": {
+   "description": "RT-CCAP CREW DUTIES & DOCS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCDC": {
+   "description": "STC-CCCT CREW DUTY DOC-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCE9": {
+   "description": "STC-CCAP IFE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCE9T": {
+   "description": "RT-STC-CCAP IFE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCEC": {
+   "description": "STC-CCCT IFE (NB)-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCP9": {
+   "description": "STC-CCAP PFS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCP9T": {
+   "description": "RT-STC-CCAP PFS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCPC": {
+   "description": "STC-CCCT VR PFS (NB)-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCW9": {
+   "description": "STC-CCAP WET RUN-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZCW9T": {
+   "description": "RT-CCAP WET RUN",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZL09": {
+   "description": "STC-CCLP PROMO GENERAL I",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZL99": {
+   "description": "STC-CCLP PROMO GENERAL II",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZL99T": {
+   "description": "RT-STC-CCLP PROMO GEN II",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLCD": {
+   "description": "STC-CCLP CREW DUTIES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLCDT": {
+   "description": "RT-STC-CCLP CREW DUTIES",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLHF": {
+   "description": "STC-CCLP HUMAN FACTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLHFT": {
+   "description": "RT-STC-CCLP HUMAN FACTORS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLHP": {
+   "description": "THE HELPING PROCESS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLHPT": {
+   "description": "RT-CCLP THE HELPING PROCESS",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLLC": {
+   "description": "STC-CCLP LEAD W CONFIDENCE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLSC": {
+   "description": "STC-CCLP SVC COACH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLSCT": {
+   "description": "RT-STC-CCLP SVC COACH",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLWR": {
+   "description": "STC-CCLP DRY/WET-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZLWRT": {
+   "description": "RT-STC-CCLP DRY/WET-UNIFORM",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ZZ99": {
+   "description": "747/310 CONVERSION COURSE",
+   "category": "training",
+   "friendsSee": "Training",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "5F99": {
+   "description": "5F99",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "ATDO": {
+   "description": "AUTO TAG DAY OFF",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "BOFF": {
+   "description": "BLANK DAY OFF",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "CE99": {
+   "description": "CONTRACT RENEWAL",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "COVAC1": {
+   "description": "COVAC DAY1",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "COVAC2": {
+   "description": "COVAC DAY2",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "COWES1": {
+   "description": "COVAC FOR WES D1",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "COWES2": {
+   "description": "COVAC FOR WES D2",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CP03": {
+   "description": "01 WEEK SUSPENSION",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CP24": {
+   "description": "SUSPENSION - No Pay",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CP44": {
+   "description": "SUSPENSION OF ALL DUTIES FP",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPN4": {
+   "description": "IFM INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPN5": {
+   "description": "CS INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPNT": {
+   "description": "INTERVIEW AT STC",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CPOP": {
+   "description": "Crew Overseas",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CQ99": {
+   "description": "OFFDAY B4 COUPLE-CODED FLT",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "DTVL": {
+   "description": "Management Crew - Duty Travel",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "EC91": {
+   "description": "EXTRA CURRICULAR ACTIVITIES",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "EC99": {
+   "description": "EXTRA CURRICULAR ACTIVITIES",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "EXDO": {
+   "description": "EXDO",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "FF99": {
+   "description": "OFFDAY B4 FQ FLT",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "FV99": {
+   "description": "IFS INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GF99": {
+   "description": "OFFDAY B4 GQ FLT",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "HQO": {
+   "description": "Home Qurantine Order",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "IM99": {
+   "description": "IFS WRITTEN TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "IN99": {
+   "description": "CS INTERVIEW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "LO": {
+   "description": "LAYOVER",
+   "category": "layover",
+   "friendsSee": "Away (layover)",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "LOA": {
+   "description": "Leave of Absence",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "LV99": {
+   "description": "OFF DAY",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "MB": {
+   "description": "MEDICAL BOARD",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MB01": {
+   "description": "MEDICAL BOARD 1000-1200",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MB02": {
+   "description": "MEDICAL BOARD 1300-1600",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MF99": {
+   "description": "MISSES FLT/NO SHOW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NDCP": {
+   "description": "Offday B4 Assessment Flt",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "NDFC": {
+   "description": "OFFDAY B4 NON DISRUPTABLE DUTY",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "NR99": {
+   "description": "National Service reporting",
+   "category": "national_service",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "OD99": {
+   "description": "Day off gained by mutual swap",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "OFF": {
+   "description": "REQUESTED DAY OFF",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "OFFA": {
+   "description": "OFFA for AM Off Day-0001-1200",
+   "category": "part_off",
+   "friendsSee": "Off morning (until 12:00)",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "OFFD": {
+   "description": "AUTO DAY OFF",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "OFFP": {
+   "description": "OFFP for PM Off Day-1201-2359",
+   "category": "part_off",
+   "friendsSee": "Off afternoon (from 12:01)",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "QF99": {
+   "description": "Off day bfr rqsted flt",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "RD": {
+   "description": "RESERVE DUTY",
+   "category": "reserve",
+   "friendsSee": "Reserve",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "RF99": {
+   "description": "Offday bfr/aftr rcncy flt",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "RQ91": {
+   "description": "Off day request",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "RQ99": {
+   "description": "Off day request",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "RQPR": {
+   "description": "PR OFF DAY REQUEST",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "RS99": {
+   "description": "RESIGNATION",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "RST": {
+   "description": "REST",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "RX99": {
+   "description": "OWED DAY OFF",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "SD99": {
+   "description": "REPORTED & STEPPED DOWN FR FLT",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SHN": {
+   "description": "Leave of Absence",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SOFF": {
+   "description": "Day off for sim",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "SSS4": {
+   "description": "FOR ULR FLIGHTS",
+   "category": "standby",
+   "friendsSee": "Standby",
+   "blocksMatching": true,
+   "swappable": true
+  },
+  "ST18": {
+   "description": "DAY0 SWAB TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "ST19": {
+   "description": "DAY0 SWAB TEST (Prog B)",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "ST38": {
+   "description": "DAY3 SWAB TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "ST39": {
+   "description": "DAY3 SWAB TEST (Prog B)",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "ST79": {
+   "description": "Make Up On Arr Swab(Prog B)",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "ST88": {
+   "description": "SWAB TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "ST89": {
+   "description": "SWAB TEST PROG B",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "STN9": {
+   "description": "SWAB TEST FOR NON VAC CREW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "STOP": {
+   "description": "Authorised External PCT Test",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "STRE": {
+   "description": "RE-SWAB APPOINTMENT",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "STTS": {
+   "description": "OROPHARYNGEAL (THROAT) SWAB",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "UM99": {
+   "description": "UNION MEETING",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "VL99": {
+   "description": "Offday returned to VOLUNTEER",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "WFH2": {
+   "description": "WIA WFH replacement for CPS2",
+   "category": "busy",
+   "friendsSee": "Busy",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "WK99": {
+   "description": "OFF DAY WORK PERMIT RENEWAL",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "WP99": {
+   "description": "IFS WRITTEN TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "WT01": {
+   "description": "CS WRITTEN TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "WT02": {
+   "description": "CS WRITTEN TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "WT09": {
+   "description": "CS WRITTEN TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "WT99": {
+   "description": "CS WRITTEN TEST",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "AALV": {
+   "description": "ANNUAL LEAVE",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CHDL": {
+   "description": "PAID CHILDCARE LEAVE",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "CMPT": {
+   "description": "COMPASSIONATE",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "DILP": {
+   "description": "Day off in-lieu (P Holiday)",
+   "category": "off",
+   "friendsSee": "Off",
+   "blocksMatching": false,
+   "swappable": false
+  },
+  "GPAL": {
+   "description": "Government Paid Adoption Leave",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GPPL": {
+   "description": "GPPL LEAVE",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "GPSL": {
+   "description": "GPSL LEAVE",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MC": {
+   "description": "Medical Leave",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MCFP": {
+   "description": "Medical (casual) Full pay",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MCLO": {
+   "description": "Medical Leave Layover",
+   "category": "layover",
+   "friendsSee": "Away (layover)",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MCNP": {
+   "description": "Medical (casual) No pay",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MH": {
+   "description": "MEDICAL - CABIN CREW",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MKUL": {
+   "description": "MAKEUP LEAVE",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MLVE": {
+   "description": "Management Crew - Annual Leave",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MNCF": {
+   "description": "Medical (non-casual) Full pay",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MNCH": {
+   "description": "Medical (non-casual) Half pay",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MNCL": {
+   "description": "Medical (non casual full pay",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MNCN": {
+   "description": "Medical (non-casual) No pay",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MTNY": {
+   "description": "Maternity",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MTRL": {
+   "description": "Matrimonial",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MTTC": {
+   "description": "3rd Child Matnity Lve fullpay",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "MWAC": {
+   "description": "Med Leave for work accidents",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NPLC": {
+   "description": "NPL Childcare",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NPLI": {
+   "description": "INVOLUNTRY NO PAY LEAVE",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NPLJ": {
+   "description": "NPL Join spouse working over",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NPLM": {
+   "description": "NPL - 4th and subsequent leave",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NPLO": {
+   "description": "NPL Others",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NPLS": {
+   "description": "NPL Study",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NPLV": {
+   "description": "VOLUNTRY NO PAY LEAVE",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "NTSV": {
+   "description": "National service/reservist",
+   "category": "national_service",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "PARL": {
+   "description": "PARENT CARE LEAVE",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SDFP": {
+   "description": "DUTY SUSPENSION (FULL PAY)",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SG50": {
+   "description": "SG50",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SLCP": {
+   "description": "Special Lve represent company",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SLCT": {
+   "description": "Special Lve represent country",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SLLC": {
+   "description": "Special Lve local union co",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SLOC": {
+   "description": "Special Lve overseas union",
+   "category": "private",
+   "friendsSee": "Unavailable",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "SLOT": {
+   "description": "Special Lve others",
+   "category": "leave",
+   "friendsSee": "Away",
+   "blocksMatching": true,
+   "swappable": false
+  },
+  "FLY": {
+   "description": "Flying duty (flight number + sector on the same row)",
+   "category": "flight",
+   "friendsSee": "Flying",
+   "blocksMatching": true,
+   "swappable": true
+  }
+ }
+}

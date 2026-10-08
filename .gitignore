@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# env / secrets (keep the examples)
+.env
+.env.*
+!.env.example
+
+# build outputs
+.next/
+out/
+dist/
+build/
+.vercel/
+.expo/
+web-build/
+ios/
+android/
+*.tsbuildinfo
+coverage/
+
+# supabase local state
+supabase/.branches/
+supabase/.temp/
+
+# misc
+.DS_Store
+*.log
+__pycache__/
