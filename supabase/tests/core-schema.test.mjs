@@ -3,25 +3,7 @@
 // Run from the repo root: npm run test:db
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
-import { PGlite } from '@electric-sql/pglite';
-
-const MIGRATIONS = join(import.meta.dirname, '..', 'migrations');
-
-// Minimal stand-in for what Supabase provides: roles, auth.users and auth.uid().
-const SUPABASE_STUB = `
-  create role anon nologin;
-  create role authenticated nologin;
-  create role service_role nologin bypassrls;
-  create schema auth;
-  grant usage on schema auth, public to anon, authenticated;
-  create table auth.users (id uuid primary key);
-  create function auth.uid() returns uuid language sql stable as $$
-    select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid
-  $$;
-  grant execute on function auth.uid() to anon, authenticated;
-`;
+import { createDb } from './harness.mjs';
 
 const U = {
   ana: '00000000-0000-0000-0000-00000000000a', // owner of most rosters in these tests
@@ -32,28 +14,14 @@ const U = {
 };
 
 let db;
-
-/** Run SQL as a signed-in user (or anon when userId is null). Always resets to superuser. */
-async function as(userId, sql, params = []) {
-  await db.exec(`reset role; select set_config('request.jwt.claim.sub', '${userId ?? ''}', false);`);
-  await db.exec(`set role ${userId ? 'authenticated' : 'anon'}`);
-  try {
-    return (await db.query(sql, params)).rows;
-  } finally {
-    await db.exec('reset role');
-  }
-}
+let as;
 
 async function fails(userId, sql, params = []) {
   await assert.rejects(() => as(userId, sql, params));
 }
 
 before(async () => {
-  db = new PGlite();
-  await db.exec(SUPABASE_STUB);
-  for (const file of readdirSync(MIGRATIONS).filter((f) => f.endsWith('.sql')).sort()) {
-    await db.exec(readFileSync(join(MIGRATIONS, file), 'utf8'));
-  }
+  ({ db, as } = await createDb());
 
   for (const [name, id] of Object.entries(U)) {
     await db.query('insert into auth.users (id) values ($1)', [id]);
