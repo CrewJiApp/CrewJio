@@ -194,6 +194,6 @@ export function signInErrorMessage(e: unknown): string | null {
   if (/provider is not enabled|Unsupported provider/i.test(msg)) return 'This sign-in option is not switched on yet.';
   if (/rate limit|too many/i.test(msg)) return 'Too many tries. Please wait a minute and try again.';
   if (/expired|invalid.*(otp|token)|token has expired/i.test(msg)) return 'That code did not work. Check it or ask for a new one.';
-  if (/network|fetch/i.test(msg)) return 'No connection. Check your internet and try again.';
+  if (/network|fetch/i.test(msg)) return 'Can’t reach the server. Check your internet, and that app/.env.local has your real Supabase URL.';
   return msg;
 }

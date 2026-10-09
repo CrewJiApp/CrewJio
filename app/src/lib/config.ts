@@ -6,4 +6,11 @@ export const config = {
   supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '',
 };
 
-export const hasSupabaseConfig = config.supabaseUrl.startsWith('https://') && config.supabaseAnonKey.length > 0;
+// The placeholders from .env.example count as "no keys", so a half-filled file stays in preview mode.
+const isPlaceholder = (v: string) => /your-project-ref|your-anon|publishable-key/i.test(v);
+
+export const hasSupabaseConfig =
+  /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(config.supabaseUrl.trim()) &&
+  config.supabaseAnonKey.trim().length > 20 &&
+  !isPlaceholder(config.supabaseUrl) &&
+  !isPlaceholder(config.supabaseAnonKey);
