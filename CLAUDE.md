@@ -40,6 +40,14 @@ Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out
 - Profiles are visible only to yourself, people in a group with you, and your partner (or pending partner request). Nobody can search.
 - `supabase/tests/core-schema.test.mjs` checks these rules in an in-memory Postgres (`npm run test:db`). Add a test for every new rule.
 
+## App conventions (build step 2)
+- **Sign-in**: Apple (native, iOS only), Google (browser OAuth with PKCE), phone number by SMS code, and email code as a fallback (handy for testing). Setup steps for Nick: `docs/setup-sign-in.md`.
+- **Preview mode**: with no Supabase keys in `app/.env.local`, every sign-in button signs in a local demo user and data is stored on the phone only (AsyncStorage). `app/src/lib/backend.ts` hides which mode is in use. Keep both working.
+- Onboarding asks for a display name (prefilled from Apple or Google) and saves the profile at the end of step 3. The Me tab reuses the same screens to edit it.
+- **Manual duties** are built by `shared/src/duty-entry.ts`, never by hand in screens. Times are stored as "HHMM" in the app and `time` in Postgres. For training, sim, ground school, standby and reserve, `report_time` is the start and `arrive_time` the end. A flight with a return flight fills the days between with `layover` duties at the destination. A day off is a duty (`off`); holiday, annual leave, busy and reservist are rows in `holidays` with a date range.
+- **Calendar cells** (`shared/src/calendar.ts`): leave always wins, then the away airport for flights and layovers, then TRG / SIM / GND, then SBY / RSV, then off. Colours: flight amber, training lavender, standby slate, leave teal outline.
+- Tabs: Roster, Crew, the + (Add duty), Track for cabin crew or Partner for pilots, Me.
+
 ## Day ranking (shared/ranking.ts)
 For a set of people and a date, classify as:
 - **Great**: everyone off and rested (nobody landed from a long-haul flight in the previous ~24h)
