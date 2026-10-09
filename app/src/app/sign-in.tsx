@@ -49,7 +49,8 @@ export default function SignIn() {
   const verify = async () => {
     if (!sentTo) return;
     setError(null);
-    if (!/^\d{6}$/.test(code.trim()) && !auth.demo) return setError('The code has 6 digits.');
+    // Supabase sends 6 digits by default; projects can set up to 10.
+    if (!/^\d{6,10}$/.test(code.trim()) && !auth.demo) return setError('Enter the code from the message, numbers only.');
     setBusy(true);
     try {
       await auth.verifyCode(sentTo, code.trim());
@@ -71,7 +72,7 @@ export default function SignIn() {
             <>
               <StepHeader
                 title={mode === 'phone' ? 'Your mobile number' : 'Your email'}
-                subtitle={mode === 'phone' ? 'We’ll text you a 6-digit code. Nobody can find you by your number.' : 'We’ll email you a 6-digit code.'}
+                subtitle={mode === 'phone' ? 'We’ll text you a code. Nobody can find you by your number.' : 'We’ll email you a code.'}
               />
               <TextField
                 key={mode}
@@ -97,7 +98,7 @@ export default function SignIn() {
           ) : (
             <>
               <StepHeader title="Enter the code" subtitle={`Sent to ${where}. It can take a minute to arrive.`} />
-              <TextField label="6-digit code" value={code} onChangeText={setCode} placeholder="123456" keyboardType="number-pad" maxLength={6} mono error={error} autoFocus />
+              <TextField label="Code" value={code} onChangeText={(v) => setCode(v.replace(/\D/g, ''))} placeholder="123456" keyboardType="number-pad" maxLength={10} mono error={error} autoFocus />
               <Button label="Send a new code" variant="text" disabled={busy} onPress={send} />
               <Button
                 label={mode === 'phone' ? 'Change number' : 'Change email'}

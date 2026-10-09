@@ -36,17 +36,20 @@ crewjio://**
 The first is for testing in Expo Go, the second for the real app later.
 
 ## 4. Email codes (the quickest way to test real sign-in)
-On the phone sign-in screen, tap **Use email instead**. To make Supabase send a 6-digit code
-instead of a link:
-1. Supabase → **Authentication → Emails → Templates → Magic link**.
-2. Replace the body with something like:
+On the phone sign-in screen, tap **Use email instead**. Supabase sends a link by default; make it send a code:
+1. Supabase → **Authentication → Emails → Templates**. Change **both** of these templates:
+   - **Confirm signup**: the first email a new address gets.
+   - **Magic link**: every sign-in after that.
+2. In each, replace the body with something like this, then press **Save**:
    ```
    <h2>Your CrewJio code</h2>
    <p>Enter this code in the app: <strong>{{ .Token }}</strong></p>
    ```
-3. Save. Supabase's built-in email only sends a few emails per hour. Before inviting testers, set
-   **Authentication → Emails → SMTP settings** to use Resend: host `smtp.resend.com`, port `465`,
-   username `resend`, password = a Resend API key, sender `hello@mail.crewjio.com`.
+3. Supabase → **Authentication → Sign In / Providers → Email**: set **Email OTP Length** to 6 (codes of 6 to 10 digits work, but 6 is easiest to type).
+4. Supabase's built-in email only sends a few emails per hour, and only to your own team's addresses.
+   Before inviting testers, set **Authentication → Emails → SMTP settings** to use Resend: host
+   `smtp.resend.com`, port `465`, username `resend`, password = a Resend API key, sender
+   `hello@mail.crewjio.com`.
 
 ## 5. Google
 1. Google Cloud Console → create a project (or reuse one) → **APIs & Services → OAuth consent screen**:
