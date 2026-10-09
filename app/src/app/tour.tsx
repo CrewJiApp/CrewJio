@@ -60,9 +60,14 @@ export default function Tour() {
   const onScrollEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) =>
     setIndex(Math.round(e.nativeEvent.contentOffset.x / width));
 
-  const finish = () => router.replace('/home');
+  const finish = () => router.replace('/roster');
   const next = () => {
-    if (last) return finish();
+    if (last) {
+      // "Upload my roster": land on the roster with Add duty open.
+      finish();
+      router.push('/add-duty');
+      return;
+    }
     listRef.current?.scrollToIndex({ index: index + 1, animated: !reduceMotion });
     setIndex(index + 1);
   };

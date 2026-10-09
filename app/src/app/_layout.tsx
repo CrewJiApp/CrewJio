@@ -12,6 +12,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useReducedMotion } from 'react-native-reanimated';
 
+import { AuthProvider } from '@/state/auth';
 import { OnboardingProvider } from '@/state/onboarding';
 import { colors } from '@/theme';
 
@@ -42,23 +43,29 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={navTheme}>
-      <OnboardingProvider>
-        <StatusBar style="light" />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: { backgroundColor: colors.night },
-            animation: reduceMotion ? 'none' : 'default',
-          }}>
-          <Stack.Screen name="index" />
-          <Stack.Screen name="onboarding/role" />
-          <Stack.Screen name="onboarding/rank" />
-          <Stack.Screen name="onboarding/fleets" />
-          {/* One-way doors: once the profile is done there is no swiping back into it. */}
-          <Stack.Screen name="tour" options={{ gestureEnabled: false }} />
-          <Stack.Screen name="home" options={{ gestureEnabled: false }} />
-        </Stack>
-      </OnboardingProvider>
+      <AuthProvider>
+        <OnboardingProvider>
+          <StatusBar style="light" />
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: colors.night },
+              animation: reduceMotion ? 'none' : 'default',
+            }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="sign-in" />
+            <Stack.Screen name="auth-callback" />
+            <Stack.Screen name="onboarding/role" />
+            <Stack.Screen name="onboarding/rank" />
+            <Stack.Screen name="onboarding/fleets" />
+            {/* One-way doors: once the profile is done there is no swiping back into it. */}
+            <Stack.Screen name="tour" options={{ gestureEnabled: false }} />
+            <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
+            <Stack.Screen name="add-duty" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="day/[date]" options={{ presentation: 'modal' }} />
+          </Stack>
+        </OnboardingProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
