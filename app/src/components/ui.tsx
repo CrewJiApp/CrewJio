@@ -87,12 +87,14 @@ const buttonStyles = StyleSheet.create({
 });
 
 /** "STEP 1 OF 3" + title + subtitle, as in the role picker mockup. */
-export function StepHeader({ step, total, title, subtitle }: { step: number; total: number; title: string; subtitle?: string }) {
+export function StepHeader({ step, total, title, subtitle }: { step?: number; total?: number; title: string; subtitle?: string }) {
   return (
     <View style={styles.stepHeader}>
-      <Text style={type.overline} accessibilityLabel={`Step ${step} of ${total}`}>
-        STEP {step} OF {total}
-      </Text>
+      {step && total ? (
+        <Text style={type.overline} accessibilityLabel={`Step ${step} of ${total}`}>
+          STEP {step} OF {total}
+        </Text>
+      ) : null}
       <Text style={type.title} accessibilityRole="header">
         {title}
       </Text>

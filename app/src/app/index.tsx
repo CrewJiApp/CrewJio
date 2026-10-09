@@ -1,27 +1,42 @@
-// Welcome / login (mockup 01-welcome). Auth is a placeholder until Prompt 2.
-import { router, useLocalSearchParams } from 'expo-router';
+// Welcome / sign in (mockup 01-welcome). Signed-in users are sent on to onboarding or their roster.
+import { Redirect, router, useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeInDown, useReducedMotion } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FlightPathHero, LogoMark, Wordmark, brandStyles } from '@/components/brand';
 import { Button } from '@/components/ui';
-import { useOnboarding, type AuthMethod } from '@/state/onboarding';
+import { signInErrorMessage, useAuth } from '@/state/auth';
 import { colors, fonts, radius, space, type } from '@/theme';
 
 const PRIVACY_URL = 'https://crewjio.com/privacy';
 
 export default function Welcome() {
-  const { signInPlaceholder } = useOnboarding();
+  const auth = useAuth();
   const reduceMotion = useReducedMotion();
+  const [busy, setBusy] = useState<'apple' | 'google' | null>(null);
+  const [error, setError] = useState<string | null>(null);
   // Opened from an invite link, e.g. crewjio://?inviter=Jia%20Li&group=Batch%20girls
   const { inviter, group } = useLocalSearchParams<{ inviter?: string; group?: string }>();
 
-  const continueWith = (method: AuthMethod) => {
-    signInPlaceholder(method);
-    router.push('/onboarding/role');
+  if (auth.status === 'loading') return null;
+  if (auth.status === 'signed_in') return <Redirect href={auth.profile ? '/roster' : '/onboarding/role'} />;
+
+  const run = async (which: 'apple' | 'google') => {
+    setError(null);
+    setBusy(which);
+    try {
+      await (which === 'apple' ? auth.signInWithApple() : auth.signInWithGoogle());
+    } catch (e) {
+      setError(signInErrorMessage(e));
+    } finally {
+      setBusy(null);
+    }
   };
+  // Sign in with Apple is native on iOS only. In demo mode every button works everywhere.
+  const showApple = auth.demo || Platform.OS === 'ios';
 
   return (
     <SafeAreaView style={styles.screen} edges={['bottom', 'left', 'right']}>
@@ -52,9 +67,24 @@ export default function Welcome() {
                 </Text>
               </View>
             ) : null}
-            <Button label="Continue with Apple" variant="light" onPress={() => continueWith('apple')} />
-            <Button label="Continue with Google" variant="outline" onPress={() => continueWith('google')} />
-            <Button label="Use phone number" variant="text" onPress={() => continueWith('phone')} />
+            {showApple ? (
+              <Button label={busy === 'apple' ? 'Signing in…' : 'Continue with Apple'} variant="light" disabled={!!busy} onPress={() => run('apple')} />
+            ) : null}
+            <Button
+              label={busy === 'google' ? 'Signing in…' : 'Continue with Google'}
+              variant={showApple ? 'outline' : 'light'}
+              disabled={!!busy}
+              onPress={() => run('google')}
+            />
+            <Button label="Use phone number" variant="text" disabled={!!busy} onPress={() => router.push('/sign-in')} />
+            {error ? (
+              <Text style={styles.error} accessibilityLiveRegion="polite">
+                {error}
+              </Text>
+            ) : null}
+            {auth.demo ? (
+              <Text style={[type.small, styles.demo]}>Preview mode: no Supabase keys yet, so everything stays on this phone.</Text>
+            ) : null}
           </View>
 
           <Text style={[type.small, styles.legal]}>
@@ -109,4 +139,6 @@ const styles = StyleSheet.create({
   inviteGroup: { fontFamily: fonts.bold },
   legal: { textAlign: 'center', fontSize: 13, lineHeight: 19, marginTop: 'auto', paddingBottom: space.lg },
   link: { color: colors.amber, textDecorationLine: 'underline' },
+  error: { fontFamily: fonts.medium, fontSize: 15, color: '#F07A7A', textAlign: 'center' },
+  demo: { textAlign: 'center', color: colors.subtle },
 });

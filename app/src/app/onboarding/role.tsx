@@ -1,15 +1,27 @@
 // Step 1 of 3: role and airline (mockup 02-role-picker).
 import { router } from 'expo-router';
-import type { ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
+import { TextField } from '@/components/fields';
 import { AirplaneTiltIcon, LockSimpleIcon, UserIcon } from '@/components/icons';
 import { BackButton, Button, Chip, InfoNote, OptionCard, Screen, SectionLabel, StepHeader } from '@/components/ui';
+import { useAuth } from '@/state/auth';
 import { useOnboarding } from '@/state/onboarding';
 import { colors, radius, space } from '@/theme';
 
 export default function RoleStep() {
-  const { draft, setRole, setAirline } = useOnboarding();
+  const { draft, editing, setRole, setAirline, setDisplayName } = useOnboarding();
+  const { user } = useAuth();
+
+  // Prefill the name Apple or Google shared, once.
+  const suggested = user?.suggestedName ?? '';
+  const prefilled = useRef(false);
+  useEffect(() => {
+    if (prefilled.current || editing || !suggested) return;
+    prefilled.current = true;
+    if (!draft.displayName) setDisplayName(suggested);
+  }, [editing, suggested, draft.displayName, setDisplayName]);
 
   return (
     <Screen>
@@ -53,13 +65,22 @@ export default function RoleStep() {
           <Chip label="Scoot" selected={draft.airline === 'Scoot'} onPress={() => setAirline('Scoot')} style={styles.flex} />
         </View>
 
+        <TextField
+          label="Your name (friends see this)"
+          value={draft.displayName}
+          onChangeText={setDisplayName}
+          placeholder="First name is fine"
+          autoCapitalize="words"
+          maxLength={40}
+        />
+
         <InfoNote icon={<LockSimpleIcon size={20} color={colors.muted} />}>
           Nobody can search for you. People connect only through an invite link or your contacts.
         </InfoNote>
       </ScrollView>
 
       <View style={styles.footer}>
-        <Button label="Continue" onPress={() => router.push('/onboarding/rank')} />
+        <Button label="Continue" disabled={!draft.displayName.trim()} onPress={() => router.push('/onboarding/rank')} />
       </View>
     </Screen>
   );
