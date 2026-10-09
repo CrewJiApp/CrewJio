@@ -30,6 +30,16 @@ Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out
 - **Group**: name, members, sharing level (off days only | + destinations | full roster). If a friend is in several groups, they see the most generous level shared with any of their groups, unless a per-person override hides more.
 - **Partner**: special 1-to-1 connection with full roster, live flight status and landing notifications.
 
+## Sharing and privacy (enforced in supabase/migrations/20261010000000_core_schema.sql)
+- `duties` and `holidays` are readable only by their owner at table level. Everyone else reads them through `get_shared_roster(owner, from, to)`, which redacts each day to the viewer's effective level.
+- Each member sets what each group sees of them (`group_members.sharing_level`, default `off_days`). Effective level = the most generous level the owner shares with any group both people are in, capped by the owner's per-person override (`sharing_overrides`, which can also hide someone completely). The viewer never sees the override exists.
+- What each level shows: `off_days` = Off / Busy / Away / Unavailable only; `destinations` = + friends label and sector; `full` = + flight number and times. Groups always see holidays, leave, busy and reservist as "Away".
+- An active partner sees full detail and the holiday kind (Holiday, Annual leave, Busy, Reservist). One active partner per person; only the addressee can accept.
+- Private codes always show "Unavailable" with no detail, even to the partner. Raw roster codes and notes never leave the owner.
+- Groups are created with `create_group(name)` and joined with `join_group(invite_code)`; members cannot add other people directly. Only the group owner can rename or delete it.
+- Profiles are visible only to yourself, people in a group with you, and your partner (or pending partner request). Nobody can search.
+- `supabase/tests/core-schema.test.mjs` checks these rules in an in-memory Postgres (`npm run test:db`). Add a test for every new rule.
+
 ## Day ranking (shared/ranking.ts)
 For a set of people and a date, classify as:
 - **Great**: everyone off and rested (nobody landed from a long-haul flight in the previous ~24h)
