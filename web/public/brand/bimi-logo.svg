@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+<title>CrewJio</title>
+<rect width="120" height="120" fill="#0E1726"/>
+<g transform="translate(6.7,4.9) scale(0.888)"><path d="M24 96 C 28 62, 42 40, 60 33" fill="none" stroke="#F5B642" stroke-width="13" stroke-linecap="round"/>
+<path d="M96 96 C 92 62, 78 40, 60 33" fill="none" stroke="#4FD1C5" stroke-width="13" stroke-linecap="round"/>
+<circle cx="60" cy="33" r="13" fill="#EEF2F7"/></g>
+</svg>

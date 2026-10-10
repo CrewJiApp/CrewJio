@@ -8,12 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "import:tally": "tsx scripts/import-tally.ts",
-    "email:dev": "email dev --dir src/emails --port 3001",
+    "email:dev": "email dev --dir emails --port 3001",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
     "@react-email/components": "^1.0.12",
+    "@react-email/render": "^2.0.6",
     "@supabase/supabase-js": "^2.117.3",
     "motion": "^14.0.0",
     "next": "16.4.0",
@@ -24,6 +25,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@react-email/ui": "^6.11.1",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
