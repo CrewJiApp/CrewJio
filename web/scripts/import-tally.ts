@@ -162,8 +162,6 @@ async function main() {
         resendApiKey: env("RESEND_API_KEY"),
         unsubscribeSecret: env("UNSUBSCRIBE_SECRET"),
         siteUrl,
-        from: "CrewJio <hello@mail.crewjio.com>",
-        replyTo: "hello@crewjio.com",
       });
       await db.from("waitlist").update({ confirmation_sent_at: new Date().toISOString() }).eq("email", r.email as string);
       sent += 1;
