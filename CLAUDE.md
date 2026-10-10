@@ -98,6 +98,9 @@ Users can edit any imported flight after the fact: Delayed, AOG / stuck, Cancell
   - Body: "Hi {first_name}, you're on the list. CrewJio helps SG crew and pilots find the days you're all home, without the group-chat juggling. We're opening the beta to a small group first, and we'll email you when your spot is ready. Want in faster? Jio your crew and share crewjio.com with your batch. Just reply if you have ideas or questions. We read everything. — Nick, CrewJio"
   - Footer: why they got it, a one-click unsubscribe, and "Not affiliated with any airline."
 - Never put Resend or Supabase service keys in browser code.
+- **Every email uses `web/emails/components/CrewJioLayout.tsx`** (logo header, amber and teal card, footer with the reason, unsubscribe and "Not affiliated with any airline"), built from its `H1`, `P`, `CTA`, `Divider`, `SignOff` blocks. Start new email types from `web/emails/Announcement.tsx`. Preview them with `npm run email:dev` in `web/`. Email images are served from `crewjio.com/email/` (`web/public/email/`); never delete files there, since emails already sent still point at them.
+- Emails are rendered to HTML and plain text with `@react-email/render`. The From address comes from the `EMAIL_FROM` env var (default `CrewJio <hello@mail.crewjio.com>`); reply-to stays `hello@crewjio.com`.
+- Unsubscribe: links carry an HMAC token of the email (`UNSUBSCRIBE_SECRET`, `web/src/lib/unsubscribe-token.ts`). `/unsubscribe` asks for one tap, and `POST /api/unsubscribe` sets `unsubscribed_at`; a GET never unsubscribes, so link scanners can't. Every marketing email sends `List-Unsubscribe` and `List-Unsubscribe-Post: List-Unsubscribe=One-Click`.
 
 ## Design
 Dark navy UI (#0E1726 background, #17233A cards), amber accent (#F5B642), teal (#4FD1C5), training lavender (#C9B6FF), partner pink (#F59BB8). Fonts: DM Sans (UI), JetBrains Mono (flight codes). Touch targets ≥ 44px. Mockups are in the CrewJio Design canvas.
