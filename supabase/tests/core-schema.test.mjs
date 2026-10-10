@@ -195,3 +195,53 @@ test('the waitlist stays locked to the service role', async () => {
   await fails(U.ana, 'select * from public.waitlist');
   await fails(null, `insert into public.waitlist (first_name, email, role, airline, consent_at) values ('x', 'x@y.z', 'pilot', 'SIA', now())`);
 });
+
+test('the duty kind follows the sharing level', async () => {
+  const kinds = async (viewer) =>
+    Object.fromEntries((await roster(viewer)).map((r) => [r.day.toISOString().slice(0, 10), r.kind]));
+  // Cai: off days only, so no kinds at all.
+  assert.ok(Object.values(await kinds(U.cai)).every((k) => k === null));
+  // Ben: full roster through Batch.
+  const ben = await kinds(U.ben);
+  assert.equal(ben['2026-11-02'], 'flight');
+  assert.equal(ben['2026-11-04'], 'layover');
+  assert.equal(ben['2026-11-05'], 'training');
+  assert.equal(ben['2026-11-03'], null); // private
+  assert.equal(ben['2026-11-06'], null); // holiday
+  // Dee, the partner, sees the kind too, but never for a private day.
+  const dee = await kinds(U.dee);
+  assert.equal(dee['2026-11-02'], 'flight');
+  assert.equal(dee['2026-11-03'], null);
+});
+
+test('partner invites: one code, accepted by the other person, one partner each', async () => {
+  // Ana already has a partner, so she cannot invite another.
+  await fails(U.ana, 'select public.create_partner_invite()');
+
+  const [{ create_partner_invite: code }] = await as(U.cai, 'select public.create_partner_invite()');
+  assert.match(code, /^[0-9A-F]{10}$/);
+  // Only Cai can see her invite.
+  assert.equal((await as(U.cai, 'select * from public.partner_invites')).length, 1);
+  assert.deepEqual(await as(U.eve, 'select * from public.partner_invites'), []);
+  // Nobody can create invites directly or accept their own.
+  await fails(U.eve, 'insert into public.partner_invites (owner_id) values ($1)', [U.eve]);
+  await fails(U.cai, 'select public.accept_partner_invite($1)', [code]);
+  // Dee is already Ana's partner.
+  await fails(U.dee, 'select public.accept_partner_invite($1)', [code]);
+
+  const [{ accept_partner_invite: partner }] = await as(U.eve, 'select public.accept_partner_invite($1)', [code.toLowerCase()]);
+  assert.equal(partner, U.cai);
+  const [link] = await as(U.eve, 'select status, accepted_at from public.partners where $1 in (requester_id, addressee_id)', [U.cai]);
+  assert.equal(link.status, 'active');
+  assert.ok(link.accepted_at);
+  // The code is used up, and Eve can now see Cai's profile.
+  assert.deepEqual(await db.query('select * from public.partner_invites').then((r) => r.rows), []);
+  assert.equal((await as(U.eve, 'select display_name from public.profiles where id = $1', [U.cai]))[0].display_name, 'cai');
+});
+
+test('partner invites expire', async () => {
+  const [{ create_partner_invite: code }] = await as(U.ben, 'select public.create_partner_invite()');
+  await db.query(`update public.partner_invites set expires_at = now() - interval '1 minute' where code = $1`, [code]);
+  await fails(U.eve, 'select public.accept_partner_invite($1)', [code]);
+  await fails(U.ben, `select public.accept_partner_invite('NOPE')`);
+});
