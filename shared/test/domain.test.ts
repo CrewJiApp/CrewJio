@@ -9,7 +9,6 @@ import {
   friendsLabel,
   lookupCode,
   normaliseProfile,
-  rankDays,
   rankIndex,
   rosterCodeCount,
   suggestSwaps,
@@ -107,8 +106,7 @@ describe('effective sharing level', () => {
 });
 
 describe('stubs', () => {
-  it('are clearly not implemented yet', () => {
-    expect(() => rankDays([], '2026-11-01', '2026-11-30')).toThrow(/not implemented/);
+  it('swap suggestions are clearly not implemented yet', () => {
     expect(() => suggestSwaps({} as never, '2026-11-01', [])).toThrow(/not implemented/);
   });
 });

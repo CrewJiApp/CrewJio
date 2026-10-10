@@ -7,4 +7,5 @@ export * from './rows';
 export * from './roster-codes';
 export * from './sharing';
 export * from './ranking';
+export * from './roster-import';
 export * from './swaps';

@@ -1,7 +1,7 @@
 // Groups, partners and sharing levels. See CLAUDE.md "Sharing and privacy".
 // The database enforces these rules (supabase/migrations/*_core_schema.sql); this mirror
 // lets the app explain them and lets tests pin the behaviour down.
-import type { IsoDate } from './duty';
+import type { DutyKind, IsoDate } from './duty';
 
 /** Ordered from least to most generous. */
 export const SHARING_LEVELS = ['off_days', 'destinations', 'full'] as const;
@@ -73,6 +73,8 @@ export function effectiveLevel(args: {
 export interface SharedRosterEntry {
   day: IsoDate;
   status: 'off' | 'busy' | 'away' | 'unavailable';
+  /** Duty kind at "destinations" level and above; null at "off days only", for private days and leave. */
+  kind: DutyKind | null;
   label: string;
   sector: string | null;
   flightNumber: string | null;
