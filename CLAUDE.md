@@ -38,6 +38,8 @@ Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out
 - Private codes always show "Unavailable" with no detail, even to the partner. Raw roster codes and notes never leave the owner.
 - Groups are created with `create_group(name)` and joined with `join_group(invite_code)`; members cannot add other people directly. Only the group owner can rename or delete it.
 - Profiles are visible only to yourself, people in a group with you, and your partner (or pending partner request). Nobody can search.
+- **Partners connect by code** (migration `20261011000000`): `create_partner_invite()` returns a 10-character code valid for 7 days; `accept_partner_invite(code)` makes the two people active partners straight away (entering the code is the acceptance). One active partner each; either side can disconnect.
+- `get_shared_roster` also returns the duty `kind`, under the same rules as the label: hidden at `off_days`, for private days, and for leave / reservist / busy days shown to groups as "Away".
 - `supabase/tests/core-schema.test.mjs` checks these rules in an in-memory Postgres (`npm run test:db`). Add a test for every new rule.
 
 ## App conventions (build step 2)
@@ -47,8 +49,16 @@ Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out
 - **Manual duties** are built by `shared/src/duty-entry.ts`, never by hand in screens. Times are stored as "HHMM" in the app and `time` in Postgres. For training, sim, ground school, standby and reserve, `report_time` is the start and `arrive_time` the end. A flight with a return flight fills the days between with `layover` duties at the destination. A day off is a duty (`off`); holiday, annual leave, busy and reservist are rows in `holidays` with a date range.
 - **Calendar cells** (`shared/src/calendar.ts`): leave always wins, then the away airport for flights and layovers, then TRG / SIM / GND, then SBY / RSV, then off. Colours: flight amber, training lavender, standby slate, leave teal outline.
 - Tabs: Roster, Crew, the + (Add duty), Track for cabin crew or Partner for pilots, Me.
+- **Groups (build step 3)**: Crew tab lists partner and groups; friends join only with the group's invite code (Crew → Join with a code). Group Plan shows best days per month, a nudge for people missing the month, the member's own sharing level for that group, members (tap to set a per-person override), invite code, leave / delete. Crew Match picks friends across groups and the partner for the next 14 days. Sharing (invites, best days, proposals) uses the system share sheet; polls and "Lock in" come later.
+- In preview mode, `app/src/lib/demo-friends.ts` supplies demo crew with rotating rosters for any group you create or join, and a demo partner.
 
 ## Day ranking (shared/ranking.ts)
+`classifyPersonDays` is the port of `scripts/try_roster.py` and must keep reproducing `samples/nov-2026-days.json` (tested). `rowsToDuties` (shared/roster-import.ts) turns list-view rows into duties, merging overnight flights and late standbys into one duty with an arrival date. Decisions made in build step 3:
+- A day with nothing on it counts as off, but only for people who have added something in that range; people with no roster for the range are left out of the ranking and shown as "Nudge".
+- People are combined by the part of the day each is free (morning, afternoon, evening). Training that ends by 18:00 frees the evening. **SameLayover** (everyone on a layover in the same city) is an extra match type.
+- **Almost** needs 3+ people and the busy one must not be on leave.
+- Friends are ranked only from what `get_shared_roster` gives the viewer (`sharedEntriesToRoster`): at "off days only" a duty is just Busy, and an unexplained Away or Unavailable counts as untouchable.
+
 For a set of people and a date, classify as:
 - **Great**: everyone off and rested (nobody landed from a long-haul flight in the previous ~24h)
 - **Evening**: everyone free from evening (back from a turnaround, or training ends ~17:00)
