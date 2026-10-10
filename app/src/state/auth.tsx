@@ -10,6 +10,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
 import { backend, clearDemoData } from '@/lib/backend';
+import { clearDemoSocial } from '@/lib/social';
 import { supabase } from '@/lib/supabase';
 
 WebBrowser.maybeCompleteAuthSession();
@@ -167,6 +168,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           await AsyncStorage.removeItem(DEMO_USER_KEY);
           await clearDemoData();
+          await clearDemoSocial();
           await enter(null);
         }
       },

@@ -63,6 +63,12 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
             <Stack.Screen name="add-duty" options={{ presentation: 'modal' }} />
             <Stack.Screen name="day/[date]" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="group/new" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="group/join" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="group/[id]" />
+            <Stack.Screen name="match" />
+            <Stack.Screen name="partner-view" />
+            <Stack.Screen name="partner-connect" options={{ presentation: 'modal' }} />
           </Stack>
         </OnboardingProvider>
       </AuthProvider>
