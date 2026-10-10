@@ -32,6 +32,7 @@ export function TextField({
   maxLength,
   style,
   autoFocus,
+  onFocus,
 }: {
   label: string;
   value: string;
@@ -44,6 +45,7 @@ export function TextField({
   maxLength?: number;
   style?: StyleProp<ViewStyle>;
   autoFocus?: boolean;
+  onFocus?: () => void;
 }) {
   const [focused, setFocused] = useState(false);
   return (
@@ -59,7 +61,10 @@ export function TextField({
         maxLength={maxLength}
         autoFocus={autoFocus}
         accessibilityLabel={label}
-        onFocus={() => setFocused(true)}
+        onFocus={() => {
+          setFocused(true);
+          onFocus?.();
+        }}
         onBlur={() => setFocused(false)}
         keyboardAppearance="dark"
         style={[styles.input, mono && styles.mono, focused && styles.inputFocused, !!error && styles.inputError]}
