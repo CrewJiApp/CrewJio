@@ -13,6 +13,3 @@ export const serverEnv = {
   resendApiKey: () => required("RESEND_API_KEY"),
   unsubscribeSecret: () => required("UNSUBSCRIBE_SECRET"),
 };
-
-export const EMAIL_FROM = "CrewJio <hello@mail.crewjio.com>";
-export const EMAIL_REPLY_TO = "hello@crewjio.com";

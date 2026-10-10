@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { sendConfirmation } from "@/lib/send-confirmation";
-import { EMAIL_FROM, EMAIL_REPLY_TO, serverEnv } from "@/lib/server/env";
+import { serverEnv } from "@/lib/server/env";
 import { clientIp, isRateLimited } from "@/lib/server/rate-limit";
 import { supabaseAdmin } from "@/lib/server/supabase-admin";
 import { SITE_URL } from "@/lib/site";
@@ -58,8 +58,6 @@ export async function POST(request: Request) {
         resendApiKey: serverEnv.resendApiKey(),
         unsubscribeSecret: serverEnv.unsubscribeSecret(),
         siteUrl: SITE_URL,
-        from: EMAIL_FROM,
-        replyTo: EMAIL_REPLY_TO,
       });
       await db.from("waitlist").update({ confirmation_sent_at: new Date().toISOString() }).eq("email", data.email);
     } catch (emailError) {
