@@ -110,15 +110,15 @@ export default function RosterScreen() {
             </View>
           </Pressable>
         ) : (
-          <View style={styles.promptCard}>
+          <Pressable onPress={() => router.push('/match')} accessibilityRole="button" style={({ pressed }) => [styles.promptCard, pressed && { opacity: 0.85 }]}>
             <View style={[styles.promptIcon, { backgroundColor: '#173B3E' }]}>
               <UsersIcon size={24} color={colors.teal} />
             </View>
             <View style={styles.flex}>
-              <Text style={type.bodyStrong}>Crew match is next</Text>
-              <Text style={type.small}>Soon you can add friends and see the days you’re all off.</Text>
+              <Text style={type.bodyStrong}>When can we meet?</Text>
+              <Text style={type.small}>See the days you and your crew are all home.</Text>
             </View>
-          </View>
+          </Pressable>
         )}
       </ScrollView>
     </SafeAreaView>
