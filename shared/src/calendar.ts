@@ -16,7 +16,7 @@ export function monthGrid(year: number, month: number): (IsoDate | null)[][] {
 }
 
 /** Colour family of a day cell. Matches the legend under the calendar. */
-export type DayTone = 'flight' | 'training' | 'standby' | 'leave' | 'off' | 'empty';
+export type DayTone = 'flight' | 'training' | 'standby' | 'leave' | 'busy' | 'off' | 'empty';
 
 export interface DayBadge {
   tone: DayTone;
@@ -24,7 +24,7 @@ export interface DayBadge {
   code: string | null;
 }
 
-type DutyLike = Pick<NewDuty, 'date' | 'kind' | 'sector'>;
+type DutyLike = Pick<NewDuty, 'date' | 'kind' | 'sector'> & Partial<Pick<NewDuty, 'category' | 'code' | 'friendsLabel'>>;
 type HolidayLike = Pick<Holiday, 'kind' | 'startDate' | 'endDate'>;
 
 const HOLIDAY_CODE: Record<Holiday['kind'], string> = { holiday: 'HOL', annual_leave: 'AL', busy_personal: 'BUSY', reservist: 'NS' };
@@ -44,6 +44,9 @@ export function dayBadge(date: IsoDate, duties: DutyLike[], holidays: HolidayLik
   const leave = holidays.find((h) => h.startDate <= date && date <= h.endDate);
   if (leave) return { tone: 'leave', code: HOLIDAY_CODE[leave.kind] };
   const today = duties.filter((d) => d.date === date);
+  // Leave and reservist typed as roster codes are duties, but they win the same way.
+  if (today.some((d) => d.category === 'national_service')) return { tone: 'leave', code: 'NS' };
+  if (today.some((d) => d.category === 'leave')) return { tone: 'leave', code: 'AL' };
   const away = today.find((d) => d.kind === 'flight' || d.kind === 'layover');
   if (away) return { tone: 'flight', code: awayAirport(away.sector) };
   const training = today.find((d) => d.kind === 'training' || d.kind === 'sim' || d.kind === 'ground_school');
@@ -51,6 +54,9 @@ export function dayBadge(date: IsoDate, duties: DutyLike[], holidays: HolidayLik
   const standby = today.find((d) => d.kind === 'standby' || d.kind === 'reserve');
   if (standby) return { tone: 'standby', code: standby.kind === 'reserve' ? 'RSV' : 'SBY' };
   if (today.some((d) => d.kind === 'holiday' || d.kind === 'annual_leave' || d.kind === 'busy_personal')) return { tone: 'leave', code: 'AL' };
+  // Work, busy time, private codes and unknown codes. The owner sees their own code.
+  const busy = today.find((d) => d.kind === 'other');
+  if (busy) return { tone: 'busy', code: busy.code ? busy.code.slice(0, 4) : busy.friendsLabel === 'Working' ? 'WORK' : 'BUSY' };
   if (today.some((d) => d.kind === 'off')) return { tone: 'off', code: null };
   return { tone: 'empty', code: null };
 }

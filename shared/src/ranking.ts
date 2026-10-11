@@ -91,7 +91,8 @@ export function classifyPersonDays(roster: PersonRoster, start: IsoDate, end: Is
     const away = day.find((d) => d.kind === 'layover' || ((d.kind === 'standby' || d.kind === 'reserve') && d.sector && !d.sector.includes('-') && d.sector !== BASE_AIRPORT));
     if (away) {
       const layover = day.find((d) => d.sector)?.sector ?? away.sector ?? '';
-      return { date, status: 'Away', note: `Layover ${layover}`, layover: away.sector ?? undefined };
+      const onCall = !day.some((d) => d.kind === 'layover');
+      return { date, status: 'Away', note: onCall ? `Standby in ${layover}` : `Layover ${layover}`, layover: away.sector ?? undefined };
     }
 
     if ([...cats].every((c) => c === 'off' || c === 'part_off')) {
@@ -106,6 +107,17 @@ export function classifyPersonDays(roster: PersonRoster, start: IsoDate, end: Is
     if (training.length === day.length && training.every((d) => d.arriveTime && !d.arriveDate && d.arriveTime <= '1800')) {
       const ends = training.map((d) => d.arriveTime!).sort().at(-1)!;
       return { date, status: 'Evening', note: `Training until ${displayTime(ends)}` };
+    }
+
+    // Busy for part of the day (work hours, or a phone calendar event) leaves the rest free.
+    const busy = day.filter((d) => d.category === 'busy' && d.kind === 'other');
+    if (busy.length > 0 && busy.length === day.length && busy.every((d) => d.reportTime && d.arriveTime && !d.arriveDate)) {
+      const first = busy.map((d) => d.reportTime!).sort()[0]!;
+      const last = busy.map((d) => d.arriveTime!).sort().at(-1)!;
+      const what = busy[0]!.friendsLabel || 'Busy';
+      if (last <= '1800') return { date, status: 'Evening', note: `${what} until ${displayTime(last)}` };
+      if (first >= '1800') return { date, status: 'Daytime', note: `Free until ${displayTime(first)}` };
+      if (first >= '1200') return { date, status: 'Morning', note: `Free until ${displayTime(first)}` };
     }
 
     return { date, status: 'Busy', note: [...cats].sort().join(', ') };

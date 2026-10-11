@@ -9,3 +9,5 @@ export * from './sharing';
 export * from './ranking';
 export * from './roster-import';
 export * from './swaps';
+export * from './code-entry';
+export * from './calendar-sync';

@@ -20,7 +20,8 @@ export interface RosterRow {
   actingRank?: string;
 }
 
-const CATEGORY_KIND: Record<CodeCategory, DutyKind> = {
+/** The duty kind stored for each code category. */
+export const CATEGORY_KIND: Record<CodeCategory, DutyKind> = {
   off: 'off',
   part_off: 'off',
   layover: 'layover',

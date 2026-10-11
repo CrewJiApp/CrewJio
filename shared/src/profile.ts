@@ -1,7 +1,19 @@
 // Profile, roles, ranks and fleets. See CLAUDE.md "Domain model".
 
-export const ROLES = ['cabin_crew', 'pilot'] as const;
+/** Cabin crew and pilots fly; a partner (or family, or friend) is not crew and adds their own calendar. */
+export const ROLES = ['cabin_crew', 'pilot', 'partner'] as const;
 export type Role = (typeof ROLES)[number];
+
+export const ROLE_LABELS: Record<Role, string> = {
+  cabin_crew: 'Cabin crew',
+  pilot: 'Pilot',
+  partner: 'Not crew',
+};
+
+/** True for people with an airline roster (cabin crew and pilots). */
+export function fliesForWork(role: Role): boolean {
+  return role !== 'partner';
+}
 
 export const AIRLINES = ['SIA', 'Scoot', 'other'] as const;
 export type Airline = (typeof AIRLINES)[number];
@@ -47,7 +59,7 @@ export interface Profile {
 }
 
 export function ranksForRole(role: Role): readonly { id: Rank; label: string; short: string }[] {
-  return role === 'cabin_crew' ? CREW_RANKS : PILOT_RANKS;
+  return role === 'cabin_crew' ? CREW_RANKS : role === 'pilot' ? PILOT_RANKS : [];
 }
 
 export function isRankForRole(role: Role, rank: string): rank is Rank {
@@ -61,9 +73,16 @@ export function rankIndex(role: Role, rank: Rank): number {
 
 /**
  * Normalise a profile draft so it never holds a combination the database rejects:
- * rank must match the role, and JCL is cabin crew only.
+ * rank must match the role, and JCL is cabin crew only. A partner has no airline, rank or
+ * fleets, and is never offered swaps.
  */
-export function normaliseProfile<T extends Pick<Profile, 'role' | 'rank' | 'jclTrained' | 'fleets'>>(p: T): T {
+export function normaliseProfile<T extends Pick<Profile, 'role' | 'rank' | 'jclTrained' | 'fleets'> & Partial<Pick<Profile, 'airline' | 'openToSwaps'>>>(p: T): T {
+  if (p.role === 'partner') {
+    const out: T = { ...p, rank: null, fleets: [], jclTrained: false };
+    if (out.airline !== undefined) out.airline = 'other';
+    if (out.openToSwaps !== undefined) out.openToSwaps = false;
+    return out;
+  }
   const rank = p.rank && isRankForRole(p.role, p.rank) ? p.rank : null;
   const fleets = FLEETS.filter((f) => p.fleets.includes(f));
   return { ...p, rank, fleets, jclTrained: p.role === 'cabin_crew' ? p.jclTrained : false };

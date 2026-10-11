@@ -58,7 +58,8 @@ export interface Duty {
   arriveDate: IsoDate | null;
   /** Owner only, never shared. */
   note: string | null;
-  source: 'manual' | 'import';
+  /** manual: typed in; import: roster screenshot; calendar: copied from the phone's calendar. */
+  source: 'manual' | 'import' | 'calendar';
   /** Import found a code or value not in the code list. The user must confirm it. */
   needsReview: boolean;
 }

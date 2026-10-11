@@ -35,6 +35,11 @@ export function lookupCode(code: string): RosterCode | undefined {
   return Object.prototype.hasOwnProperty.call(codes, code) ? codes[code] : undefined;
 }
 
+/** Every code in the list with its details, for searching while the user types. */
+export function allCodes(): [string, RosterCode][] {
+  return Object.entries(codes);
+}
+
 export function rosterCodeCount(): number {
   return Object.keys(codes).length;
 }

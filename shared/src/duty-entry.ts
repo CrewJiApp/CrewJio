@@ -1,6 +1,6 @@
 // Manual duty entry: turns what the user types into duty and holiday rows, with validation.
 // Used by the Add duty sheet; the database constraints in core_schema.sql mirror these rules.
-import { addDays, daysBetween, isIsoDate } from './dates';
+import { addDays, daysBetween, isIsoDate, weekdayIndex } from './dates';
 import { KIND_CATEGORY, type Duty, type DutyKind, type HHMM, type Holiday, type HolidayKind, type IsoDate } from './duty';
 
 /** A duty before it is saved: no id or owner yet. */
@@ -170,21 +170,82 @@ export const DEFAULT_HOURS: Record<TimedKind, { start: HHMM; end: HHMM } | null>
 };
 
 /**
+ * Where a standby or reserve is held: null at base, or the layover airport (crew can be on
+ * standby while away on a layover). Friends see them as away.
+ */
+export function standbyLocation(where: string | undefined, field = 'where'): string | null {
+  if (!where?.trim()) return null;
+  const airport = required(normaliseAirport(where), field, 'Use a 3-letter airport code, like SFO.');
+  return airport === BASE_AIRPORT ? null : airport;
+}
+
+/**
  * Training, sim, ground school, standby or reserve on one day.
  * For these duties report_time holds the start and arrive_time the end.
+ * `where` is for standby or reserve on a layover: the airport, e.g. "SFO".
  */
-export function buildTimedDuty(input: { kind: TimedKind; date: string; start?: string; end?: string; note?: string }): NewDuty {
+export function buildTimedDuty(input: { kind: TimedKind; date: string; start?: string; end?: string; note?: string; where?: string }): NewDuty {
   const date = checkDate(input.date, 'date');
   const start = optionalTime(input.start, 'start');
   const end = optionalTime(input.end, 'end');
+  const onCall = input.kind === 'standby' || input.kind === 'reserve';
   return {
     ...base(input.kind, date),
+    sector: onCall ? standbyLocation(input.where) : null,
     reportTime: start,
     arriveTime: end,
     // Ends after midnight, e.g. a 1600 to 0200 standby.
     arriveDate: start && end && end <= start ? addDays(date, 1) : null,
     note: input.note?.trim() ? input.note.trim().slice(0, 500) : null,
   };
+}
+
+/** Longest range one busy or coded entry can cover. */
+export const MAX_RANGE_DAYS = 31;
+
+/** Every date from start to end (inclusive), optionally Monday to Friday only. */
+export function entryDates(startDate: string, endDate: string | undefined, weekdaysOnly = false): IsoDate[] {
+  const start = checkDate(startDate, 'date');
+  const end = endDate ? checkDate(endDate, 'endDate') : start;
+  if (end < start) throw new DutyInputError('endDate', 'The end date is before the start date.');
+  if (daysBetween(start, end) >= MAX_RANGE_DAYS) throw new DutyInputError('endDate', `Add up to ${MAX_RANGE_DAYS} days at a time.`);
+  const out: IsoDate[] = [];
+  for (let d = start; d <= end; d = addDays(d, 1)) {
+    if (!weekdaysOnly || weekdayIndex(d) < 5) out.push(d);
+  }
+  if (out.length === 0) throw new DutyInputError('endDate', 'There are no weekdays in those dates.');
+  return out;
+}
+
+/** What a partner (not crew) can add: work or busy, with optional hours. */
+export type BusyLabel = 'Working' | 'Busy';
+
+/**
+ * Work or busy time for someone who is not crew, on one or more days. With hours, the rest of
+ * the day still counts as free (busy until 18:00 leaves the evening free). Without hours the
+ * whole day is busy.
+ */
+export function buildBusyDays(input: {
+  label: BusyLabel;
+  date: string;
+  endDate?: string;
+  weekdaysOnly?: boolean;
+  start?: string;
+  end?: string;
+  note?: string;
+}): NewDuty[] {
+  const start = optionalTime(input.start, 'start');
+  const end = optionalTime(input.end, 'end');
+  if ((start && !end) || (!start && end)) throw new DutyInputError(start ? 'end' : 'start', 'Add both times, or leave both empty for the whole day.');
+  const note = input.note?.trim() ? input.note.trim().slice(0, 500) : null;
+  return entryDates(input.date, input.endDate, input.weekdaysOnly).map((date) => ({
+    ...base('other', date),
+    friendsLabel: input.label,
+    reportTime: start,
+    arriveTime: end,
+    arriveDate: start && end && end <= start ? addDays(date, 1) : null,
+    note,
+  }));
 }
 
 export function buildOffDuty(date: string): NewDuty {

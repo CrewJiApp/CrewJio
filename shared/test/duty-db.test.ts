@@ -4,6 +4,9 @@ import { beforeAll, describe, expect, it } from 'vitest';
 // @ts-expect-error plain JS helper shared with the database tests
 import { createDb } from '../../supabase/tests/harness.mjs';
 import {
+  buildBusyDays,
+  buildCodedDuties,
+  eventsToBusyDuties,
   buildFlightDuties,
   buildLeave,
   buildOffDuty,
@@ -53,6 +56,16 @@ const everyKind: NewDuty[] = [
   buildTimedDuty({ kind: 'standby', date: '2026-10-12', start: '1600', end: '0200' }),
   buildTimedDuty({ kind: 'reserve', date: '2026-10-01' }),
   buildOffDuty('2026-10-06'),
+  // Standby while away on a layover.
+  buildTimedDuty({ kind: 'standby', date: '2026-10-04', start: '2005', end: '0040', where: 'LHR' }),
+  // Typed roster codes, including a private one and one that is not in the list.
+  ...buildCodedDuties({ code: 'SS60', date: '2026-10-20', start: '0600', end: '2359' }),
+  ...buildCodedDuties({ code: 'aalv', date: '2026-10-21', endDate: '2026-10-22' }),
+  ...buildCodedDuties({ code: 'NTSV', date: '2026-10-23' }),
+  ...buildCodedDuties({ code: 'QX7Q', date: '2026-10-24', allowUnknown: true }),
+  // A partner's work days and phone calendar.
+  ...buildBusyDays({ label: 'Working', date: '2026-10-26', endDate: '2026-10-27', start: '0900', end: '1800', note: 'Office' }),
+  ...eventsToBusyDuties([{ startDate: '2026-10-28', startTime: '1900', endDate: '2026-10-28', endTime: '2130', allDay: false }], '2026-10-28', '2026-10-28'),
 ];
 
 describe('duties in the database', () => {
