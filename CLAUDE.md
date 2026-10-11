@@ -21,7 +21,7 @@ Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out
 - Swap suggestions are suggestions only. The app never claims to perform a swap; swaps happen in the airline's official system.
 
 ## Domain model
-- **Profile**: name, role (cabin crew | pilot), airline (SIA | Scoot | other), rank, fleets (A380, A350, 777, 787, 737), JCL trained (Business class qualified, crew only), open_to_swaps (bool)
+- **Profile**: name, role (cabin crew | pilot | partner = not crew: a partner, family or friend), airline (SIA | Scoot | other), rank, fleets (A380, A350, 777, 787, 737), JCL trained (Business class qualified, crew only), open_to_swaps (bool)
 - **Crew ranks** (name tag colour): Flight Steward/Stewardess (blue #1E3A8C), Leading (green #1F6B35), Chief (red #B3191F), In-flight Supervisor (plum #5C1A3C). Name tags use CrewJio's own batik-style pattern in these colours.
 - **Pilot ranks**: Second Officer, First Officer, Captain (shown as stripes)
 - **Duty** types: flight (turnaround or multi-day trip), standby/reserve, training (usually 09:00–17:00), sim, ground school, off, holiday, annual leave, busy-personal
@@ -40,6 +40,7 @@ Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out
 - Profiles are visible only to yourself, people in a group with you, and your partner (or pending partner request). Nobody can search.
 - **Partners connect by code** (migration `20261011000000`): `create_partner_invite()` returns a 10-character code valid for 7 days; `accept_partner_invite(code)` makes the two people active partners straight away (entering the code is the acceptance). One active partner each; either side can disconnect.
 - `get_shared_roster` also returns the duty `kind`, under the same rules as the label: hidden at `off_days`, for private days, and for leave / reservist / busy days shown to groups as "Away".
+- **Not-crew users** (migration `20261012000000`): `profiles.role = 'partner'` has no rank, fleets or JCL and is never open to swaps. Their work and busy time are `other` duties with category `busy` and friends label "Working" or "Busy", with optional hours. `duties.source = 'calendar'` marks busy times copied from the phone calendar: only times, never event titles, places or people. A crew partner sees them in full; groups see them as "Away" (busy is always Away to groups).
 - `supabase/tests/core-schema.test.mjs` checks these rules in an in-memory Postgres (`npm run test:db`). Add a test for every new rule.
 
 ## App conventions (build step 2)
@@ -51,12 +52,16 @@ Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out
 - Tabs: Roster, Crew, the + (Add duty), Track for cabin crew or Partner for pilots, Me.
 - **Groups (build step 3)**: Crew tab lists partner and groups; friends join only with the group's invite code (Crew → Join with a code). Group Plan shows best days per month, a nudge for people missing the month, the member's own sharing level for that group, members (tap to set a per-person override), invite code, leave / delete. Crew Match picks friends across groups and the partner for the next 14 days. Sharing (invites, best days, proposals) uses the system share sheet; polls and "Lock in" come later.
 - In preview mode, `app/src/lib/demo-friends.ts` supplies demo crew with rotating rosters for any group you create or join, and a demo partner.
+- **Typing a roster code** (Add duty → Code, the default tab; `shared/src/code-entry.ts`): the user types the code from their roster and we search `roster-codes.json` as they type (exact code, then codes starting with it, then description words). A known code shows what it means and what friends see, then asks only for what it needs: times for standby / reserve / training (prefilled from the description, e.g. SS60 = 06:00 to 23:59), a day or a range for off / leave / reservist / private / busy, and FLY goes to the Flight tab. An unknown code is never guessed: the user must switch on "Save it anyway" and it is saved as Busy. The raw code is stored for the owner only.
+- **Standby on a layover**: standby and reserve have a Where choice (In Singapore / On a layover + airport). The airport goes in `sector`; at base it stays null. It ranks as away ("Standby in SFO") and can match a friend's layover in the same city.
+- **Not-crew users**: onboarding has a third choice, "I'm not crew", which skips rank and aircraft. They get Calendar, Crew, + (Add), Partner and Me tabs. Their Add sheet (`components/partner-entry.tsx`) has Copy your phone calendar (`app/calendar-sync.tsx`, `expo-calendar/legacy` because the newer API is not in Expo Go; copies the next 60 days and replaces what it copied before), Work / busy (hours, several days, weekdays only), Free day and Holiday.
 
 ## Day ranking (shared/ranking.ts)
 `classifyPersonDays` is the port of `scripts/try_roster.py` and must keep reproducing `samples/nov-2026-days.json` (tested). `rowsToDuties` (shared/roster-import.ts) turns list-view rows into duties, merging overnight flights and late standbys into one duty with an arrival date. Decisions made in build step 3:
 - A day with nothing on it counts as off, but only for people who have added something in that range; people with no roster for the range are left out of the ranking and shown as "Nudge".
 - People are combined by the part of the day each is free (morning, afternoon, evening). Training that ends by 18:00 frees the evening. **SameLayover** (everyone on a layover in the same city) is an extra match type.
 - **Almost** needs 3+ people and the busy one must not be on leave.
+- Busy for part of the day (`other` duties with category `busy` and hours: work, phone calendar) leaves the rest free: ending by 18:00 is **Evening**, starting from 18:00 is **Daytime**, starting from 12:00 is **Morning**. Without hours the whole day is busy.
 - Friends are ranked only from what `get_shared_roster` gives the viewer (`sharedEntriesToRoster`): at "off days only" a duty is just Busy, and an unexplained Away or Unavailable counts as untouchable.
 
 For a set of people and a date, classify as:
