@@ -1,38 +1,16 @@
 // Step 3 of 3: fleets, JCL (cabin crew only) and open to swaps. Follows the 02-role-picker pattern.
 import { FLEETS } from '@crewjio/shared';
-import { router } from 'expo-router';
-import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { BackButton, Button, Chip, SectionLabel, Screen, StepHeader, ToggleRow } from '@/components/ui';
-import { useAuth } from '@/state/auth';
+import { useFinishProfile } from '@/state/finish-profile';
 import { useOnboarding } from '@/state/onboarding';
 import { fonts, space } from '@/theme';
 
 export default function FleetsStep() {
-  const { draft, editing, toggleFleet, setJclTrained, setOpenToSwaps } = useOnboarding();
-  const { user, saveProfile } = useAuth();
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { draft, toggleFleet, setJclTrained, setOpenToSwaps } = useOnboarding();
+  const { finish, saving, error, editing } = useFinishProfile();
   const isCrew = draft.role === 'cabin_crew';
-
-  const finish = async () => {
-    if (!user) return;
-    setError(null);
-    setSaving(true);
-    try {
-      await saveProfile({ ...draft, id: user.id, displayName: draft.displayName.trim() });
-    } catch (e) {
-      setSaving(false);
-      setError(`Could not save your profile. ${e instanceof Error ? e.message : ''}`.trim());
-      return;
-    }
-    setSaving(false);
-    router.dismissAll();
-    // Editing goes back to the Me tab. New users get the tour: a one-way door, so the onboarding
-    // steps are dropped from history.
-    router.replace(editing ? '/me' : '/tour');
-  };
 
   return (
     <Screen>

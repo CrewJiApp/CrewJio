@@ -1,18 +1,22 @@
 // Step 1 of 3: role and airline (mockup 02-role-picker).
 import { router } from 'expo-router';
 import { useEffect, useRef, type ReactNode } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { TextField } from '@/components/fields';
-import { AirplaneTiltIcon, LockSimpleIcon, UserIcon } from '@/components/icons';
+import { AirplaneTiltIcon, HeartIcon, LockSimpleIcon, UserIcon } from '@/components/icons';
 import { BackButton, Button, Chip, InfoNote, OptionCard, Screen, SectionLabel, StepHeader } from '@/components/ui';
 import { useAuth } from '@/state/auth';
+import { useFinishProfile } from '@/state/finish-profile';
 import { useOnboarding } from '@/state/onboarding';
-import { colors, radius, space } from '@/theme';
+import { colors, fonts, radius, space } from '@/theme';
 
 export default function RoleStep() {
   const { draft, editing, setRole, setAirline, setDisplayName } = useOnboarding();
   const { user } = useAuth();
+  const { finish, saving, error } = useFinishProfile();
+  // Not crew: no rank or aircraft to ask about, so this is the only step.
+  const partner = draft.role === 'partner';
 
   // Prefill the name Apple or Google shared, once.
   const suggested = user?.suggestedName ?? '';
@@ -33,10 +37,14 @@ export default function RoleStep() {
         <ScrollView ref={scroll} contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled" keyboardDismissMode="interactive">
           <BackButton />
           <StepHeader
-            step={1}
-            total={3}
+            step={partner ? undefined : 1}
+            total={partner ? undefined : 3}
             title="What do you fly as?"
-            subtitle="This sets your duty types and roster import. Friends see it as a small label only."
+            subtitle={
+              partner
+                ? 'You’ll add your own calendar: work, plans and holidays. Friends see it as a small label only.'
+                : 'This sets your duty types and roster import. Friends see it as a small label only.'
+            }
           />
 
           <View style={styles.group} accessibilityRole="radiogroup">
@@ -62,13 +70,28 @@ export default function RoleStep() {
                 </RoleIcon>
               }
             />
+            <OptionCard
+              title="I'm not crew"
+              subtitle="Partner, family or friend. Add your own calendar and see when you're both free"
+              selected={partner}
+              onPress={() => setRole('partner')}
+              leading={
+                <RoleIcon active={partner}>
+                  <HeartIcon size={26} color={partner ? colors.onAmber : colors.cloud} />
+                </RoleIcon>
+              }
+            />
           </View>
 
-          <SectionLabel>Airline</SectionLabel>
-          <View style={styles.row} accessibilityRole="radiogroup">
-            <Chip label="Singapore Airlines" selected={draft.airline === 'SIA'} onPress={() => setAirline('SIA')} style={styles.wide} />
-            <Chip label="Scoot" selected={draft.airline === 'Scoot'} onPress={() => setAirline('Scoot')} style={styles.flex} />
-          </View>
+          {partner ? null : (
+            <>
+              <SectionLabel>Airline</SectionLabel>
+              <View style={styles.row} accessibilityRole="radiogroup">
+                <Chip label="Singapore Airlines" selected={draft.airline === 'SIA'} onPress={() => setAirline('SIA')} style={styles.wide} />
+                <Chip label="Scoot" selected={draft.airline === 'Scoot'} onPress={() => setAirline('Scoot')} style={styles.flex} />
+              </View>
+            </>
+          )}
 
           <TextField
             label="Your name (friends see this)"
@@ -86,7 +109,12 @@ export default function RoleStep() {
         </ScrollView>
 
         <View style={styles.footer}>
-          <Button label="Continue" disabled={!draft.displayName.trim()} onPress={() => router.push('/onboarding/rank')} />
+          {error ? <Text style={styles.error}>{error}</Text> : null}
+          <Button
+            label={partner ? (saving ? 'Saving…' : editing ? 'Save' : 'Continue') : 'Continue'}
+            disabled={!draft.displayName.trim() || saving}
+            onPress={partner ? finish : () => router.push('/onboarding/rank')}
+          />
         </View>
       </KeyboardAvoidingView>
     </Screen>
@@ -104,5 +132,6 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   wide: { flex: 1.35 },
   roleIcon: { width: 56, height: 56, borderRadius: radius.md, alignItems: 'center', justifyContent: 'center' },
-  footer: { paddingHorizontal: space.xl + 4, paddingBottom: space.md, paddingTop: space.sm },
+  footer: { paddingHorizontal: space.xl + 4, paddingBottom: space.md, paddingTop: space.sm, gap: space.sm },
+  error: { fontFamily: fonts.medium, fontSize: 15, color: '#F07A7A', textAlign: 'center' },
 });

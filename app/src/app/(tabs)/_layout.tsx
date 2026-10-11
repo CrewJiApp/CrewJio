@@ -27,13 +27,15 @@ export default function TabsLayout() {
 function TabBar({ state, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   const { profile } = useAuth();
-  // Crew track their own flights; pilots get the partner view (mockups 10 and 11).
-  const pilot = profile?.role === 'pilot';
+  // Crew track their own flights; pilots and people who are not crew get the partner view
+  // (mockups 10 and 11).
+  const role = profile?.role;
+  const partnerTab = role === 'pilot' || role === 'partner';
   const items = [
-    { name: 'roster', label: 'Roster', Icon: CalendarBlankIcon },
+    { name: 'roster', label: role === 'partner' ? 'Calendar' : 'Roster', Icon: CalendarBlankIcon },
     { name: 'crew', label: 'Crew', Icon: UsersIcon },
-    { name: 'add', label: 'Add duty', Icon: PlusIcon },
-    { name: 'partner', label: pilot ? 'Partner' : 'Track', Icon: pilot ? HeartIcon : AirplaneTiltIcon },
+    { name: 'add', label: role === 'partner' ? 'Add' : 'Add duty', Icon: PlusIcon },
+    { name: 'partner', label: partnerTab ? 'Partner' : 'Track', Icon: partnerTab ? HeartIcon : AirplaneTiltIcon },
     { name: 'me', label: 'Me', Icon: UserIcon },
   ];
   const current = state.routes[state.index]?.name;
@@ -47,7 +49,7 @@ function TabBar({ state, navigation }: BottomTabBarProps) {
               <Pressable
                 onPress={() => router.push('/add-duty')}
                 accessibilityRole="button"
-                accessibilityLabel="Add duty"
+                accessibilityLabel={role === 'partner' ? 'Add' : 'Add duty'}
                 style={({ pressed }) => [styles.add, pressed && { opacity: 0.85 }]}>
                 <PlusIcon size={30} color={colors.onAmber} weight="bold" />
               </Pressable>

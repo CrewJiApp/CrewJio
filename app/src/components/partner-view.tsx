@@ -1,6 +1,6 @@
 // Partner (mockup 16): their next flight, this week side by side, and the days you're both home.
 // Live flight progress and landing alerts come with flight tracking (build step 7).
-import { addDays, bestDays, dayBadge, displayTime, shortDate, todayInSingapore, type IsoDate, type PersonRoster } from '@crewjio/shared';
+import { ROLE_LABELS, addDays, bestDays, dayBadge, displayTime, shortDate, todayInSingapore, type IsoDate, type PersonRoster } from '@crewjio/shared';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -100,7 +100,7 @@ export function PartnerView({ link, embedded }: { link: PartnerLink; embedded?: 
             <Text style={type.title} accessibilityRole="header" numberOfLines={1}>
               {partner.displayName}
             </Text>
-            <Text style={type.small}>Partner · {partner.role === 'pilot' ? 'Pilot' : 'Cabin crew'}</Text>
+            <Text style={type.small}>Partner · {ROLE_LABELS[partner.role]}</Text>
           </View>
         </View>
 

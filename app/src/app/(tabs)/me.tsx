@@ -1,5 +1,5 @@
 // Me: the saved profile, edit it, sign out.
-import { AIRLINE_LABELS, FLEETS, ranksForRole } from '@crewjio/shared';
+import { AIRLINE_LABELS, FLEETS, ROLE_LABELS, ranksForRole } from '@crewjio/shared';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -18,8 +18,8 @@ export default function MeTab() {
   if (!profile) return null;
 
   const rank = ranksForRole(profile.role).find((r) => r.id === profile.rank);
-  const rows: [string, string][] = [
-    ['Role', profile.role === 'cabin_crew' ? 'Cabin crew' : 'Pilot'],
+  const rows: [string, string][] = profile.role === 'partner' ? [['Role', 'Not crew (partner, family or friend)']] : [
+    ['Role', ROLE_LABELS[profile.role]],
     ['Airline', AIRLINE_LABELS[profile.airline]],
     ['Rank', rank?.label ?? 'Not set'],
     ['Fleets', FLEETS.filter((f) => profile.fleets.includes(f)).join(', ') || 'Not set'],

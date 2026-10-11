@@ -1,5 +1,5 @@
 // Month calendar for My Roster (mockups 10, 11): one tappable cell per day with a short code.
-import { dayBadge, monthGrid, type DayTone, type Holiday, type IsoDate, type NewDuty } from '@crewjio/shared';
+import { dayBadge, monthGrid, type DayTone, type Holiday, type IsoDate, type NewDuty, type Role } from '@crewjio/shared';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, fonts, radius } from '@/theme';
@@ -9,6 +9,7 @@ export const TONE_STYLE: Record<DayTone, { bg: string; fg: string; border: strin
   training: { bg: colors.lavender, fg: colors.onCloud, border: colors.lavender },
   standby: { bg: '#5B6782', fg: colors.cloud, border: '#5B6782' },
   leave: { bg: '#173B3E', fg: colors.teal, border: colors.teal },
+  busy: { bg: '#2B3550', fg: colors.cloud, border: '#3A4766' },
   off: { bg: 'transparent', fg: colors.cloud, border: colors.border },
   empty: { bg: 'transparent', fg: colors.cloud, border: colors.border },
 };
@@ -16,7 +17,7 @@ export const TONE_STYLE: Record<DayTone, { bg: string; fg: string; border: strin
 const WEEKDAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const TONE_WORDS: Record<DayTone, string> = { flight: 'Flying', training: 'Training', standby: 'Standby', leave: 'Leave', off: 'Off', empty: 'Nothing added' };
+const TONE_WORDS: Record<DayTone, string> = { flight: 'Flying', training: 'Training', standby: 'Standby', leave: 'Leave', busy: 'Busy', off: 'Off', empty: 'Nothing added' };
 
 export function RosterCalendar({
   year,
@@ -74,14 +75,22 @@ export function RosterCalendar({
   );
 }
 
-export function Legend({ pilot }: { pilot: boolean }) {
-  const items: [DayTone, string][] = [
-    ['flight', 'Flight'],
-    ['training', pilot ? 'Sim / ground' : 'Training'],
-    ['standby', pilot ? 'Reserve' : 'Standby'],
-    ['leave', 'Leave'],
-    ['off', 'Off'],
-  ];
+export function Legend({ role }: { role: Role }) {
+  const items: [DayTone, string][] =
+    role === 'partner'
+      ? [
+          ['busy', 'Working / busy'],
+          ['leave', 'Holiday'],
+          ['off', 'Free'],
+        ]
+      : [
+          ['flight', 'Flight'],
+          ['training', role === 'pilot' ? 'Sim / ground' : 'Training'],
+          ['standby', role === 'pilot' ? 'Reserve' : 'Standby'],
+          ['leave', 'Leave'],
+          ['busy', 'Busy'],
+          ['off', 'Off'],
+        ];
   return (
     <View style={styles.legend}>
       {items.map(([tone, label]) => (

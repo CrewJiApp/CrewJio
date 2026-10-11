@@ -1,5 +1,7 @@
-// Add duty (mockup 12): flight (with optional return), training / sim / ground, standby / reserve,
-// or a day off / leave. Validation comes from shared/duty-entry.ts.
+// Add duty (mockup 12): type a roster code, or add a flight (with optional return), training /
+// sim / ground, standby / reserve (at base or on a layover), or a day off / leave. Validation
+// comes from shared/duty-entry.ts and shared/code-entry.ts. People who are not crew get their
+// own sheet (components/partner-entry.tsx).
 import {
   DEFAULT_HOURS,
   DutyInputError,
@@ -16,27 +18,32 @@ import {
   type TimedKind,
 } from '@crewjio/shared';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { CodeEntryForm, WherePicker, type Saver } from '@/components/code-entry';
 import { DateField, TextField } from '@/components/fields';
+import { PartnerEntryForm } from '@/components/partner-entry';
 import { CameraIcon, LockSimpleIcon } from '@/components/icons';
 import { Chip, InfoNote, ToggleRow } from '@/components/ui';
 import { backend } from '@/lib/backend';
 import { useAuth } from '@/state/auth';
 import { colors, fonts, radius, space, touch, type } from '@/theme';
 
-type Tab = 'flight' | 'timed' | 'standby' | 'leave';
+type Tab = 'code' | 'flight' | 'timed' | 'standby' | 'leave';
 type LeaveChoice = 'off' | HolidayKind;
 
 export default function AddDuty() {
   const { user, profile } = useAuth();
   const pilot = profile?.role === 'pilot';
+  const notCrew = profile?.role === 'partner';
+  // The code tab and the not-crew sheet own their fields and save through this.
+  const saver = useRef<Saver | null>(null);
   const params = useLocalSearchParams<{ date?: string }>();
   const startDate: IsoDate = params.date && isIsoDate(params.date) ? params.date : todayInSingapore();
 
-  const [tab, setTab] = useState<Tab>('flight');
+  const [tab, setTab] = useState<Tab>('code');
   const [date, setDate] = useState<IsoDate>(startDate);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
@@ -62,6 +69,8 @@ export default function AddDuty() {
   const [start, setStart] = useState(pilot ? '' : displayTime(DEFAULT_HOURS.training!.start));
   const [end, setEnd] = useState(pilot ? '' : displayTime(DEFAULT_HOURS.training!.end));
   const [note, setNote] = useState('');
+  const [standbyAway, setStandbyAway] = useState(false);
+  const [standbyAirport, setStandbyAirport] = useState('');
 
   // Off and leave
   const [leave, setLeave] = useState<LeaveChoice>('off');
@@ -88,6 +97,10 @@ export default function AddDuty() {
     setErrors({});
     setSaving(true);
     try {
+      if (notCrew || tab === 'code') {
+        if (await saver.current?.()) router.back();
+        return;
+      }
       if (tab === 'flight') {
         const duties = buildFlightDuties({
           date,
@@ -101,8 +114,10 @@ export default function AddDuty() {
           returnFlight: hasReturn ? { date: retDate, flightNumber: retNumber, departTime: retDepart, arriveTime: retArrive, arrivesNextDay: retNextDay } : undefined,
         });
         await backend.addDuties(user.id, duties);
-      } else if (tab === 'timed' || tab === 'standby') {
-        await backend.addDuties(user.id, [buildTimedDuty({ kind: tab === 'timed' ? timedKind : standbyKind, date, start, end, note })]);
+      } else if (tab === 'timed') {
+        await backend.addDuties(user.id, [buildTimedDuty({ kind: timedKind, date, start, end, note })]);
+      } else if (tab === 'standby') {
+        await backend.addDuties(user.id, [buildTimedDuty({ kind: standbyKind, date, start, end, where: standbyAway ? standbyAirport : undefined })]);
       } else if (leave === 'off') {
         await backend.addDuties(user.id, [buildOffDuty(date)]);
       } else {
@@ -118,6 +133,7 @@ export default function AddDuty() {
   };
 
   const tabs: [Tab, string][] = [
+    ['code', 'Code'],
     ['flight', 'Flight'],
     ['timed', pilot ? 'Sim / ground' : 'Training'],
     ['standby', pilot ? 'Reserve' : 'Standby'],
@@ -131,7 +147,7 @@ export default function AddDuty() {
           <Text style={styles.headerAction}>Cancel</Text>
         </Pressable>
         <Text style={styles.headerTitle} accessibilityRole="header">
-          Add duty
+          {notCrew ? 'Add to calendar' : 'Add duty'}
         </Text>
         <Pressable onPress={save} disabled={saving} accessibilityRole="button" style={[styles.headerBtn, styles.headerRight]} hitSlop={8}>
           <Text style={[styles.headerAction, styles.headerSave, saving && { opacity: 0.5 }]}>{saving ? 'Saving' : 'Save'}</Text>
@@ -139,7 +155,10 @@ export default function AddDuty() {
       </View>
 
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled">
+        <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled" keyboardDismissMode="interactive">
+          {notCrew && user ? <PartnerEntryForm userId={user.id} startDate={startDate} saverRef={saver} /> : null}
+          {notCrew ? null : (
+          <>
           <Pressable
             onPress={() => Alert.alert('Coming soon', 'Soon you can screenshot your whole month and CrewJio fills it in. For now, add duties one by one.')}
             accessibilityRole="button"
@@ -174,6 +193,8 @@ export default function AddDuty() {
               </Pressable>
             ))}
           </View>
+
+          {tab === 'code' && user ? <CodeEntryForm userId={user.id} startDate={startDate} saverRef={saver} onUseFlight={() => switchTab('flight')} /> : null}
 
           {tab === 'flight' ? (
             <>
@@ -234,6 +255,7 @@ export default function AddDuty() {
                 <TextField label="From" value={start} onChangeText={setStart} placeholder="hh:mm" keyboardType="numbers-and-punctuation" mono maxLength={5} error={errors.start} style={styles.flex} />
                 <TextField label="Until" value={end} onChangeText={setEnd} placeholder="hh:mm" keyboardType="numbers-and-punctuation" mono maxLength={5} error={errors.end} style={styles.flex} />
               </View>
+              <WherePicker away={standbyAway} onAway={setStandbyAway} airport={standbyAirport} onAirport={setStandbyAirport} error={errors.where} />
             </>
           ) : null}
 
@@ -265,8 +287,10 @@ export default function AddDuty() {
 
           <View style={styles.visible}>
             <Text style={type.bodyStrong}>Visible to</Text>
-            <Text style={type.small}>Your groups, at the level you choose for each one. Notes are only ever visible to you.</Text>
+            <Text style={type.small}>Your groups, at the level you choose for each one. Roster codes and notes are only ever visible to you.</Text>
           </View>
+          </>
+          )}
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

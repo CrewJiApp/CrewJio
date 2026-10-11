@@ -19,6 +19,8 @@ const TAG_STYLE: Record<string, { bg: string; fg: string }> = {
   GND: { bg: colors.lavender, fg: colors.onCloud },
   SBY: { bg: '#5B6782', fg: colors.cloud },
   RSV: { bg: '#5B6782', fg: colors.cloud },
+  WORK: { bg: '#3A4766', fg: colors.cloud },
+  BUSY: { bg: '#3A4766', fg: colors.cloud },
 };
 
 export default function RosterScreen() {
@@ -28,7 +30,9 @@ export default function RosterScreen() {
   const range = useMemo(() => rosterRange(ym.year, ym.month, today), [ym, today]);
   const { duties, holidays, loading, error, reload } = useRoster(range.from, range.to);
 
-  const pilot = profile?.role === 'pilot';
+  const role = profile?.role ?? 'cabin_crew';
+  const pilot = role === 'pilot';
+  const partner = role === 'partner';
   const next = nextDuty(today, duties, holidays);
   const monthPrefix = `${ym.year}-${String(ym.month).padStart(2, '0')}`;
   const hasThisMonth = duties.some((d) => d.date.startsWith(monthPrefix)) || holidays.some((h) => h.startDate.slice(0, 7) <= monthPrefix && h.endDate.slice(0, 7) >= monthPrefix);
@@ -47,7 +51,7 @@ export default function RosterScreen() {
     <SafeAreaView style={styles.screen} edges={['top', 'left', 'right']}>
       <ScrollView contentContainerStyle={styles.body}>
         <View style={styles.overRow}>
-          <Text style={type.overline}>MY ROSTER</Text>
+          <Text style={type.overline}>{partner ? 'MY CALENDAR' : 'MY ROSTER'}</Text>
           {pilotChip ? (
             <View style={styles.chip}>
               <Text style={styles.chipText}>{pilotChip}</Text>
@@ -85,12 +89,12 @@ export default function RosterScreen() {
           </Pressable>
         ) : !loading ? (
           <View style={styles.nextCard}>
-            <Text style={[type.small, styles.flex]}>Nothing coming up yet. Tap + to add your next duty.</Text>
+            <Text style={[type.small, styles.flex]}>{partner ? 'Nothing coming up yet. Tap + to add your work days or copy your phone calendar.' : 'Nothing coming up yet. Tap + to add your next duty.'}</Text>
           </View>
         ) : null}
 
         <RosterCalendar year={ym.year} month={ym.month} today={today} duties={duties} holidays={holidays} onPressDay={openDay} />
-        <Legend pilot={pilot} />
+        <Legend role={role} />
 
         {error ? (
           <View style={styles.errorCard}>
@@ -105,8 +109,10 @@ export default function RosterScreen() {
               <CameraIcon size={24} color={colors.amber} />
             </View>
             <View style={styles.flex}>
-              <Text style={type.bodyStrong}>Add this month’s roster</Text>
-              <Text style={type.small}>Add your duties one by one for now. Screenshot import is coming soon.</Text>
+              <Text style={type.bodyStrong}>{partner ? 'Add this month' : 'Add this month’s roster'}</Text>
+              <Text style={type.small}>
+                {partner ? 'Copy your phone calendar, or add your work days. Days with nothing on count as free.' : 'Add your duties one by one for now. Screenshot import is coming soon.'}
+              </Text>
             </View>
           </Pressable>
         ) : (
@@ -116,7 +122,7 @@ export default function RosterScreen() {
             </View>
             <View style={styles.flex}>
               <Text style={type.bodyStrong}>When can we meet?</Text>
-              <Text style={type.small}>See the days you and your crew are all home.</Text>
+              <Text style={type.small}>{partner ? 'See the days you and your partner are both free.' : 'See the days you and your crew are all home.'}</Text>
             </View>
           </Pressable>
         )}

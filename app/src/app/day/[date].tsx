@@ -32,10 +32,22 @@ function describe(d: Duty): { title: string; detail: string | null; mono: boolea
     ].filter(Boolean);
     return { title: `${d.flightNumber ?? 'Flight'} · ${from} → ${to}`, detail: parts.join(' · ') || null, mono: true, tone: 'flight' };
   }
-  if (d.kind === 'layover') return { title: `Layover · ${d.sector ?? ''}`, detail: 'Away', mono: false, tone: 'flight' };
+  // A typed roster code shows the code itself (only the owner ever sees it).
+  const coded = d.code ? `${d.code} · ` : '';
+  if (d.kind === 'layover') return { title: `${coded}Layover · ${d.sector ?? ''}`, detail: 'Away', mono: false, tone: 'flight' };
   const hours = d.reportTime && d.arriveTime ? `${displayTime(d.reportTime)} to ${displayTime(d.arriveTime)}` : d.reportTime ? `From ${displayTime(d.reportTime)}` : null;
+  if (d.category === 'leave' || d.category === 'national_service') {
+    return { title: `${coded}${d.category === 'leave' ? 'Leave' : 'Reservist'}`, detail: 'Groups see Away', mono: false, tone: 'leave' };
+  }
+  if (d.kind === 'other') {
+    const label = d.category === 'private' ? 'Private' : d.friendsLabel;
+    const seen = d.category === 'private' ? 'Friends see Unavailable' : d.source === 'calendar' ? 'From your phone calendar' : null;
+    return { title: `${coded}${label}`, detail: [hours ?? (d.code ? null : 'All day'), seen, d.note].filter(Boolean).join(' · ') || null, mono: false, tone: 'busy' };
+  }
   const tone = d.kind === 'off' ? 'off' : d.kind === 'standby' || d.kind === 'reserve' ? 'standby' : 'training';
-  return { title: d.note && tone === 'training' ? d.note : (KIND_TITLE[d.kind] ?? 'Duty'), detail: [tone === 'training' && d.note ? KIND_TITLE[d.kind] : null, hours].filter(Boolean).join(' · ') || null, mono: false, tone };
+  const where = (tone === 'standby' && d.sector) ? `In ${d.sector}` : null;
+  const title = d.note && tone === 'training' ? d.note : `${coded}${KIND_TITLE[d.kind] ?? 'Duty'}`;
+  return { title, detail: [tone === 'training' && d.note ? KIND_TITLE[d.kind] : null, hours, where].filter(Boolean).join(' · ') || null, mono: false, tone };
 }
 
 function confirm(title: string, message: string, onYes: () => void) {

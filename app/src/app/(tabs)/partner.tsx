@@ -1,5 +1,5 @@
-// Pilots get a Partner tab (mockup 11); cabin crew get Track (live flights, build step 7)
-// and reach their partner from the Crew tab.
+// Pilots and people who are not crew get a Partner tab (mockup 11); cabin crew get Track (live
+// flights, build step 7) and reach their partner from the Crew tab.
 import { router } from 'expo-router';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,9 +12,9 @@ import { useAuth } from '@/state/auth';
 import { useGroups } from '@/state/social';
 import { colors, space, type } from '@/theme';
 
-export default function PartnerTab() {
+export default function PartnerOrTrackTab() {
   const { profile } = useAuth();
-  if (profile?.role === 'pilot') return <PilotPartner />;
+  if (profile?.role === 'pilot' || profile?.role === 'partner') return <PartnerTab notCrew={profile.role === 'partner'} />;
   return (
     <ComingSoon
       overline="TRACK"
@@ -25,7 +25,7 @@ export default function PartnerTab() {
   );
 }
 
-function PilotPartner() {
+function PartnerTab({ notCrew }: { notCrew: boolean }) {
   const { partner, loading } = useGroups();
   if (loading) {
     return (
@@ -42,7 +42,11 @@ function PilotPartner() {
         <Text style={type.title}>Your partner</Text>
         <View style={styles.card}>
           <HeartIcon size={28} color={colors.pink} />
-          <Text style={[type.body, { color: colors.cloud }]}>Connect with your partner to share full rosters and see when you’re both home.</Text>
+          <Text style={[type.body, { color: colors.cloud }]}>
+            {notCrew
+              ? 'Connect with your partner to see their roster next to your calendar, and the days you’re both free.'
+              : 'Connect with your partner to share full rosters and see when you’re both home.'}
+          </Text>
           <Button label="Connect your partner" onPress={() => router.push('/partner-connect')} />
         </View>
       </View>

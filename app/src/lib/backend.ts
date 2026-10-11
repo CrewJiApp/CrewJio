@@ -36,6 +36,8 @@ export interface Backend {
   addHoliday(userId: string, holiday: NewHoliday): Promise<void>;
   deleteDuty(id: string): Promise<void>;
   deleteHoliday(id: string): Promise<void>;
+  /** Replaces everything copied from the phone calendar between from..to with `duties`. */
+  replaceCalendarDuties(userId: string, from: IsoDate, to: IsoDate, duties: NewDuty[]): Promise<void>;
 }
 
 const DUTY_COLUMNS =
@@ -90,6 +92,13 @@ function supabaseBackend(): Backend {
     async deleteHoliday(id) {
       const { error } = await db.from('holidays').delete().eq('id', id);
       fail(error);
+    },
+    async replaceCalendarDuties(userId, from, to, duties) {
+      const { error } = await db.from('duties').delete().eq('user_id', userId).eq('source', 'calendar').gte('duty_date', from).lte('duty_date', to);
+      fail(error);
+      if (duties.length === 0) return;
+      const { error: insertError } = await db.from('duties').insert(duties.map(dutyToRow));
+      fail(insertError);
     },
   };
 }
@@ -151,6 +160,11 @@ function demoBackend(): Backend {
     async deleteHoliday(id) {
       const data = await readDemo();
       await writeDemo({ ...data, holidays: data.holidays.filter((h) => h.id !== id) });
+    },
+    async replaceCalendarDuties(userId, from, to, duties) {
+      const data = await readDemo();
+      const kept = data.duties.filter((d) => !(d.source === 'calendar' && d.date >= from && d.date <= to));
+      await writeDemo({ ...data, duties: [...kept, ...duties.map((d) => ({ ...d, id: demoId(), userId }))] });
     },
   };
 }

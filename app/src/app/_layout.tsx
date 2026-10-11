@@ -69,6 +69,7 @@ export default function RootLayout() {
             <Stack.Screen name="match" />
             <Stack.Screen name="partner-view" />
             <Stack.Screen name="partner-connect" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="calendar-sync" options={{ presentation: 'modal' }} />
           </Stack>
         </OnboardingProvider>
       </AuthProvider>

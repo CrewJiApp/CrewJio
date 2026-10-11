@@ -2,6 +2,7 @@
 // group's settings: what it sees of you, invite code, members, leave or delete.
 import {
   CREW_RANKS,
+  ROLE_LABELS,
   PILOT_RANKS,
   bestDays,
   monthName,
@@ -45,7 +46,7 @@ function nextMonths(today: string, count: number) {
 
 function rankLabel(p: Profile) {
   const rank = [...CREW_RANKS, ...PILOT_RANKS].find((r) => r.id === p.rank)?.short;
-  return [p.role === 'pilot' ? 'Pilot' : 'Crew', rank].filter(Boolean).join(' · ');
+  return [p.role === 'cabin_crew' ? 'Crew' : ROLE_LABELS[p.role], rank].filter(Boolean).join(' · ');
 }
 
 export default function GroupPlan() {
