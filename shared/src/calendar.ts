@@ -74,7 +74,7 @@ export interface NextDuty {
 /** The next thing on the roster from today: a flight, training or standby. Leave and off days are skipped. */
 export function nextDuty(today: IsoDate, duties: NewDuty[], holidays: HolidayLike[] = []): NextDuty | null {
   const upcoming = duties
-    .filter((d) => d.date >= today && d.kind !== 'off' && d.kind !== 'layover')
+    .filter((d) => d.date >= today && d.kind !== 'off' && d.kind !== 'layover' && d.category !== 'leave' && d.category !== 'national_service')
     // Same day: earliest time first. Entries without a time keep their order (outbound before return).
     .sort((a, b) => {
       const ta = a.reportTime ?? a.departTime;
@@ -109,7 +109,10 @@ export function nextDuty(today: IsoDate, duties: NewDuty[], holidays: HolidayLik
     standby: ['SBY', 'Standby'],
     reserve: ['RSV', 'Reserve'],
   };
-  const [tag, title] = names[next.kind] ?? ['NEXT', HOLIDAY_LABELS.busy_personal];
+  // Work or busy time (people who are not crew, phone calendar) and other typed codes.
+  const busyTag = next.code ? next.code.slice(0, 4) : next.friendsLabel === 'Working' ? 'WORK' : 'BUSY';
+  const busyTitle = next.category === 'private' ? 'Private' : next.friendsLabel || HOLIDAY_LABELS.busy_personal;
+  const [tag, title] = names[next.kind] ?? [busyTag, busyTitle];
   const hours = next.reportTime && next.arriveTime ? `${displayTime(next.reportTime)} to ${displayTime(next.arriveTime)}` : next.reportTime ? `From ${displayTime(next.reportTime)}` : null;
   const free = next.arriveTime && next.arriveTime <= '1800' && !next.arriveDate ? 'free after' : null;
   return { date: next.date, tag, title: next.note && next.kind !== 'standby' && next.kind !== 'reserve' ? next.note : title, detail: [when, hours, free].filter(Boolean).join(' · '), mono: false };

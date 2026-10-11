@@ -13,6 +13,7 @@ import {
   defaultCodeHours,
   eventsToBusyDuties,
   explainCode,
+  nextDuty,
   normaliseCode,
   normaliseProfile,
   rankDays,
@@ -169,6 +170,13 @@ describe('people who are not crew', () => {
     ]);
     const crew = person('c', [...buildFlightDuties({ date: '2026-11-09', flightNumber: 'SQ 148', to: 'BWN', reportTime: '0700', departTime: '0900', arriveTime: '1115', returnFlight: { date: '2026-11-09', flightNumber: 'SQ 147', departTime: '1205', arriveTime: '1430' } })]);
     expect(rankDays([crew, shared], '2026-11-09', '2026-11-09')[0]).toMatchObject({ status: 'Evening', summary: 'Both free from evening' });
+  });
+
+  it('see their next work block on the roster card', () => {
+    const work = buildBusyDays({ label: 'Working', date: '2026-11-09', start: '0900', end: '1800' });
+    expect(nextDuty('2026-11-08', work)).toMatchObject({ tag: 'WORK', title: 'Working', detail: 'Mon 9 Nov · 09:00 to 18:00 · free after' });
+    // Leave typed as a code is not "next up".
+    expect(nextDuty('2026-11-08', buildCodedDuties({ code: 'AALV', date: '2026-11-09' }))).toBeNull();
   });
 
   it('show work, busy and their own codes on the calendar', () => {
