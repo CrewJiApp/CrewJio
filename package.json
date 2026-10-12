@@ -9,6 +9,7 @@
   "scripts": {
     "test": "npm test -w @crewjio/shared && npm run test:db",
     "test:db": "node --test supabase/tests/*.test.mjs",
+    "build:email-templates": "node scripts/build-email-templates.mjs",
     "typecheck": "npm run typecheck -w @crewjio/shared && npm run typecheck -w app",
     "app": "npm start -w app"
   },
