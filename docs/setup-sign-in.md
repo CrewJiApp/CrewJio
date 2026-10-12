@@ -51,6 +51,21 @@ On the phone sign-in screen, tap **Use email instead**. Supabase sends a link by
    `smtp.resend.com`, port `465`, username `resend`, password = a Resend API key, sender
    `hello@mail.crewjio.com`.
 
+### Branded code emails (Send Email hook)
+The plain template above works for testing. For the real app, a Supabase **Send Email hook** sends the
+branded code emails through Resend instead (`supabase/functions/send-email`): a welcome email for
+sign-up and a sign-in email for everything else. When the hook is on, the dashboard templates and SMTP
+settings above are no longer used for code emails. Setting it up, once:
+1. Deploy the function: `npx supabase functions deploy send-email --no-verify-jwt`
+2. Supabase → **Authentication → Hooks → Send Email**: choose **HTTPS**, enter
+   `https://YOUR-PROJECT-REF.supabase.co/functions/v1/send-email`, then **Generate secret** and copy it.
+3. Copy `supabase/functions/send-email/.env.example` to `.env` in the same folder and fill in
+   `SEND_EMAIL_HOOK_SECRET` (the secret from step 2), `RESEND_API_KEY` and, once crewjio.com is verified in
+   Resend, `EMAIL_FROM=CrewJio <hello@crewjio.com>`. Then run
+   `npx supabase secrets set --env-file supabase/functions/send-email/.env`.
+4. Save the hook (enable it), then ask for a code in the app to test. If nothing arrives, open
+   Supabase → **Edge Functions → send-email → Logs**.
+
 ## 5. Google
 1. Google Cloud Console → create a project (or reuse one) → **APIs & Services → OAuth consent screen**:
    app name CrewJio, your support email, publish when ready.
