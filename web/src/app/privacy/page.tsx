@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 // Starting point written for the waitlist. Have it reviewed before the app launches,
 // and extend it to cover rosters, groups and partner sharing.
-const UPDATED = "9 October 2026";
+const UPDATED = "15 October 2026";
 
 export default function PrivacyPage() {
   return (
@@ -60,6 +60,15 @@ export default function PrivacyPage() {
             <p>
               Waitlist data is stored with Supabase in its Singapore region. Emails are sent through Resend. The site is hosted on
               Vercel. These providers process data on our behalf and only as needed to run CrewJio.
+            </p>
+          </section>
+
+          <section>
+            <h2>Visitor statistics</h2>
+            <p>
+              We count visits to this website with Vercel Web Analytics. It records which pages are viewed, the page you came
+              from, and your country, browser, operating system and device type. It doesn&apos;t use cookies and doesn&apos;t
+              follow you across other sites, and we can&apos;t tell it apart from you as a person.
             </p>
           </section>
 
