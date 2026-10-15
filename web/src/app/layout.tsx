@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import { SITE_URL } from "@/lib/site";
@@ -40,6 +41,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="min-h-[100dvh] overflow-x-clip">
         <div className="ambient" aria-hidden />
         <div className="relative z-[1]">{children}</div>
+        {/* Vercel Web Analytics: page views only, no cookies. Turn it on in the Vercel dashboard. */}
+        <Analytics />
       </body>
     </html>
   );
