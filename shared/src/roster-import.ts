@@ -15,10 +15,15 @@ export interface RosterRow {
   rpt?: HHMM;
   std?: HHMM;
   sta?: HHMM;
-  /** Aircraft type and acting rank are read but not stored. */
+  /** Pink highlighted days in the airline's calendar view are training. */
+  highlight?: 'pink';
+  /** Aircraft type and acting rank can be in a sample file, but are never stored or sent on. */
   ac?: string;
   actingRank?: string;
 }
+
+/** What a pink day with no code is set to: training is usually 09:00 to 17:00 (CLAUDE.md). */
+export const PINK_TRAINING_HOURS = { start: '0900', end: '1700' } as const;
 
 /** The duty kind stored for each code category. */
 export const CATEGORY_KIND: Record<CodeCategory, DutyKind> = {
@@ -48,6 +53,27 @@ export function rowsToDuties(rows: RosterRow[]): NewDuty[] {
     const code = row.duty.trim().toUpperCase();
     const known = lookupCode(code);
     const sector = row.sector?.trim().toUpperCase() || null;
+
+    // A pink day with no code is training. The person can edit the times if they differ.
+    if (!code && row.highlight === 'pink') {
+      out.push({
+        date: row.date,
+        kind: 'training',
+        category: 'training',
+        code: null,
+        friendsLabel: 'Training',
+        flightNumber: null,
+        sector: null,
+        reportTime: PINK_TRAINING_HOURS.start,
+        departTime: null,
+        arriveTime: PINK_TRAINING_HOURS.end,
+        arriveDate: null,
+        note: null,
+        source: 'import',
+        needsReview: false,
+      });
+      continue;
+    }
 
     // Continuation: same duty, next date, only the end time.
     const prev = out[out.length - 1];

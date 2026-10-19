@@ -291,6 +291,10 @@ max_frequency = "5s"
 [functions.send-email]
 verify_jwt = false
 
+# Screenshot roster import: only signed-in people may call it (the app sends their token).
+[functions.roster-import]
+verify_jwt = true
+
 # Configure one of the supported SMS providers: `twilio`, `twilio_verify`, `messagebird`, `textlocal`, `vonage`.
 [auth.sms.twilio]
 enabled = false
