@@ -3,7 +3,7 @@
 import { friendsLabel, lookupCode } from './roster-codes';
 import { dateRange } from './dates';
 import type { IsoDate } from './duty';
-import type { NewDuty } from './duty-entry';
+import { BASE_AIRPORT, type NewDuty } from './duty-entry';
 
 export interface ImportSummary {
   duties: number;
@@ -40,7 +40,7 @@ export function importLabel(d: NewDuty): { title: string; detail: string } {
   if (d.needsReview) return { title: `${d.code} · not in the code list`, detail: 'Needs a look. We would save it as Busy.' };
   const base = known ? sentence(known.description) : d.friendsLabel;
   const hours = times(d.reportTime, d.arriveTime);
-  const where = d.sector ? `In ${d.sector}` : null;
+  const where = d.sector && d.sector !== BASE_AIRPORT ? `In ${d.sector}` : null;
   return {
     title: `${d.code ?? ''}${d.code ? ' · ' : ''}${base}`,
     detail: [known ? `Friends see ${friendsLabel(known)}` : null, hours, where].filter(Boolean).join(' · '),

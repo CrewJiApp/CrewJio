@@ -45,6 +45,12 @@
         {
           "calendarPermission": "CrewJio copies only when you are busy (never event names) so your partner can see when you are both free."
         }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "CrewJio reads the roster screenshots you choose, then forgets them."
+        }
       ]
     ],
     "experiments": {

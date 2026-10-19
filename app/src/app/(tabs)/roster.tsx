@@ -104,14 +104,14 @@ export default function RosterScreen() {
         ) : null}
 
         {!loading && !hasThisMonth ? (
-          <Pressable onPress={() => router.push('/add-duty')} accessibilityRole="button" style={({ pressed }) => [styles.promptCard, pressed && { opacity: 0.85 }]}>
+          <Pressable onPress={() => router.push(partner ? '/add-duty' : '/import')} accessibilityRole="button" style={({ pressed }) => [styles.promptCard, pressed && { opacity: 0.85 }]}>
             <View style={styles.promptIcon}>
               <CameraIcon size={24} color={colors.amber} />
             </View>
             <View style={styles.flex}>
               <Text style={type.bodyStrong}>{partner ? 'Add this month' : 'Add this month’s roster'}</Text>
               <Text style={type.small}>
-                {partner ? 'Copy your phone calendar, or add your work days. Days with nothing on count as free.' : 'Add your duties one by one for now. Screenshot import is coming soon.'}
+                {partner ? 'Copy your phone calendar, or add your work days. Days with nothing on count as free.' : 'Screenshot your roster and we read it for you, or add duties by hand with the + button.'}
               </Text>
             </View>
           </Pressable>

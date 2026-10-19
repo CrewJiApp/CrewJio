@@ -160,16 +160,15 @@ export default function AddDuty() {
           {notCrew ? null : (
           <>
           <Pressable
-            onPress={() => Alert.alert('Coming soon', 'Soon you can screenshot your whole month and CrewJio fills it in. For now, add duties one by one.')}
+            onPress={() => router.replace('/import')}
             accessibilityRole="button"
-            accessibilityHint="Coming soon"
             style={({ pressed }) => [styles.import, pressed && { opacity: 0.85 }]}>
             <View style={styles.importIcon}>
               <CameraIcon size={26} color={colors.amber} />
             </View>
             <View style={styles.flex}>
               <Text style={type.heading}>Import whole month</Text>
-              <Text style={type.small}>Screenshot your roster and we read it for you. Coming soon.</Text>
+              <Text style={type.small}>Screenshot your roster and we read it for you. You check it before it is saved.</Text>
             </View>
           </Pressable>
 

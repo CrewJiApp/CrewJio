@@ -66,6 +66,10 @@ describe('the review step', () => {
     expect(importLabel(found[2]!)).toEqual({ title: 'SQ 34 · SIN → SFO', detail: 'Report 17:55 · Departs 19:55 · Lands 18:35' });
     expect(importLabel(found[0]!).title).toMatch(/^OFFD · /);
     expect(importLabel(found[1]!)).toEqual({ title: 'QX7Q · not in the code list', detail: 'Needs a look. We would save it as Busy.' });
+    // Standby away from base says where; at base it does not.
+    expect(importLabel(found[3]!).detail).toContain('In SFO');
+    const [atBase] = rowsToDuties([{ date: '2026-11-12', duty: 'SS60', sector: 'SIN', rpt: '0600', sta: '2359' }]);
+    expect(importLabel(atBase!).detail).not.toContain('In SIN');
   });
 
   it('never saves a code that needs a look until it is confirmed, then as plain Busy', () => {
