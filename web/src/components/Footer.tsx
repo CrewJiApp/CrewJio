@@ -26,12 +26,19 @@ export function Footer() {
             <EnvelopeSimpleIcon size={18} weight="light" aria-hidden />
             {CONTACT_EMAIL}
           </a>
-          <a
-            href="/privacy"
-            className="inline-flex min-h-11 items-center rounded-full px-3 text-muted transition-colors duration-300 ease-fluid hover:text-cloud"
-          >
-            Privacy policy
-          </a>
+          {[
+            ["/privacy", "Privacy policy"],
+            ["/terms", "Terms"],
+            ["/support", "Support"],
+          ].map(([href, label]) => (
+            <a
+              key={href}
+              href={href}
+              className="inline-flex min-h-11 items-center rounded-full px-3 text-muted transition-colors duration-300 ease-fluid hover:text-cloud"
+            >
+              {label}
+            </a>
+          ))}
           <span className="px-3 text-faint">© 2026 CrewJio</span>
         </nav>
       </div>
