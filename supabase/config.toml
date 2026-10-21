@@ -295,6 +295,10 @@ verify_jwt = false
 [functions.roster-import]
 verify_jwt = true
 
+# Delete my account: only signed-in people, and only their own account.
+[functions.delete-account]
+verify_jwt = true
+
 # Configure one of the supported SMS providers: `twilio`, `twilio_verify`, `messagebird`, `textlocal`, `vonage`.
 [auth.sms.twilio]
 enabled = false

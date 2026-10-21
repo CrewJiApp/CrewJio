@@ -1,28 +1,19 @@
-// Pilots and people who are not crew get a Partner tab (mockup 11); cabin crew get Track (live
-// flights, build step 7) and reach their partner from the Crew tab.
+// Everyone gets a Partner tab (mockup 11): the connected partner's roster next to yours, or a
+// prompt to connect one.
 import { router } from 'expo-router';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { ComingSoon } from '@/components/coming-soon';
-import { AirplaneTiltIcon, HeartIcon } from '@/components/icons';
+import { HeartIcon } from '@/components/icons';
 import { PartnerView } from '@/components/partner-view';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/state/auth';
 import { useGroups } from '@/state/social';
 import { colors, space, type } from '@/theme';
 
-export default function PartnerOrTrackTab() {
+export default function PartnerRoute() {
   const { profile } = useAuth();
-  if (profile?.role === 'pilot' || profile?.role === 'partner') return <PartnerTab notCrew={profile.role === 'partner'} />;
-  return (
-    <ComingSoon
-      overline="TRACK"
-      title="Live flights"
-      body="Follow your flights and your partner’s, with landing alerts and a share link for family."
-      icon={<AirplaneTiltIcon size={28} color={colors.amber} />}
-    />
-  );
+  return <PartnerTab notCrew={profile?.role === 'partner'} />;
 }
 
 function PartnerTab({ notCrew }: { notCrew: boolean }) {

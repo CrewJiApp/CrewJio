@@ -45,7 +45,7 @@ const SLIDES: Slide[] = [
     key: 'jio',
     eyebrow: 'STEP 3 · JIO',
     title: 'See the best day, then jio',
-    body: 'We rank days by rest, so nobody gets jio-ed to dinner straight after a London flight. Tap one to send a poll.',
+    body: 'We rank days by rest, so nobody gets jio-ed to dinner straight after a London flight. Tap one to share it with your crew.',
     art: <JioArt />,
   },
 ];

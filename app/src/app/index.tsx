@@ -11,7 +11,8 @@ import { Button } from '@/components/ui';
 import { signInErrorMessage, useAuth } from '@/state/auth';
 import { colors, fonts, radius, space, type } from '@/theme';
 
-const PRIVACY_URL = 'https://crewjio.com/privacy';
+import { allowPreview, NOT_SET_UP_MESSAGE } from '@/lib/config';
+import { PRIVACY_URL, TERMS_URL } from '@/lib/links';
 
 export default function Welcome() {
   const auth = useAuth();
@@ -82,13 +83,21 @@ export default function Welcome() {
                 {error}
               </Text>
             ) : null}
-            {auth.demo ? (
+            {auth.demo && allowPreview ? (
               <Text style={[type.small, styles.demo]}>Preview mode: no Supabase keys yet, so everything stays on this phone.</Text>
             ) : null}
+            {auth.demo && !allowPreview ? <Text style={styles.error}>{NOT_SET_UP_MESSAGE}</Text> : null}
           </View>
 
           <Text style={[type.small, styles.legal]}>
-            Not affiliated with any airline. By continuing you agree to the Terms and{' '}
+            Not affiliated with any airline. By continuing you agree to the{' '}
+            <Text
+              style={styles.link}
+              accessibilityRole="link"
+              onPress={() => WebBrowser.openBrowserAsync(TERMS_URL)}>
+              Terms
+            </Text>{' '}
+            and{' '}
             <Text
               style={styles.link}
               accessibilityRole="link"

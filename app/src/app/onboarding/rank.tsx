@@ -23,8 +23,8 @@ export default function RankStep() {
           title="What's your rank?"
           subtitle={
             isCrew
-              ? 'Pick your name tag colour. We use it to suggest swaps with crew of a matching rank.'
-              : 'Pick your stripes. We use it to suggest swaps with pilots of a matching rank.'
+              ? 'Pick your name tag colour. It will help match swap ideas with crew of a similar rank.'
+              : 'Pick your stripes. It will help match swap ideas with pilots of a similar rank.'
           }
         />
 

@@ -1,5 +1,4 @@
 // Partner (mockup 16): their next flight, this week side by side, and the days you're both home.
-// Live flight progress and landing alerts come with flight tracking (build step 7).
 import { ROLE_LABELS, addDays, bestDays, dayBadge, displayTime, shortDate, todayInSingapore, type IsoDate, type PersonRoster } from '@crewjio/shared';
 import { router } from 'expo-router';
 import { useState } from 'react';
@@ -147,11 +146,6 @@ export function PartnerView({ link, embedded }: { link: PartnerLink; embedded?: 
         ))}
         {!ranking.loading && best.length === 0 ? <Text style={type.small}>No days you’re both home in the next month yet. Add more of your roster to see them.</Text> : null}
 
-        <View style={styles.soon}>
-          <Text style={type.bodyStrong}>Landing alerts</Text>
-          <Text style={type.small}>Live flight status and a ping when {first} lands are coming with flight tracking.</Text>
-        </View>
-
         <Button label={`Disconnect from ${first}`} variant="text" disabled={busy} onPress={disconnect} />
       </ScrollView>
     </SafeAreaView>
@@ -177,5 +171,4 @@ const styles = StyleSheet.create({
   weekDay: { flex: 1, textAlign: 'center', fontFamily: fonts.medium, fontSize: 12, color: colors.muted },
   cell: { flex: 1, height: 36, borderRadius: 8, borderWidth: 1.5 },
   bar: { flex: 1, height: 4, borderRadius: 2 },
-  soon: { borderWidth: 1, borderColor: colors.border, borderRadius: radius.lg, padding: space.lg, gap: 4 },
 });

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { TextField } from '@/components/fields';
+import { allowPreview } from '@/lib/config';
 import { toE164 } from '@/lib/phone';
 import { BackButton, Button, Screen, StepHeader } from '@/components/ui';
 import { signInErrorMessage, useAuth, type OtpChannel } from '@/state/auth';
@@ -110,7 +111,7 @@ export default function SignIn() {
               />
             </>
           )}
-          {auth.demo ? <Text style={[type.small, styles.demo]}>Preview mode: no code is sent. Tap Continue to go on.</Text> : null}
+          {auth.demo && allowPreview ? <Text style={[type.small, styles.demo]}>Preview mode: no code is sent. Tap Continue to go on.</Text> : null}
         </ScrollView>
         <View style={styles.footer}>
           <Button

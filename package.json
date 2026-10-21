@@ -9,7 +9,7 @@
   "scripts": {
     "test": "npm test -w @crewjio/shared && npm run test:db",
     "test:db": "node --test supabase/tests/*.test.mjs",
-    "test:functions": "npx deno run --node-modules-dir=none --no-lock --allow-env --allow-net --allow-read --allow-import supabase/tests/functions/roster-import.e2e.ts",
+    "test:functions": "npx deno run --node-modules-dir=none --no-lock --allow-env --allow-net --allow-read --allow-import supabase/tests/functions/roster-import.e2e.ts && npx deno run --node-modules-dir=none --no-lock --allow-env --allow-net --allow-read --allow-import supabase/tests/functions/delete-account.e2e.ts",
     "build:email-templates": "node scripts/build-email-templates.mjs",
     "typecheck": "npm run typecheck -w @crewjio/shared && npm run typecheck -w app",
     "app": "npm start -w app"

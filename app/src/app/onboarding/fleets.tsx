@@ -20,7 +20,7 @@ export default function FleetsStep() {
           step={3}
           total={3}
           title="What do you fly?"
-          subtitle="Pick every aircraft you're rated on. Swap ideas only match duties on these fleets."
+          subtitle="Pick every aircraft you're rated on. Swap ideas will only match duties on these fleets."
         />
 
         <SectionLabel>Fleets</SectionLabel>
@@ -49,7 +49,7 @@ export default function FleetsStep() {
           ) : null}
           <ToggleRow
             title="Open to swaps"
-            subtitle="Friends can suggest a duty swap with you. You always decide, in the airline's own system."
+            subtitle="Friends will be able to suggest a duty swap with you. You always decide, in the airline's own system."
             value={draft.openToSwaps}
             onChange={setOpenToSwaps}
           />

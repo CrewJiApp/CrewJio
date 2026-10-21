@@ -92,7 +92,7 @@ export function GroupsArt() {
         <Blobs tints={[colors.pink]} />
         <View>
           <Text style={type.bodyStrong}>Partner</Text>
-          <Text style={type.small}>Full roster + live flights</Text>
+          <Text style={type.small}>Full roster + next flight</Text>
         </View>
       </View>
       <View style={styles.newGroup}>

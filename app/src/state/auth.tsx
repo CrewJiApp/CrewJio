@@ -9,6 +9,7 @@ import * as Linking from 'expo-linking';
 import * as WebBrowser from 'expo-web-browser';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
+import { allowPreview, NOT_SET_UP_MESSAGE } from '@/lib/config';
 import { backend, clearDemoData } from '@/lib/backend';
 import { clearDemoSocial } from '@/lib/social';
 import { supabase } from '@/lib/supabase';
@@ -38,6 +39,8 @@ interface AuthState {
   /** Demo mode only: sign in as the local demo user. */
   signInDemo(): Promise<void>;
   signOut(): Promise<void>;
+  /** Permanently deletes the account and everything in it, then signs out. */
+  deleteAccount(): Promise<void>;
   saveProfile(profile: Profile): Promise<void>;
 }
 
@@ -55,7 +58,7 @@ function nameFromMetadata(meta: Record<string, unknown> | undefined): string {
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [status, setStatus] = useState<AuthStatus>('loading');
+  const [status, setStatus] = useState<AuthStatus>(!supabase && !allowPreview ? 'signed_out' : 'loading');
   const [user, setUser] = useState<AuthUser | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   // Apple only shares the name on the very first sign-in, so keep it until onboarding uses it.
@@ -76,6 +79,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!supabase) {
+      // A store build without its keys stays signed out (the initial status already says so).
+      if (!allowPreview) return;
       AsyncStorage.getItem(DEMO_USER_KEY)
         .then((v) => enter(v ? DEMO_USER : null))
         .catch(() => enter(null));
@@ -98,6 +103,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const value = useMemo<AuthState>(() => {
     const db = supabase;
     const signInDemo = async () => {
+      if (!allowPreview) throw new Error(NOT_SET_UP_MESSAGE);
       await AsyncStorage.setItem(DEMO_USER_KEY, '1');
       await enter(DEMO_USER);
     };
@@ -146,7 +152,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
 
       async sendCode(to) {
-        if (!db) return;
+        if (!db) {
+          if (!allowPreview) throw new Error(NOT_SET_UP_MESSAGE);
+          return;
+        }
         const { error } = await db.auth.signInWithOtp('phone' in to ? { phone: to.phone } : { email: to.email, options: { shouldCreateUser: true } });
         if (error) throw error;
       },
@@ -171,6 +180,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           await clearDemoSocial();
           await enter(null);
         }
+      },
+
+      async deleteAccount() {
+        if (db) {
+          const { error } = await db.functions.invoke('delete-account');
+          if (error) throw new Error('We could not delete your account. Please try again, or email hello@crewjio.com.');
+          // The account no longer exists, so end this phone's session without asking the server.
+          await db.auth.signOut({ scope: 'local' }).catch(() => undefined);
+        } else {
+          await AsyncStorage.removeItem(DEMO_USER_KEY);
+          await clearDemoData();
+          await clearDemoSocial();
+        }
+        await enter(null);
       },
 
       async saveProfile(next) {

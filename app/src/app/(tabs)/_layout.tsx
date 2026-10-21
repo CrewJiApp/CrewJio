@@ -4,7 +4,7 @@ import { Tabs, type BottomTabBarProps } from 'expo-router/tabs';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { AirplaneTiltIcon, CalendarBlankIcon, HeartIcon, PlusIcon, UserIcon, UsersIcon } from '@/components/icons';
+import { CalendarBlankIcon, HeartIcon, PlusIcon, UserIcon, UsersIcon } from '@/components/icons';
 import { useAuth } from '@/state/auth';
 import { colors, fonts } from '@/theme';
 
@@ -27,15 +27,12 @@ export default function TabsLayout() {
 function TabBar({ state, navigation }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   const { profile } = useAuth();
-  // Crew track their own flights; pilots and people who are not crew get the partner view
-  // (mockups 10 and 11).
   const role = profile?.role;
-  const partnerTab = role === 'pilot' || role === 'partner';
   const items = [
     { name: 'roster', label: role === 'partner' ? 'Calendar' : 'Roster', Icon: CalendarBlankIcon },
     { name: 'crew', label: 'Crew', Icon: UsersIcon },
     { name: 'add', label: role === 'partner' ? 'Add' : 'Add duty', Icon: PlusIcon },
-    { name: 'partner', label: partnerTab ? 'Partner' : 'Track', Icon: partnerTab ? HeartIcon : AirplaneTiltIcon },
+    { name: 'partner', label: 'Partner', Icon: HeartIcon },
     { name: 'me', label: 'Me', Icon: UserIcon },
   ];
   const current = state.routes[state.index]?.name;
