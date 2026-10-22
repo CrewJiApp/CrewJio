@@ -51,7 +51,7 @@ let j = await r.json();
 check('200 with cleaned rows', r.status === 200 && j.rows.length === 2 && j.dropped === 2 && j.rows[0].flight === 'SQ 148' && !JSON.stringify(j).includes('555555') && !JSON.stringify(j).includes('7M8'), j);
 check('import marked done', finished.at(-1) === 'done', finished);
 const sent = JSON.parse(calls.find((c) => c.url.includes('anthropic'))!.body!);
-check('two images and the date went to Claude', sent.messages[0].content.filter((c: { type: string }) => c.type === 'image').length === 2 && sent.messages[0].content.at(-1).text.includes('2026-10-19') && sent.tool_choice.name === 'submit_roster', sent.tool_choice);
+check('two images and the date went to Claude', sent.messages[0].content.filter((c: { type: string }) => c.type === 'image').length === 2 && sent.messages[0].content.at(-1).text.includes('2026-10-19') && sent.tool_choice.type === 'auto' && sent.tools[0].name === 'submit_roster', sent.tool_choice);
 const claim = JSON.parse(calls.find((c) => c.url.includes('claim_roster_import'))!.body!);
 check('claimed for the signed-in user with 2 images and the default limit of 8', claim.p_user === '22222222-2222-2222-2222-222222222222' && claim.p_images === 2 && claim.p_limit === 8, claim);
 

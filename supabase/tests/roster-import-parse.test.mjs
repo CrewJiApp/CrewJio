@@ -72,10 +72,10 @@ test('more than 400 rows are cut off', () => {
   assert.ok(dropped >= 50);
 });
 
-test('the request: strict tool, forced tool choice, images first, and the privacy rules in the prompt', () => {
+test('the request: strict tool, tool choice auto, images first, and the privacy rules in the prompt', () => {
   const body = buildRequest({ model: 'm', today: '2026-10-19', images: [{ mediaType: 'image/jpeg', data: 'AAA' }, { mediaType: 'image/png', data: 'BBB' }] });
   assert.equal(body.model, 'm');
-  assert.deepEqual(body.tool_choice, { type: 'tool', name: 'submit_roster' });
+  assert.deepEqual(body.tool_choice, { type: 'auto' });
   assert.equal(body.tools[0], TOOL);
   assert.equal(TOOL.input_schema.additionalProperties, false);
   assert.equal(TOOL.input_schema.properties.rows.items.additionalProperties, false);

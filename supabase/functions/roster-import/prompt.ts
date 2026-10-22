@@ -62,16 +62,16 @@ export function buildRequest(opts: { model: string; images: ImageInput[]; today:
   return {
     model: opts.model,
     max_tokens: 12000,
-    temperature: 0,
     system: SYSTEM_PROMPT,
     tools: [TOOL],
-    tool_choice: { type: 'tool', name: TOOL_NAME },
+    // This model does not accept a forced tool choice, so the prompt asks for the call and extractResult checks for it.
+    tool_choice: { type: 'auto' },
     messages: [
       {
         role: 'user',
         content: [
           ...opts.images.map((img) => ({ type: 'image', source: { type: 'base64', media_type: img.mediaType, data: img.data } })),
-          { type: 'text', text: `Today's date is ${opts.today}. Read the roster in these ${opts.images.length} screenshot(s) and call ${TOOL_NAME}.` },
+          { type: 'text', text: `Today's date is ${opts.today}. Read the roster in these ${opts.images.length} screenshot(s). Reply only by calling the ${TOOL_NAME} tool.` },
         ],
       },
     ],
