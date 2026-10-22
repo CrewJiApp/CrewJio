@@ -79,8 +79,9 @@ Deno.serve(async (req) => {
       signal: AbortSignal.timeout(120_000),
     });
     if (!res.ok) {
-      // Log the status only: the response can echo parts of the screenshots.
-      console.error('[roster-import] Claude returned', res.status);
+      // Log the status and Anthropic's error type and short message only, never the whole body.
+      const detail = await res.json().then((b: { error?: { type?: unknown; message?: unknown } }) => ({ type: String(b?.error?.type ?? '').slice(0, 60), message: String(b?.error?.message ?? '').slice(0, 200) })).catch(() => ({ type: '', message: '' }));
+      console.error('[roster-import] Claude returned', res.status, detail.type, detail.message);
       await finish('failed');
       return reply(502, { error: 'read_failed' });
     }
