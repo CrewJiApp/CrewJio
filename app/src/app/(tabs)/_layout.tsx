@@ -24,7 +24,7 @@ export default function TabsLayout() {
   );
 }
 
-function TabBar({ state, navigation }: BottomTabBarProps) {
+function TabBar({ state, emitter, navigateToTab }: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   const { profile } = useAuth();
   const role = profile?.role;
@@ -61,8 +61,8 @@ function TabBar({ state, navigation }: BottomTabBarProps) {
             onPress={() => {
               const route = state.routes.find((r) => r.name === name);
               if (!route) return;
-              const event = navigation.emit({ type: 'tabPress', target: route.key, canPreventDefault: true });
-              if (!focused && !event.defaultPrevented) navigation.navigate(name);
+              const event = emitter.emit({ type: 'tabPress', target: route.key, canPreventDefault: true });
+              if (!focused && !event.defaultPrevented) navigateToTab(route.key);
             }}
             accessibilityRole="tab"
             accessibilityState={{ selected: focused }}

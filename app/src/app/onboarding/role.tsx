@@ -1,6 +1,6 @@
 // Step 1 of 3: role and airline (mockup 02-role-picker).
 import { router } from 'expo-router';
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useRef, type ComponentProps, type ReactNode, type Ref } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { TextField } from '@/components/fields';
@@ -10,6 +10,8 @@ import { useAuth } from '@/state/auth';
 import { useFinishProfile } from '@/state/finish-profile';
 import { useOnboarding } from '@/state/onboarding';
 import { colors, fonts, radius, space } from '@/theme';
+
+type ScrollViewHandle = NonNullable<ComponentProps<typeof ScrollView>['ref']> extends Ref<infer T> ? T : never;
 
 export default function RoleStep() {
   const { draft, editing, setRole, setAirline, setDisplayName } = useOnboarding();
@@ -28,7 +30,7 @@ export default function RoleStep() {
   }, [editing, suggested, draft.displayName, setDisplayName]);
 
   // The name field sits low on the screen, so bring it above the keyboard once it opens.
-  const scroll = useRef<ScrollView>(null);
+  const scroll = useRef<ScrollViewHandle>(null);
   const showName = () => setTimeout(() => scroll.current?.scrollToEnd({ animated: true }), 300);
 
   return (

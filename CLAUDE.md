@@ -5,7 +5,7 @@ Roster-sharing app for Singapore cabin crew and pilots (SIA and Scoot first). Cr
 Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out)
 
 ## Stack
-- `app/` — Expo (React Native, TypeScript), iOS + Android, expo-router
+- `app/` — Expo SDK 58 (React Native, TypeScript), iOS + Android, expo-router
 - `supabase/` — Postgres, Auth (Apple, Google, phone), Storage, Edge Functions. Region: Singapore (ap-southeast-1)
 - `web/` — Next.js on Vercel: landing page, waitlist, family share links (`crewjio.com/s/<handle>`)
 - `shared/` — TypeScript types and pure logic shared by app and web (duty types, day ranking, swap matching)
