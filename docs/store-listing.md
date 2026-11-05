@@ -111,7 +111,7 @@ CrewJio lets cabin crew, pilots and their partners share rosters in private invi
 
 SIGN IN
 • Apple reviewers: tap "Sign in with Apple".
-• Or tap "Use phone number" and enter +65 9123 4567. The verification code is 123456.
+• Or tap "Use email", then "App reviewer sign-in (test number)", and enter +65 9123 4567. The verification code is 123456.
 After signing in, choose "Cabin crew", pick a rank and any fleet, and you are in.
 
 WHAT TO TRY

@@ -16,6 +16,13 @@ const isPlaceholder = (v: string) => /your-project-ref|your-anon|publishable-key
  */
 export const allowPreview = __DEV__ || process.env.EXPO_PUBLIC_ALLOW_PREVIEW === '1';
 
+/**
+ * Real SMS codes need an SMS provider in Supabase. Until one is set up (EXPO_PUBLIC_SMS_SIGN_IN=1),
+ * people sign in with Apple, Google or an email code, and phone sign-in is only a small
+ * "reviewer sign-in" link for the test number given to the store reviewers.
+ */
+export const smsSignIn = process.env.EXPO_PUBLIC_SMS_SIGN_IN === '1';
+
 export const NOT_SET_UP_MESSAGE = 'This version of CrewJio is not set up correctly. Please update the app, or email hello@crewjio.com.';
 
 export const hasSupabaseConfig =

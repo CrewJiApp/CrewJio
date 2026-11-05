@@ -11,7 +11,7 @@ import { Button } from '@/components/ui';
 import { signInErrorMessage, useAuth } from '@/state/auth';
 import { colors, fonts, radius, space, type } from '@/theme';
 
-import { allowPreview, NOT_SET_UP_MESSAGE } from '@/lib/config';
+import { allowPreview, NOT_SET_UP_MESSAGE, smsSignIn } from '@/lib/config';
 import { PRIVACY_URL, TERMS_URL } from '@/lib/links';
 
 export default function Welcome() {
@@ -77,7 +77,7 @@ export default function Welcome() {
               disabled={!!busy}
               onPress={() => run('google')}
             />
-            <Button label="Use phone number" variant="text" disabled={!!busy} onPress={() => router.push('/sign-in')} />
+            <Button label={smsSignIn || auth.demo ? 'Use phone number' : 'Use email'} variant="text" disabled={!!busy} onPress={() => router.push('/sign-in')} />
             {error ? (
               <Text style={styles.error} accessibilityLiveRegion="polite">
                 {error}

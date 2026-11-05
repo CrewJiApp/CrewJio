@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { TextField } from '@/components/fields';
-import { allowPreview } from '@/lib/config';
+import { allowPreview, smsSignIn } from '@/lib/config';
 import { toE164 } from '@/lib/phone';
 import { BackButton, Button, Screen, StepHeader } from '@/components/ui';
 import { signInErrorMessage, useAuth, type OtpChannel } from '@/state/auth';
@@ -14,7 +14,9 @@ type Mode = 'phone' | 'email';
 
 export default function SignIn() {
   const auth = useAuth();
-  const [mode, setMode] = useState<Mode>('phone');
+  // Without an SMS provider the email code is the main way in; the phone is a reviewer-only link.
+  const phoneFirst = smsSignIn || auth.demo;
+  const [mode, setMode] = useState<Mode>(phoneFirst ? 'phone' : 'email');
   const [address, setAddress] = useState('');
   const [sentTo, setSentTo] = useState<OtpChannel | null>(null);
   const [code, setCode] = useState('');
@@ -87,7 +89,7 @@ export default function SignIn() {
                 autoFocus
               />
               <Button
-                label={mode === 'phone' ? 'Use email instead' : 'Use phone number instead'}
+                label={mode === 'phone' ? 'Use email instead' : phoneFirst ? 'Use phone number instead' : 'App reviewer sign-in (test number)'}
                 variant="text"
                 onPress={() => {
                   setMode(mode === 'phone' ? 'email' : 'phone');

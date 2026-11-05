@@ -32,7 +32,7 @@ Most of this is already done for sign-in emails and the database. Check each:
 5. **Sign-in methods** (see `docs/setup-sign-in.md`):
    - **Apple**: Supabase → Authentication → Providers → Apple: add the bundle ID `com.crewjio.app` to **Authorized Client IDs**.
    - **Google**: add `crewjio://auth-callback` to Authentication → URL Configuration → **Redirect URLs**.
-   - **Phone codes**: needs an SMS provider (for example Twilio) set under Providers → Phone. Real texts cost a little each; set a spending limit there too.
+   - **Phone codes** (not at launch: the app leads with email unless `EXPO_PUBLIC_SMS_SIGN_IN=1` is set; the test number above still works for reviewers): needs an SMS provider (for example Twilio) set under Providers → Phone. Real texts cost a little each; set a spending limit there too.
 6. **Plan**: the free Supabase plan pauses a project after a week with no activity and has no backups. For real users, upgrade the project to **Pro** (about US$25 a month) in Supabase → Settings → Billing.
 7. **Merge the website pages** (pull request: "Add privacy, terms, support and delete-account pages") and check these load on crewjio.com: /privacy, /terms, /support, /delete-account. The stores check them.
 8. **Have a lawyer read** the privacy policy and terms before you publish (a Singapore lawyer who knows the PDPA). They are plain-language drafts, not legal advice.
