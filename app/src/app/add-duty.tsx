@@ -269,10 +269,9 @@ export default function AddDuty() {
                 <DateField label="Date" value={date} onChange={setDate} error={errors.date} />
               ) : (
                 <>
-                  <View style={styles.pair}>
-                    <DateField label="From" value={date} onChange={(d) => { setDate(d); if (endDate < d) setEndDate(d); }} error={errors.startDate} style={styles.flex} />
-                    <DateField label="Until" value={endDate} onChange={setEndDate} minimumDate={date} error={errors.endDate} style={styles.flex} />
-                  </View>
+                  {/* One under the other: the inline calendar needs the full width to show all seven days. */}
+                  <DateField label="From" value={date} onChange={(d) => { setDate(d); if (endDate < d) setEndDate(d); }} error={errors.startDate} />
+                  <DateField label="Until" value={endDate} onChange={setEndDate} minimumDate={date} error={errors.endDate} />
                   <TextField label="Note (optional, only you see this)" value={note} onChangeText={setNote} placeholder={leave === 'holiday' ? 'Bali' : ''} autoCapitalize="sentences" maxLength={80} />
                   <InfoNote icon={<LockSimpleIcon size={20} color={colors.muted} />}>
                     {leave === 'reservist'
