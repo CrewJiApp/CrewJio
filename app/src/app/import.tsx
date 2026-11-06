@@ -12,13 +12,14 @@ import {
   summariseImport,
   type NewDuty,
 } from '@crewjio/shared';
+import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
 import { router } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Alert, Image, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { CameraIcon, LockSimpleIcon, TrashIcon, WarningCircleIcon } from '@/components/icons';
+import { CameraIcon, FilePdfIcon, LockSimpleIcon, TrashIcon, WarningCircleIcon } from '@/components/icons';
 import { TONE_STYLE } from '@/components/roster-calendar';
 import { SheetHeader } from '@/components/sheets';
 import { Button, InfoNote } from '@/components/ui';
@@ -27,9 +28,10 @@ import {
   IMPORTS_PER_MONTH,
   MAX_SCREENSHOTS,
   demoMode,
+  checkPdf,
   importErrorMessage,
   importsLeft,
-  prepareImage,
+  prepareFiles,
   readRoster,
   sampleRoster,
   type Picked,
@@ -61,6 +63,7 @@ export default function ImportRoster() {
   const [error, setError] = useState<string | null>(null);
   const [left, setLeft] = useState<number | null>(null);
   const preview = demoMode();
+  const hasPdf = images.some((i) => i.kind === 'pdf');
 
   useEffect(() => {
     void importsLeft().then(setLeft);
@@ -75,10 +78,25 @@ export default function ImportRoster() {
   const choose = async () => {
     setError(null);
     const room = MAX_SCREENSHOTS - images.length;
-    if (room <= 0) return;
+    if (room <= 0 || hasPdf) return;
     const result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ['images'], allowsMultipleSelection: true, selectionLimit: room, quality: 1 });
     if (result.canceled) return;
-    setImages((current) => [...current, ...result.assets.map((a) => ({ uri: a.uri, width: a.width }))].slice(0, MAX_SCREENSHOTS));
+    setImages((current) => [...current, ...result.assets.map((a) => ({ kind: 'image' as const, uri: a.uri, width: a.width }))].slice(0, MAX_SCREENSHOTS));
+  };
+
+  // One roster PDF, on its own: never mixed with screenshots.
+  const choosePdf = async () => {
+    setError(null);
+    const result = await DocumentPicker.getDocumentAsync({ type: 'application/pdf', multiple: false, copyToCacheDirectory: true });
+    if (result.canceled || !result.assets[0]) return;
+    const file = result.assets[0];
+    try {
+      checkPdf(file);
+    } catch (e) {
+      setError(importErrorMessage(e));
+      return;
+    }
+    setImages([{ kind: 'pdf', uri: file.uri, name: file.name, size: file.size ?? 0 }]);
   };
 
   const show = (duties: NewDuty[], skipped: number) => {
@@ -93,7 +111,7 @@ export default function ImportRoster() {
     setError(null);
     setPhase('reading');
     try {
-      const prepared = await Promise.all(images.map(prepareImage));
+      const prepared = await prepareFiles(images);
       const result = await readRoster(prepared);
       show(rowsToDuties(result.rows), result.dropped);
       void importsLeft().then(setLeft);
@@ -153,26 +171,42 @@ export default function ImportRoster() {
               <Text style={type.title} accessibilityRole="header">
                 Import your whole month
               </Text>
-              <Text style={type.body}>Screenshot your roster in your airline’s roster app, list view or calendar view, and choose up to {MAX_SCREENSHOTS} screenshots. We read the flights, standby and training days for you.</Text>
+              <Text style={type.body}>Screenshot your roster in your airline’s roster app, list view or calendar view, and choose up to {MAX_SCREENSHOTS} screenshots. Or choose one PDF of your roster, up to 2.5 MB. We read the flights, standby and training days for you.</Text>
             </View>
 
             {images.length > 0 ? (
               <View style={styles.thumbs}>
-                {images.map((img, i) => (
-                  <View key={img.uri} style={styles.thumbWrap}>
-                    <Image source={{ uri: img.uri }} style={styles.thumb} accessibilityLabel={`Screenshot ${i + 1}`} />
-                    <Pressable onPress={() => setImages((c) => c.filter((_, k) => k !== i))} accessibilityRole="button" accessibilityLabel={`Remove screenshot ${i + 1}`} style={styles.thumbRemove} hitSlop={6}>
-                      <TrashIcon size={18} color={colors.cloud} />
-                    </Pressable>
-                  </View>
-                ))}
+                {images.map((img, i) =>
+                  img.kind === 'pdf' ? (
+                    <View key={img.uri} style={styles.pdfCard}>
+                      <FilePdfIcon size={28} color={colors.amber} />
+                      <View style={styles.flex}>
+                        <Text style={type.bodyStrong} numberOfLines={1}>
+                          {img.name}
+                        </Text>
+                        <Text style={type.small}>{(img.size / 1_000_000).toFixed(1)} MB</Text>
+                      </View>
+                      <Pressable onPress={() => setImages([])} accessibilityRole="button" accessibilityLabel="Remove the PDF" style={styles.trash}>
+                        <TrashIcon size={20} color={colors.muted} />
+                      </Pressable>
+                    </View>
+                  ) : (
+                    <View key={img.uri} style={styles.thumbWrap}>
+                      <Image source={{ uri: img.uri }} style={styles.thumb} accessibilityLabel={`Screenshot ${i + 1}`} />
+                      <Pressable onPress={() => setImages((c) => c.filter((_, k) => k !== i))} accessibilityRole="button" accessibilityLabel={`Remove screenshot ${i + 1}`} style={styles.thumbRemove} hitSlop={6}>
+                        <TrashIcon size={18} color={colors.cloud} />
+                      </Pressable>
+                    </View>
+                  ),
+                )}
               </View>
             ) : null}
 
-            {images.length < MAX_SCREENSHOTS ? <Button label={images.length === 0 ? 'Choose screenshots' : 'Add more screenshots'} variant="outline" onPress={choose} /> : null}
+            {!hasPdf && images.length < MAX_SCREENSHOTS ? <Button label={images.length === 0 ? 'Choose screenshots' : 'Add more screenshots'} variant="outline" onPress={choose} /> : null}
+            {images.length === 0 ? <Button label="Choose a PDF instead" variant="text" onPress={choosePdf} /> : null}
 
             <InfoNote icon={<LockSimpleIcon size={20} color={colors.muted} />}>
-              Screenshots are read once and never stored. Staff numbers and aircraft details are removed, and nothing is saved until you check it.
+              Screenshots and PDFs are read once and never stored. Staff numbers and aircraft details are removed, and nothing is saved until you check it.
             </InfoNote>
 
             {left !== null ? (
@@ -193,7 +227,7 @@ export default function ImportRoster() {
         <View style={styles.center}>
           <ActivityIndicator size="large" color={colors.amber} />
           <Text style={type.title}>Reading your roster</Text>
-          <Text style={[type.body, styles.centerText]}>This can take up to a minute. Your screenshots are not stored.</Text>
+          <Text style={[type.body, styles.centerText]}>This can take up to a minute. Nothing you chose is stored.</Text>
         </View>
       ) : null}
 
@@ -282,6 +316,7 @@ const styles = StyleSheet.create({
   hero: { gap: space.md },
   icon: { width: 60, height: 60, borderRadius: 18, backgroundColor: colors.card, alignItems: 'center', justifyContent: 'center' },
   thumbs: { flexDirection: 'row', flexWrap: 'wrap', gap: space.md },
+  pdfCard: { flexDirection: 'row', alignItems: 'center', gap: space.md, backgroundColor: colors.card, borderRadius: radius.lg, paddingLeft: space.lg, minHeight: 64, width: '100%' },
   thumbWrap: { width: 78, height: 130 },
   thumb: { width: 78, height: 130, borderRadius: 12, backgroundColor: colors.card },
   thumbRemove: { position: 'absolute', top: 4, right: 4, width: 32, height: 32, borderRadius: 16, backgroundColor: 'rgba(14,23,38,0.85)', alignItems: 'center', justifyContent: 'center' },

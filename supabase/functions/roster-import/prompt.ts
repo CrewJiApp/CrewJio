@@ -3,7 +3,7 @@ import type { ParsedRow } from './parse.ts';
 
 export const TOOL_NAME = 'submit_roster';
 
-export const SYSTEM_PROMPT = `You read screenshots of an airline crew roster app and copy the rows out exactly as printed.
+export const SYSTEM_PROMPT = `You read screenshots (or a PDF print-out) of an airline crew roster app and copy the rows out exactly as printed.
 
 The screenshots are either the LIST view (columns: Start Date, Day, Flight Number, Sector, A/C, Duty, Sector Duty, Acting Rank, Rpt, STD, STA, Flight Time, Duty Time, FDP) or the CALENDAR view (one cell per day).
 
@@ -52,8 +52,9 @@ export const TOOL = {
   },
 } as const;
 
+/** The only kinds of file we read: a JPEG (the app turns every screenshot into one) or a PDF. */
 export interface ImageInput {
-  mediaType: 'image/jpeg' | 'image/png' | 'image/webp';
+  mediaType: 'image/jpeg' | 'application/pdf';
   /** Base64, no data: prefix. */
   data: string;
 }
@@ -61,7 +62,7 @@ export interface ImageInput {
 export function buildRequest(opts: { model: string; images: ImageInput[]; today: string }) {
   return {
     model: opts.model,
-    max_tokens: 12000,
+    max_tokens: 8000,
     system: SYSTEM_PROMPT,
     tools: [TOOL],
     // This model does not accept a forced tool choice, so the prompt asks for the call and extractResult checks for it.
@@ -70,8 +71,8 @@ export function buildRequest(opts: { model: string; images: ImageInput[]; today:
       {
         role: 'user',
         content: [
-          ...opts.images.map((img) => ({ type: 'image', source: { type: 'base64', media_type: img.mediaType, data: img.data } })),
-          { type: 'text', text: `Today's date is ${opts.today}. Read the roster in these ${opts.images.length} screenshot(s). Reply only by calling the ${TOOL_NAME} tool.` },
+          ...opts.images.map((img) => ({ type: img.mediaType === 'application/pdf' ? 'document' : 'image', source: { type: 'base64', media_type: img.mediaType, data: img.data } })),
+          { type: 'text', text: `Today's date is ${opts.today}. Read the roster in ${opts.images.length === 1 && opts.images[0].mediaType === 'application/pdf' ? 'this PDF' : `these ${opts.images.length} screenshot(s)`}. Reply only by calling the ${TOOL_NAME} tool.` },
         ],
       },
     ],
@@ -100,12 +101,26 @@ export function extractResult(response: unknown): ReadResult | null {
   };
 }
 
-/** Which kind of image this is from its first bytes, or null when it is not one we accept. */
-export function imageType(base64: string): ImageInput['mediaType'] | null {
+/** Which kind of file this is from its first bytes, or null when it is not a JPEG or a PDF. */
+export function fileType(base64: string): ImageInput['mediaType'] | null {
   if (base64.startsWith('/9j/')) return 'image/jpeg';
-  if (base64.startsWith('iVBOR')) return 'image/png';
-  if (base64.startsWith('UklGR')) return 'image/webp';
+  if (base64.startsWith('JVBERi')) return 'application/pdf'; // "%PDF-"
   return null;
+}
+
+/**
+ * Pages in a PDF, counted from its page objects. PDFs that hide their page objects inside
+ * compressed streams count as 0, so the size limit is the real guard; this stops the obvious
+ * many-page file.
+ */
+export function pdfPageCount(base64: string): number {
+  let text: string;
+  try {
+    text = atob(base64);
+  } catch {
+    return Infinity;
+  }
+  return (text.match(/\/Type\s*\/Page(?![A-Za-z])/g) ?? []).length;
 }
 
 export type { ParsedRow };

@@ -43,6 +43,14 @@ If it says "not switched on yet", the secrets or deploy step is missing. If some
 Supabase → **Edge Functions → roster-import → Logs** and send me a screenshot. The logs never contain your
 screenshots or roster.
 
-## Costs
-Each import is one Claude request with up to 4 images. It is usually a few cents. Watch your usage on the
-Anthropic Console; the monthly limit per person and your spend limit keep it bounded.
+## Costs, and what stops a surprise bill
+Each import is one Claude request with up to 4 images (or one PDF). It is usually a few cents. These limits
+stack, so no single account or crowd of accounts can run up a large bill:
+1. **Only JPEG and PDF files are read.** The phone turns every screenshot into a JPEG first. The server
+   refuses anything else (PNG, WebP, GIF, SVG, Word, zip...), a PDF over 2.5 MB or 6 pages, a PDF mixed with
+   screenshots, more than 4 screenshots, and any request over 20 MB, all before Claude is called.
+2. **Signed-in people only** (`verify_jwt`), one import at a time each.
+3. **8 imports per person per month**, and **6 tries per person per day** (failed reads count towards the day).
+4. **120 tries per day across everybody.** Raise it with `ROSTER_IMPORT_DAILY_LIMIT_ALL` when you have more users.
+5. **Your Anthropic spend limit** (Billing → Limits) is the hard stop. Set it to an amount you are happy to lose,
+   for example US$20 a month, and turn on the email alert at half of it.

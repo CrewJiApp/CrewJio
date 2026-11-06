@@ -31,8 +31,8 @@ before(async () => {
   await as(U.ana, 'insert into public.partners (addressee_id) values ($1)', [U.dee]);
   await as(U.dee, `update public.partners set status = 'active'`);
   await as(U.ana, `insert into public.sharing_overrides (viewer_id, max_level) values ($1, 'hidden')`, [U.cai]);
-  await db.query('select public.claim_roster_import($1, 1, 5)', [U.ana]);
-  await db.query('select public.claim_roster_import($1, 1, 5)', [U.ben]);
+  await db.query('select * from public.claim_roster_import($1, 1, 5, 6, 100)', [U.ana]);
+  await db.query('select * from public.claim_roster_import($1, 1, 5, 6, 100)', [U.ben]);
 });
 
 const count = async (sql, params) => Number((await db.query(sql, params)).rows[0].n);

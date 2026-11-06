@@ -9,6 +9,7 @@ export { CaretLeftIcon } from 'phosphor-react-native/src/icons/CaretLeft';
 export { CaretRightIcon } from 'phosphor-react-native/src/icons/CaretRight';
 export { CheckIcon } from 'phosphor-react-native/src/icons/Check';
 export { CheckCircleIcon } from 'phosphor-react-native/src/icons/CheckCircle';
+export { FilePdfIcon } from 'phosphor-react-native/src/icons/FilePdf';
 export { HeartIcon } from 'phosphor-react-native/src/icons/Heart';
 export { LockSimpleIcon } from 'phosphor-react-native/src/icons/LockSimple';
 export { PencilSimpleIcon } from 'phosphor-react-native/src/icons/PencilSimple';
