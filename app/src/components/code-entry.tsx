@@ -140,10 +140,10 @@ export function CodeEntryForm({
               style={({ pressed }) => [styles.suggestion, pressed && { opacity: 0.8 }]}>
               <Text style={styles.suggestionCode}>{s.code}</Text>
               <View style={styles.flex}>
-                <Text style={type.bodyStrong} numberOfLines={1}>
+                <Text style={type.bodyStrong} numberOfLines={2}>
                   {sentence(s.description)}
                 </Text>
-                <Text style={type.small} numberOfLines={1}>
+                <Text style={type.small} numberOfLines={2}>
                   Friends see {s.category === 'private' ? 'Unavailable' : s.friendsSee}
                 </Text>
               </View>

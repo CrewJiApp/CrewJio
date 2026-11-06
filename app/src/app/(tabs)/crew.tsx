@@ -112,10 +112,10 @@ function GroupCard({ group, me }: { group: Group; me: Profile }) {
     <Pressable onPress={() => router.push({ pathname: '/group/[id]', params: { id: group.id } })} accessibilityRole="button" style={({ pressed }) => [styles.card, pressed && { opacity: 0.85 }]}>
       <AvatarStack people={others} />
       <View style={styles.flex}>
-        <Text style={type.heading} numberOfLines={1}>
+        <Text style={type.heading} numberOfLines={2}>
           {group.name}
         </Text>
-        <Text style={type.small} numberOfLines={1}>
+        <Text style={type.small} numberOfLines={2}>
           {count} {count === 1 ? 'person' : 'crew'} · {LEVEL_SHORT[group.mySharingLevel]}
         </Text>
       </View>

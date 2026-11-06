@@ -146,7 +146,7 @@ export default function GroupPlan() {
             <CaretLeftIcon size={22} color={colors.cloud} />
           </Pressable>
           <View style={styles.flex}>
-            <Text style={type.heading} accessibilityRole="header" numberOfLines={1}>
+            <Text style={type.heading} accessibilityRole="header" numberOfLines={2}>
               {group.name}
             </Text>
             <Text style={type.small}>
