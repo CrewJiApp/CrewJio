@@ -16,35 +16,81 @@ const link = "text-cloud underline decoration-white/30 underline-offset-4";
 interface Step {
   title: string;
   body: React.ReactNode;
+  /** Small numbered taps shown under the step. */
+  taps?: React.ReactNode[];
   shot?: { src: string; alt: string };
 }
+
+const b = (text: string) => <strong className="text-cloud">{text}</strong>;
 
 const STEPS: Step[] = [
   {
     title: "Install TestFlight",
     body: (
       <>
-        TestFlight is Apple&apos;s free app for trying apps before they are in the App Store. Get it from the{" "}
-        <a href={TESTFLIGHT_APP_URL} className={link}>
-          App Store
-        </a>
-        . You only do this once.
+        TestFlight is Apple&apos;s free app for trying apps before they are in the App Store. You only do this once. If you already
+        have it, skip to step 2.
       </>
     ),
+    taps: [
+      <>Open the {b("App Store")} on your iPhone.</>,
+      <>
+        Tap {b("Search")} at the bottom right and type {b("TestFlight")}. Or{" "}
+        <a href={TESTFLIGHT_APP_URL} className={link}>
+          tap here to open it directly
+        </a>
+        .
+      </>,
+      <>
+        Tap {b("Get")} next to TestFlight (the blue icon, by Apple), then confirm with Face ID, Touch ID or your Apple ID password.
+      </>,
+      <>
+        Tap {b("Open")}. If it asks you to sign in, use your Apple ID, then tap {b("Continue")} and accept the terms.
+      </>,
+    ],
   },
   {
-    title: "Open the CrewJio invite",
+    title: "Add CrewJio to TestFlight",
     body: TESTFLIGHT_URL ? (
       <>
-        Open the invite link on your iPhone, tap <strong className="text-cloud">Accept</strong>, then{" "}
-        <strong className="text-cloud">Install</strong>. CrewJio appears on your home screen like any other app.
+        The invite link is what adds CrewJio to your TestFlight. Do this on your iPhone, not on a computer.
       </>
     ) : (
       <>
-        The invite link is not open yet. Join the list below and we&apos;ll email it to you the moment it is. Then tap{" "}
-        <strong className="text-cloud">Accept</strong> and <strong className="text-cloud">Install</strong>.
+        The invite arrives by email, from TestFlight or from us. We email it to you as soon as the beta link opens. Open the email on your
+        iPhone and follow these taps.
       </>
     ),
+    taps: TESTFLIGHT_URL
+      ? [
+          <>
+            Tap {b("Open the TestFlight invite")} at the top of this page. If it opens inside another app, copy the link into Safari
+            instead.
+          </>,
+          <>
+            Safari asks if you want to open this in TestFlight. Tap {b("Open")}.
+          </>,
+          <>
+            TestFlight shows a page for CrewJio. Tap {b("Accept")}, or {b("Start Testing")} if it shows that instead.
+          </>,
+          <>
+            Tap {b("Install")} and wait for the download. Tap {b("Open")} when it finishes. CrewJio is now on your home screen, with a small
+            orange dot next to its name. The dot means it is a beta app.
+          </>,
+        ]
+      : [
+          <>Open the invite email on your iPhone.</>,
+          <>
+            Tap {b("View in TestFlight")} (or {b("Start Testing")}). When Safari asks to open TestFlight, tap {b("Open")}.
+          </>,
+          <>
+            TestFlight shows a page for CrewJio. Tap {b("Accept")}, then {b("Install")}.
+          </>,
+          <>
+            Tap {b("Open")} when it finishes. CrewJio is now on your home screen, with a small orange dot next to its name. The dot means it
+            is a beta app.
+          </>,
+        ],
   },
   {
     title: "Sign in",
@@ -211,6 +257,21 @@ export default function BetaPage() {
                 <div className="flex flex-col gap-2">
                   <h3 className="text-xl font-semibold tracking-tight">{s.title}</h3>
                   <p className="max-w-[56ch] leading-relaxed text-muted">{s.body}</p>
+                  {s.taps ? (
+                    <ol className="mt-1 flex max-w-[56ch] flex-col gap-2.5 rounded-2xl bg-card/60 p-4 ring-1 ring-white/[0.06]">
+                      {s.taps.map((t, k) => (
+                        <li key={k} className="flex gap-3 leading-relaxed text-muted">
+                          <span
+                            aria-hidden
+                            className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-white/[0.06] font-mono text-xs font-bold text-cloud ring-1 ring-white/10"
+                          >
+                            {String.fromCharCode(97 + k)}
+                          </span>
+                          <span>{t}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : null}
                 </div>
               </div>
               {s.shot ? <PhoneShot src={s.shot.src} alt={s.shot.alt} className="mx-auto w-full max-w-[13rem] md:max-w-none" sizes="240px" /> : null}
