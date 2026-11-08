@@ -4,13 +4,14 @@ import {
   hasRosterIn,
   rankDays,
   sharedEntriesToRoster,
+  type DayPart,
   type IsoDate,
   type PersonRoster,
   type Profile,
   type RankedDay,
 } from '@crewjio/shared';
 import { useFocusEffect } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { backend } from '@/lib/backend';
 import { social, type Group, type PartnerLink } from '@/lib/social';
@@ -62,9 +63,10 @@ export interface Ranking {
  * Ranks start..end for you plus `others`. Friends' rosters come through get_shared_roster, so
  * the ranking only ever uses what each person chose to share with you.
  */
-export function useRanking(others: Profile[], start: IsoDate, end: IsoDate): Ranking {
+export function useRanking(others: Profile[], start: IsoDate, end: IsoDate, part: DayPart = 'any'): Ranking {
   const { user, profile } = useAuth();
-  const [state, setState] = useState<Ranking>({ days: [], included: [], missing: [], rosters: {}, loading: true, error: null });
+  // The rosters are fetched once; changing the part of the day only re-ranks them.
+  const [state, setState] = useState<Omit<Ranking, 'days'> & { includedRosters: PersonRoster[] }>({ includedRosters: [], included: [], missing: [], rosters: {}, loading: true, error: null });
   const key = others.map((o) => o.id).join(',');
 
   useEffect(() => {
@@ -84,9 +86,8 @@ export function useRanking(others: Profile[], start: IsoDate, end: IsoDate): Ran
         ];
         const included = rosters.filter((r) => hasRosterIn(r.roster, start, end));
         const missing = rosters.filter((r) => !hasRosterIn(r.roster, start, end)).map((r) => r.profile);
-        const days = included.length > 0 ? rankDays(included.map((r) => r.roster), start, end) : [];
         const byId = Object.fromEntries(rosters.map((r) => [r.profile.id, r.roster]));
-        if (live) setState({ days, included: included.map((r) => r.profile), missing, rosters: byId, loading: false, error: null });
+        if (live) setState({ includedRosters: included.map((r) => r.roster), included: included.map((r) => r.profile), missing, rosters: byId, loading: false, error: null });
       } catch (e) {
         if (live) setState((s) => ({ ...s, loading: false, error: e instanceof Error ? e.message : 'Could not load rosters.' }));
       }
@@ -98,7 +99,8 @@ export function useRanking(others: Profile[], start: IsoDate, end: IsoDate): Ran
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, profile, key, start, end]);
 
-  return state;
+  const days = useMemo(() => (state.includedRosters.length > 0 ? rankDays(state.includedRosters, start, end, part) : []), [state.includedRosters, start, end, part]);
+  return useMemo(() => ({ ...state, days }), [state, days]);
 }
 
 export function initials(name: string): string {

@@ -1,7 +1,8 @@
 // Avatars, avatar stacks and day-status badges for groups, partner and crew match.
-import { shortDate, type DayStatus, type IsoDate, type Profile } from '@crewjio/shared';
+import { DAY_PARTS, DAY_PART_LABEL, shortDate, type DayPart, type DayStatus, type IsoDate, type Profile } from '@crewjio/shared';
 import { StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
 
+import { Chip } from '@/components/ui';
 import { initials } from '@/state/social';
 import { colors, fonts, radius, space, type } from '@/theme';
 
@@ -64,6 +65,20 @@ export function StatusBadge({ status }: { status: DayStatus }) {
   );
 }
 
+/** Any time / Morning / Afternoon / Evening: which part of the day you want to meet. */
+export function DayPartPicker({ value, onChange }: { value: DayPart; onChange: (part: DayPart) => void }) {
+  return (
+    <View style={styles.partWrap}>
+      <Text style={type.overline}>WHAT TIME OF DAY?</Text>
+      <View style={styles.partRow} accessibilityRole="radiogroup" accessibilityLabel="Time of day">
+        {DAY_PARTS.map((part) => (
+          <Chip key={part} label={DAY_PART_LABEL[part]} selected={value === part} onPress={() => onChange(part)} style={styles.partChip} />
+        ))}
+      </View>
+    </View>
+  );
+}
+
 /** A best-day card (mockup 15): date block, title, explanation, badge. */
 export function DayCard({ date, title, detail, status, highlight }: { date: IsoDate; title: string; detail: string; status: DayStatus; highlight?: boolean }) {
   const [dow, day] = shortDate(date).split(' ');
@@ -84,6 +99,9 @@ export function DayCard({ date, title, detail, status, highlight }: { date: IsoD
 
 const styles = StyleSheet.create({
   flex: { flex: 1, gap: 2 },
+  partWrap: { gap: 8 },
+  partRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  partChip: { flexBasis: '47%', flexGrow: 1, minHeight: 48 },
   avatar: { alignItems: 'center', justifyContent: 'center' },
   dashed: { borderWidth: 1.5, borderStyle: 'dashed', borderColor: colors.muted },
   avatarText: { fontFamily: fonts.bold },

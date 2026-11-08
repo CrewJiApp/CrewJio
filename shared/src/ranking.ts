@@ -146,6 +146,15 @@ const WINDOWS: Record<PersonDayStatus, Window> = {
 };
 const isFree = (s: PersonDayStatus) => WINDOWS[s].m || WINDOWS[s].a || WINDOWS[s].e;
 
+/** The part of the day people want to meet. "any" keeps every day that works at some point. */
+export const DAY_PARTS = ['any', 'morning', 'afternoon', 'evening'] as const;
+export type DayPart = (typeof DAY_PARTS)[number];
+
+export const DAY_PART_LABEL: Record<DayPart, string> = { any: 'Any time', morning: 'Morning', afternoon: 'Afternoon', evening: 'Evening' };
+
+/** Morning is before 12:00, afternoon 12:00 to 18:00, evening from 18:00 (see classifyPersonDays). */
+const PART_KEY: Record<Exclude<DayPart, 'any'>, keyof Window> = { morning: 'm', afternoon: 'a', evening: 'e' };
+
 export interface RankedPerson extends PersonDay {
   userId: string;
 }
@@ -175,8 +184,11 @@ function everyone(n: number): string {
  * - SameLayover: everyone away on a layover in the same city.
  * - Almost: all but one free (3+ people, and the busy one is not on leave), which triggers swap ideas.
  * - Blocked: someone is on holiday, leave, reservist or a private day.
+ * With a `part` of the day chosen (morning, afternoon or evening), a day only counts when everyone
+ * who is free is free in that part. Days that do not fit become NoMatch, so they drop out of the
+ * best days. A shared layover is not affected: everyone is away from home all day.
  */
-export function rankDays(people: PersonRoster[], start: IsoDate, end: IsoDate): RankedDay[] {
+export function rankDays(people: PersonRoster[], start: IsoDate, end: IsoDate, part: DayPart = 'any'): RankedDay[] {
   const perPerson = people.map((p) => classifyPersonDays(p, start, end));
   return dateRange(start, end).map((date, i): RankedDay => {
     const day: RankedPerson[] = people.map((p, k) => ({ ...perPerson[k]![i]!, userId: p.userId }));
@@ -187,16 +199,20 @@ export function rankDays(people: PersonRoster[], start: IsoDate, end: IsoDate): 
     const free = day.filter((p) => isFree(p.status));
     const window = free.reduce<Window>((w, p) => ({ m: w.m && WINDOWS[p.status].m, a: w.a && WINDOWS[p.status].a, e: w.e && WINDOWS[p.status].e }), { m: true, a: true, e: true });
     const overlap = window.m || window.a || window.e;
+    // Does the chosen part of the day work for everyone who is free?
+    const fits = part === 'any' || window[PART_KEY[part]];
+    const works = part === 'any' ? '' : ` · ${part} works`;
 
     if (free.length === n && overlap) {
+      if (!fits) return { date, status: 'NoMatch', people: day, summary: '' };
       const tired = day.filter((p) => p.status === 'Tired').length;
       if (window.m && window.a && window.e) {
         return tired
-          ? { date, status: 'Tired', people: day, summary: `${everyone(n)} off · ${tired} just landed` }
-          : { date, status: 'Great', people: day, summary: `${everyone(n)} off · well rested` };
+          ? { date, status: 'Tired', people: day, summary: `${everyone(n)} off · ${tired} just landed${works}` }
+          : { date, status: 'Great', people: day, summary: `${everyone(n)} off · well rested${works}` };
       }
       if (window.e) return { date, status: 'Evening', people: day, summary: `${everyone(n)} free from evening` };
-      if (window.a) return { date, status: 'Daytime', people: day, summary: `${everyone(n)} free in the day` };
+      if (window.a) return { date, status: 'Daytime', people: day, summary: `${everyone(n)} free in the day${part === 'morning' || part === 'afternoon' ? works : ''}` };
       return { date, status: 'Morning', people: day, summary: `${everyone(n)} free in the morning` };
     }
 
@@ -207,8 +223,8 @@ export function rankDays(people: PersonRoster[], start: IsoDate, end: IsoDate): 
     }
 
     const busy = day.filter((p) => !isFree(p.status));
-    if (n >= 3 && busy.length === 1 && overlap) {
-      return { date, status: 'Almost', people: day, busyUserId: busy[0]!.userId, summary: `${n - 1} of ${n} free` };
+    if (n >= 3 && busy.length === 1 && overlap && fits) {
+      return { date, status: 'Almost', people: day, busyUserId: busy[0]!.userId, summary: `${n - 1} of ${n} free${part === 'any' ? '' : ` in the ${part}`}` };
     }
     return { date, status: 'NoMatch', people: day, summary: '' };
   });

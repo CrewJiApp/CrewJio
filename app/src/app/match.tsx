@@ -1,12 +1,12 @@
 // Crew Match (mockup 17): pick friends, see the next 14 days, propose the best one.
-import { addDays, bestDays, shortDate, todayInSingapore, type DayStatus, type Profile } from '@crewjio/shared';
+import { addDays, bestDays, shortDate, todayInSingapore, type DayPart, type DayStatus, type Profile } from '@crewjio/shared';
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, Share, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CaretLeftIcon } from '@/components/icons';
-import { Avatar, DayCard } from '@/components/people';
+import { Avatar, DayCard, DayPartPicker } from '@/components/people';
 import { Button } from '@/components/ui';
 import { useAuth } from '@/state/auth';
 import { explainDay, joinNames, useGroups, useRanking } from '@/state/social';
@@ -37,7 +37,8 @@ export default function CrewMatch() {
 
   const today = todayInSingapore();
   const end = addDays(today, 13);
-  const ranking = useRanking(chosen, today, end);
+  const [part, setPart] = useState<DayPart>('any');
+  const ranking = useRanking(chosen, today, end, part);
   if (!profile) return null;
 
   const best = bestDays(ranking.days, 4);
@@ -47,7 +48,7 @@ export default function CrewMatch() {
 
   const propose = () => {
     if (!top) return;
-    Share.share({ message: `How about ${shortDate(top.date)}? CrewJio says: ${top.summary}. (${joinNames(ranking.included, profile)})` }).catch(() => undefined);
+    Share.share({ message: `How about ${shortDate(top.date)}${part === 'any' ? '' : ` ${part}`}? CrewJio says: ${top.summary}. (${joinNames(ranking.included, profile)})` }).catch(() => undefined);
   };
 
   return (
@@ -88,6 +89,8 @@ export default function CrewMatch() {
             );
           })}
         </View>
+
+        {chosen.length > 0 ? <DayPartPicker value={part} onChange={setPart} /> : null}
 
         {chosen.length > 0 ? (
           <View style={styles.gridCard}>
@@ -134,14 +137,16 @@ export default function CrewMatch() {
         ) : null}
 
         {chosen.length > 0 ? <Text style={[type.overline, styles.section]}>BEST MATCHES</Text> : null}
-        {chosen.length > 0 && !ranking.loading && best.length === 0 ? <Text style={type.small}>No day works for everyone in the next two weeks. Try fewer people.</Text> : null}
+        {chosen.length > 0 && !ranking.loading && best.length === 0 ? <Text style={type.small}>
+            {part === 'any' ? 'No day works for everyone in the next two weeks. Try fewer people.' : `No ${part} works for everyone in the next two weeks. Try another time of day, or fewer people.`}
+          </Text> : null}
         {best.map((d, i) => (
           <DayCard key={d.date} date={d.date} status={d.status} title={d.summary} detail={explainDay(d, people, profile)} highlight={i === 0} />
         ))}
       </ScrollView>
       {top ? (
         <View style={styles.footer}>
-          <Button label={`Propose ${shortDate(top.date)}`} onPress={propose} />
+          <Button label={`Propose ${shortDate(top.date)}${part === 'any' ? '' : ` ${part}`}`} onPress={propose} />
         </View>
       ) : null}
     </SafeAreaView>

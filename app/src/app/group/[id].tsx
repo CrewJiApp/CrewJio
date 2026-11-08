@@ -8,6 +8,7 @@ import {
   monthName,
   shortDate,
   todayInSingapore,
+  type DayPart,
   type OverrideLevel,
   type Profile,
   type SharingLevel,
@@ -18,7 +19,7 @@ import { ActivityIndicator, Alert, Platform, Pressable, ScrollView, Share, Style
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CaretLeftIcon } from '@/components/icons';
-import { Avatar, DayCard } from '@/components/people';
+import { Avatar, DayCard, DayPartPicker } from '@/components/people';
 import { LEVEL_EXPLAIN, LevelPicker } from '@/components/sheets';
 import { Button, Chip } from '@/components/ui';
 import { social, socialErrorMessage } from '@/lib/social';
@@ -62,7 +63,8 @@ export default function GroupPlan() {
   const start = pick === 0 ? today : bounds.first;
 
   const others = useMemo(() => (group && profile ? group.members.filter((m) => m.profile.id !== profile.id).map((m) => m.profile) : []), [group, profile]);
-  const ranking = useRanking(others, start, bounds.last);
+  const [part, setPart] = useState<DayPart>('any');
+  const ranking = useRanking(others, start, bounds.last, part);
   const [overrides, setOverrides] = useState<Record<string, OverrideLevel>>({});
   const [busy, setBusy] = useState(false);
 
@@ -87,7 +89,7 @@ export default function GroupPlan() {
   const share = (message: string) => Share.share({ message }).catch(() => undefined);
   const shareBest = () =>
     share(
-      `${group.name}: best days in ${name}\n` +
+      `${group.name}: best days in ${name}${part === 'any' ? '' : ` (${part})`}\n` +
         best.map((d) => `• ${shortDate(d.date)}: ${d.summary}`).join('\n') +
         '\nFound with CrewJio',
     );
@@ -184,6 +186,8 @@ export default function GroupPlan() {
           ))}
         </View>
 
+        <DayPartPicker value={part} onChange={setPart} />
+
         <Text style={type.overline}>BEST DAYS IN {name.toUpperCase()}</Text>
         {ranking.loading ? <ActivityIndicator color={colors.amber} /> : null}
         {!ranking.loading && others.length === 0 ? <Text style={type.small}>Invite your crew to see the days you’re all home.</Text> : null}
@@ -191,7 +195,9 @@ export default function GroupPlan() {
           <Text style={type.small}>Nobody else has added {name} yet. Give them a nudge.</Text>
         ) : null}
         {!ranking.loading && ranking.included.length >= 2 && best.length === 0 ? (
-          <Text style={type.small}>No day works for everyone in {name} yet. As more rosters come in, this fills up.</Text>
+          <Text style={type.small}>
+            {part === 'any' ? `No day works for everyone in ${name} yet. As more rosters come in, this fills up.` : `No ${part} works for everyone in ${name} yet. Try another time of day.`}
+          </Text>
         ) : null}
         {best.map((d, i) => (
           <DayCard key={d.date} date={d.date} status={d.status} title={d.summary} detail={explainDay(d, people, profile)} highlight={i === 0} />

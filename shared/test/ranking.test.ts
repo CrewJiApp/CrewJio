@@ -8,6 +8,7 @@ import {
   buildOffDuty,
   buildTimedDuty,
   classifyPersonDays,
+  DAY_PARTS,
   hasRosterIn,
   rankDays,
   rowsToDuties,
@@ -175,5 +176,58 @@ describe('friends seen through sharing levels', () => {
     const days = classifyPersonDays(friend, '2026-11-02', '2026-11-03');
     expect(days[0]).toMatchObject({ status: 'Evening', note: 'Turnaround, back 1430' });
     expect(days[1]).toMatchObject({ status: 'Away', layover: 'LHR' });
+  });
+});
+
+describe('choosing a time of day', () => {
+  const dateWith = (status: string) => expected.find((d) => d.status === status)!.date;
+  const only = (date: string, part: Parameters<typeof rankDays>[3]) => rankDays([nick], date, date, part)[0]!;
+
+  it('offers any time, morning, afternoon and evening', () => {
+    expect(DAY_PARTS).toEqual(['any', 'morning', 'afternoon', 'evening']);
+  });
+
+  it('any time ranks exactly as before', () => {
+    expect(rankDays([nick], '2026-11-01', '2026-11-30', 'any')).toEqual(rankDays([nick], '2026-11-01', '2026-11-30'));
+  });
+
+  it('keeps an evening-only day for Evening, and drops it for morning and afternoon', () => {
+    const day = dateWith('Evening');
+    expect(only(day, 'evening').status).toBe('Evening');
+    expect(only(day, 'morning').status).toBe('NoMatch');
+    expect(only(day, 'afternoon').status).toBe('NoMatch');
+    expect(only(day, 'any').status).toBe('Evening');
+  });
+
+  it('keeps a morning-only day for Morning, and drops it for the afternoon and evening', () => {
+    const day = dateWith('Morning');
+    expect(only(day, 'morning').status).toBe('Morning');
+    expect(only(day, 'afternoon').status).toBe('NoMatch');
+    expect(only(day, 'evening').status).toBe('NoMatch');
+  });
+
+  it('a fully free day fits every part, and the summary says which one', () => {
+    const day = dateWith('Great');
+    for (const part of ['morning', 'afternoon', 'evening'] as const) {
+      expect(only(day, part)).toMatchObject({ status: 'Great' });
+      expect(only(day, part).summary).toContain(`${part} works`);
+    }
+    expect(only(day, 'any').summary).not.toContain('works');
+  });
+
+  it('takes the best days for the chosen part only, and never offers a day that does not fit', () => {
+    const evening = bestDays(rankDays([nick], '2026-11-01', '2026-11-30', 'evening'), 30);
+    const morning = bestDays(rankDays([nick], '2026-11-01', '2026-11-30', 'morning'), 30);
+    const any = bestDays(rankDays([nick], '2026-11-01', '2026-11-30'), 30);
+    expect(evening.length).toBeGreaterThan(0);
+    expect(evening.length).toBeLessThanOrEqual(any.length);
+    expect(morning.length).toBeLessThanOrEqual(any.length);
+    // An evening-only day is never offered for the morning, and the other way round.
+    expect(morning.some((d) => d.status === 'Evening')).toBe(false);
+    expect(evening.some((d) => d.status === 'Morning')).toBe(false);
+  });
+
+  it('still blocks the day when someone is on leave, whatever part is chosen', () => {
+    expect(only('2026-11-23', 'evening').status).toBe('Blocked'); // Nick's reservist
   });
 });
