@@ -1,12 +1,12 @@
 // Partner (mockup 16): their next flight, this week side by side, and the days you're both home.
-import { ROLE_LABELS, addDays, bestDays, dayBadge, displayTime, shortDate, todayInSingapore, type IsoDate, type PersonRoster } from '@crewjio/shared';
+import { ROLE_LABELS, addDays, bestDays, dayBadge, displayTime, shortDate, todayInSingapore, type DayPart, type IsoDate, type PersonRoster } from '@crewjio/shared';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CaretLeftIcon } from '@/components/icons';
-import { Avatar, DayCard } from '@/components/people';
+import { Avatar, DayCard, DayPartPicker } from '@/components/people';
 import { TONE_STYLE } from '@/components/roster-calendar';
 import { Button } from '@/components/ui';
 import { social, socialErrorMessage, type PartnerLink } from '@/lib/social';
@@ -56,7 +56,8 @@ function NextFlight({ roster, today, name }: { roster: PersonRoster; today: IsoD
 export function PartnerView({ link, embedded }: { link: PartnerLink; embedded?: boolean }) {
   const { profile } = useAuth();
   const today = todayInSingapore();
-  const ranking = useRanking([link.partner], today, addDays(today, 29));
+  const [part, setPart] = useState<DayPart>('any');
+  const ranking = useRanking([link.partner], today, addDays(today, 29), part);
   const [busy, setBusy] = useState(false);
   if (!profile) return null;
 
@@ -141,10 +142,14 @@ export function PartnerView({ link, embedded }: { link: PartnerLink; embedded?: 
           </View>
         </View>
 
+        <DayPartPicker value={part} onChange={setPart} />
+
         {best.map((d, i) => (
           <DayCard key={d.date} date={d.date} status={d.status} title={d.summary.replace('Both off', 'Both home')} detail={explainDay(d, [profile, partner], profile)} highlight={i === 0} />
         ))}
-        {!ranking.loading && best.length === 0 ? <Text style={type.small}>No days you’re both home in the next month yet. Add more of your roster to see them.</Text> : null}
+        {!ranking.loading && best.length === 0 ? <Text style={type.small}>
+            {part === 'any' ? 'No days you’re both home in the next month yet. Add more of your roster to see them.' : `No ${part} works for you both in the next month. Try another time of day.`}
+          </Text> : null}
 
         <Button label={`Disconnect from ${first}`} variant="text" disabled={busy} onPress={disconnect} />
       </ScrollView>
