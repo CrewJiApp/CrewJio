@@ -172,6 +172,10 @@ const TROUBLE = [
     a: "Beta builds last 90 days. Open TestFlight and tap Update next to CrewJio. If there is no update yet, email us and we will send a new one.",
   },
   {
+    q: "TestFlight says my iPhone is not compatible",
+    a: "CrewJio needs iOS 16.4 or later. Open Settings, then General, then Software Update to see if your iPhone can update. Older iPhones that cannot reach 16.4 cannot run the beta yet.",
+  },
+  {
     q: "I use Android",
     a: "Android is not ready yet. Join the waitlist on our home page and we will email you when it is.",
   },
@@ -231,7 +235,7 @@ export default function BetaPage() {
           <div className="flex gap-4 rounded-3xl bg-card/60 p-6 ring-1 ring-white/[0.06]">
             <DeviceMobileIcon size={28} weight="light" className="mt-0.5 shrink-0 text-teal" aria-hidden />
             <p className="leading-relaxed text-muted">
-              <span className="font-semibold text-cloud">An iPhone</span> on a recent version of iOS. Android is not ready yet.
+              <span className="font-semibold text-cloud">An iPhone on iOS 16.4 or later.</span> To check, open Settings, then General, then About. Android is not ready yet.
             </p>
           </div>
           <div className="flex gap-4 rounded-3xl bg-card/60 p-6 ring-1 ring-white/[0.06]">
