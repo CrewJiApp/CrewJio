@@ -10,6 +10,11 @@
     "backgroundColor": "#0E1726",
     "ios": {
       "bundleIdentifier": "com.crewjio.app",
+      "icon": {
+        "light": "./assets/images/icon.png",
+        "dark": "./assets/images/icon-dark.png",
+        "tinted": "./assets/images/icon-tinted.png"
+      },
       "supportsTablet": false,
       "usesAppleSignIn": true,
       "buildNumber": "1",
