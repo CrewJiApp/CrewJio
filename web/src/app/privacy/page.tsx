@@ -79,9 +79,9 @@ export default function PrivacyPage() {
       <section>
         <h2>Roster screenshots</h2>
         <p>
-          When you import a roster, your screenshots are sent to our secure server and then to an AI service (Anthropic&apos;s
+          When you import a roster, your screenshots (or a PDF of your roster) are sent to our secure server and then to an AI service (Anthropic&apos;s
           Claude) that reads the rows. We ask it to ignore staff numbers, names and aircraft details, and we remove anything
-          other than dates, duty codes, flight numbers, airports and times before you see the result. The screenshots are not
+          other than dates, duty codes, flight numbers, airports and times before you see the result. The screenshots and PDFs are not
           saved by CrewJio, and nothing is added to your roster until you have checked it. Under Anthropic&apos;s commercial
           terms, data sent through its API is not used to train its models.
         </p>

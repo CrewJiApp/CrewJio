@@ -216,7 +216,7 @@ export function FlightHero() {
 
       <div className="relative flex max-w-[56rem] flex-col items-center gap-6 text-center [@media(min-aspect-ratio:11/10)]:mt-[12vh]">
         <p className="rise font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-amber sm:text-[13px] sm:tracking-[0.32em]">
-          Early access · SG crew &amp; pilots
+          iPhone beta · SG crew &amp; pilots
         </p>
         <h1
           id="hero-title"
@@ -229,7 +229,9 @@ export function FlightHero() {
           Share rosters with your crew friends and partner. No more group-chat date juggling.
         </p>
         <div className="rise" style={{ animationDelay: "240ms" }}>
-          <CtaLink href="#waitlist">Get early access</CtaLink>
+          <CtaLink href="/beta" icon="out">
+            Join the iPhone beta
+          </CtaLink>
         </div>
       </div>
     </section>

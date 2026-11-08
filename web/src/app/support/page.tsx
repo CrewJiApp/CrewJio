@@ -32,7 +32,7 @@ export default function SupportPage() {
         <h3 className="mb-1 mt-4 font-semibold text-cloud">How do I import my roster?</h3>
         <p>
           Tap the + button, then Import whole month. Choose up to four screenshots of your roster app (list view or calendar
-          view), tap Read my roster, and check what we found before you save. A code we don&apos;t recognise is never saved
+          view), or one PDF of your roster up to 2.5 MB, tap Read my roster, and check what we found before you save. A code we don&apos;t recognise is never saved
           until you confirm it.
         </p>
         <h3 className="mb-1 mt-4 font-semibold text-cloud">Who can see my roster?</h3>

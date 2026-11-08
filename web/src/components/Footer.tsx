@@ -27,6 +27,7 @@ export function Footer() {
             {CONTACT_EMAIL}
           </a>
           {[
+            ["/beta", "Join the beta"],
             ["/privacy", "Privacy policy"],
             ["/terms", "Terms"],
             ["/support", "Support"],

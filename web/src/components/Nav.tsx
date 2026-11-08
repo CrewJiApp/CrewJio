@@ -51,10 +51,10 @@ export function Nav() {
 
         <div className="flex items-center gap-1">
           <a
-            href="#waitlist"
+            href="/beta"
             className="hidden min-h-10 items-center rounded-full bg-amber px-5 text-sm font-semibold text-on-amber transition-transform duration-500 ease-fluid active:scale-[0.97] sm:inline-flex"
           >
-            Get early access
+            Join the beta
           </a>
           <button
             type="button"
@@ -83,7 +83,7 @@ export function Nav() {
         inert={!open}
       >
         <ul className="flex flex-col gap-2">
-          {[...LINKS, { href: "#waitlist", label: "Get early access" }].map((l, i) => (
+          {[...LINKS, { href: "/beta", label: "Join the beta" }].map((l, i) => (
             <li
               key={l.href}
               className="overflow-hidden"
@@ -94,7 +94,7 @@ export function Nav() {
                 style={{ transitionDelay: open ? `${100 + i * 60}ms` : "0ms" }}
                 className={`block py-2 text-4xl font-semibold tracking-tight transition-[transform,opacity] duration-700 ease-fluid ${
                   open ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-                } ${l.href === "#waitlist" ? "text-amber" : "text-cloud"}`}
+                } ${l.href === "/beta" ? "text-amber" : "text-cloud"}`}
               >
                 {l.label}
               </a>
