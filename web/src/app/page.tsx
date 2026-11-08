@@ -64,7 +64,7 @@ const FAQ = [
   },
   {
     q: "When can I start using it?",
-    a: "We're opening the beta to a small group first. Everyone on the waitlist hears from us by email, and beta volunteers get in first.",
+    a: "The iPhone beta runs through Apple's TestFlight, and the beta guide shows you how to join, step by step. Android is next: join the waitlist and we'll email you when it is ready.",
   },
 ];
 
@@ -216,10 +216,10 @@ export default function Home() {
               <div className="grid gap-12 bg-[radial-gradient(40rem_24rem_at_0%_0%,rgb(245_182_66/0.08),transparent_70%)] p-6 py-10 md:p-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:p-16">
                 <div className="flex flex-col gap-5">
                   <Eyebrow>Waitlist</Eyebrow>
-                  <h2 className="text-4xl font-bold leading-[1.05] tracking-[-0.03em] md:text-5xl">Get early access</h2>
+                  <h2 className="text-4xl font-bold leading-[1.05] tracking-[-0.03em] md:text-5xl">Android and future invites</h2>
                   <p className="max-w-[36ch] text-lg leading-relaxed text-muted">
-                    We&apos;re opening the beta to a small group first. Join the list and we&apos;ll email you when your spot is
-                    ready.
+                    On iPhone? <a href="/beta" className="text-cloud underline decoration-white/30 underline-offset-4">Join the beta now</a>.
+                    On Android, or want a heads-up when more spots open? Join the list and we&apos;ll email you.
                   </p>
                 </div>
                 <WaitlistForm />

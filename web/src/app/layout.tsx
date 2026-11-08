@@ -13,7 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const description =
-  "Share rosters with your crew friends and partner, and find the days you're all home. For SG cabin crew and pilots. Join the waitlist.";
+  "Share rosters with your crew friends and partner, and find the days you're all home. For SG cabin crew and pilots. The iPhone beta is open.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
