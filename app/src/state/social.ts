@@ -72,13 +72,15 @@ export function useRanking(others: Profile[], start: IsoDate, end: IsoDate, part
   useEffect(() => {
     if (!user || !profile) return;
     let live = true;
-    // Load the day before too, so a flight landing on the first day is counted.
+    // Load the day before (a flight landing on the first day) and the day after (an early start
+    // the next morning rules out a late evening) as well.
     const from = addDays(start, -1);
+    const through = addDays(end, 1);
     (async () => {
       try {
         const [mine, ...theirs] = await Promise.all([
-          backend.loadRoster(user.id, from, end),
-          ...others.map((o) => social.sharedRoster(o.id, from, end)),
+          backend.loadRoster(user.id, from, through),
+          ...others.map((o) => social.sharedRoster(o.id, from, through)),
         ]);
         const rosters: { profile: Profile; roster: PersonRoster }[] = [
           { profile, roster: { userId: profile.id, duties: mine!.duties, holidays: mine!.holidays } },
@@ -145,8 +147,12 @@ export function explainDay(day: RankedDay, people: Profile[], me: Profile): stri
       return 'Everyone’s free in the evening';
     }
     case 'Daytime': {
-      const ids = with_('Daytime').map((p) => p.userId);
-      return `${named(ids)} ${plural(ids) ? 'report' : 'reports'} just after midnight`;
+      // Someone starts early the next morning, or has plans in the evening.
+      const early = day.people.filter((p) => p.note.includes('next morning')).map((p) => p.userId);
+      if (early.length) return `${named(early)} ${plural(early) ? 'start' : 'starts'} early next morning`;
+      const plans = with_('Daytime').filter((p) => p.note.startsWith('Free until') || p.note.includes('busy')).map((p) => p.userId);
+      if (plans.length) return `${named(plans)} ${plural(plans) ? 'have' : 'has'} plans in the evening`;
+      return 'Free during the day';
     }
     case 'Morning': {
       const ids = with_('Morning').map((p) => p.userId);

@@ -2,7 +2,7 @@
 // model, where an overnight flight is one duty with an arrival date.
 import { addDays, dateRange } from './dates';
 import { BASE_AIRPORT, displayTime, type NewDuty } from './duty-entry';
-import { KIND_CATEGORY, type DutyKind, type Holiday, type IsoDate } from './duty';
+import { KIND_CATEGORY, type DutyKind, type HHMM, type Holiday, type IsoDate } from './duty';
 import type { SharedRosterEntry } from './sharing';
 
 /** Days ranked for a group, best first by quality. */
@@ -25,6 +25,8 @@ export interface PersonDay {
   note: string;
   /** Layover airport when away on a layover (only known at "destinations" sharing and above). */
   layover?: string;
+  /** Free on the day, but starts early the next morning, so the evening is not free. */
+  noEvening?: boolean;
 }
 
 /** Landing back at base from these counts as long-haul: the next day is a recovery day. */
@@ -34,6 +36,9 @@ export const LONG_HAUL_AIRPORTS: ReadonlySet<string> = new Set([
 ]);
 
 const BLOCKING = new Set(['national_service', 'leave', 'private']);
+/** Starting before this the next morning (a report, a standby, training) rules out a late evening. */
+export const EARLY_START = '0700';
+const START_KINDS = new Set<DutyKind>(['flight', 'standby', 'reserve', 'training', 'sim', 'ground_school']);
 const TRAINING_KINDS = new Set<DutyKind>(['training', 'sim', 'ground_school']);
 
 const from = (sector: string | null) => sector?.split('-')[0] ?? null;
@@ -122,20 +127,50 @@ export function classifyPersonDays(roster: PersonRoster, start: IsoDate, end: Is
     return { date, status: 'Busy', note: [...cats].sort().join(', ') };
   };
 
-  return dateRange(start, end).map((date): PersonDay => {
+  const withBusy = (date: IsoDate): PersonDay => {
     const all = duties.filter((d) => d.date === date);
     const busy = all.filter(isBusyEntry);
     // Work and phone-calendar busy entries sit on top of the roster. A day with nothing but
     // busy entries (a partner's calendar) is classified on its own, below.
     if (busy.length === 0 || busy.length === all.length) return classifyDay(date, all);
     return limitByBusy(classifyDay(date, all.filter((d) => !isBusyEntry(d))), busy);
-  });
+  };
+
+  // The earliest start the next day: a report, a standby or training.
+  const nextStart = (date: IsoDate): HHMM | null => {
+    const tomorrow = addDays(date, 1);
+    const starts = duties
+      .filter((d) => d.date === tomorrow && START_KINDS.has(d.kind))
+      .map((d) => d.reportTime ?? d.departTime)
+      .filter((t): t is HHMM => !!t)
+      .sort();
+    return starts[0] ?? null;
+  };
+
+  return dateRange(start, end).map((date): PersonDay => limitByNextDay(withBusy(date), nextStart(date)));
 }
 
 type DutyLike = PersonRoster['duties'][number];
 /** Work or a phone-calendar event: an `other` duty in the busy category. */
 const isBusyEntry = (d: DutyLike) => d.kind === 'other' && d.category === 'busy';
 const isTimedBusy = (d: DutyLike) => !!d.reportTime && !!d.arriveTime && !d.arriveDate;
+
+/**
+ * A start before EARLY_START the next morning (standby from 06:00, a 05:40 report) rules out a
+ * late evening, however free the day is. A day that was free all day becomes free in the day
+ * only; a day that was free from the evening alone becomes busy. Someone just back from a
+ * long-haul flight stays Tired, but without the evening (`noEvening`).
+ */
+function limitByNextDay(day: PersonDay, nextStart: HHMM | null): PersonDay {
+  if (!nextStart || nextStart >= EARLY_START || !WINDOWS[day.status].e) return day;
+  if (day.status === 'Great') {
+    const note = day.note === 'Off' ? `Off, but reports ${nextStart} next morning` : `${day.note} · reports ${displayTime(nextStart)} next morning`;
+    return { ...day, status: 'Daytime', note };
+  }
+  const note = `${day.note} · reports ${displayTime(nextStart)} next morning`;
+  if (day.status === 'Tired') return { ...day, note, noEvening: true };
+  return { date: day.date, status: 'Busy', note, ...(day.layover ? { layover: day.layover } : {}) };
+}
 
 /**
  * Takes busy entries (work or a phone calendar) off a day the roster says is free. A busy entry
@@ -183,7 +218,8 @@ const WINDOWS: Record<PersonDayStatus, Window> = {
   Busy: { m: false, a: false, e: false },
   Blocked: { m: false, a: false, e: false },
 };
-const isFree = (s: PersonDayStatus) => WINDOWS[s].m || WINDOWS[s].a || WINDOWS[s].e;
+const windowOf = (p: Pick<PersonDay, 'status' | 'noEvening'>): Window => (p.noEvening ? { ...WINDOWS[p.status], e: false } : WINDOWS[p.status]);
+const isFree = (p: Pick<PersonDay, 'status' | 'noEvening'>) => { const w = windowOf(p); return w.m || w.a || w.e; };
 
 /** The part of the day people want to meet. "any" keeps every day that works at some point. */
 export const DAY_PARTS = ['any', 'morning', 'afternoon', 'evening'] as const;
@@ -235,8 +271,8 @@ export function rankDays(people: PersonRoster[], start: IsoDate, end: IsoDate, p
     if (n === 0) return { date, status: 'NoMatch', people: day, summary: '' };
     if (day.some((p) => p.status === 'Blocked')) return { date, status: 'Blocked', people: day, summary: 'Someone is away' };
 
-    const free = day.filter((p) => isFree(p.status));
-    const window = free.reduce<Window>((w, p) => ({ m: w.m && WINDOWS[p.status].m, a: w.a && WINDOWS[p.status].a, e: w.e && WINDOWS[p.status].e }), { m: true, a: true, e: true });
+    const free = day.filter((p) => isFree(p));
+    const window = free.reduce<Window>((w, p) => ({ m: w.m && windowOf(p).m, a: w.a && windowOf(p).a, e: w.e && windowOf(p).e }), { m: true, a: true, e: true });
     const overlap = window.m || window.a || window.e;
     // Does the chosen part of the day work for everyone who is free?
     const fits = part === 'any' || window[PART_KEY[part]];
@@ -251,7 +287,10 @@ export function rankDays(people: PersonRoster[], start: IsoDate, end: IsoDate, p
           : { date, status: 'Great', people: day, summary: `${everyone(n)} off · well rested${works}` };
       }
       if (window.e) return { date, status: 'Evening', people: day, summary: `${everyone(n)} free from evening` };
-      if (window.a) return { date, status: 'Daytime', people: day, summary: `${everyone(n)} free in the day${part === 'morning' || part === 'afternoon' ? works : ''}` };
+      if (window.a) {
+        const notes = [tired ? `${tired} just landed` : '', part === 'morning' || part === 'afternoon' ? `${part} works` : ''].filter(Boolean);
+        return { date, status: 'Daytime', people: day, summary: `${everyone(n)} free in the day${notes.map((x) => ` · ${x}`).join('')}` };
+      }
       return { date, status: 'Morning', people: day, summary: `${everyone(n)} free in the morning` };
     }
 
@@ -261,7 +300,7 @@ export function rankDays(people: PersonRoster[], start: IsoDate, end: IsoDate, p
       return { date, status: 'SameLayover', people: day, layover: city, summary: `${everyone(n)} on layover in ${city}` };
     }
 
-    const busy = day.filter((p) => !isFree(p.status));
+    const busy = day.filter((p) => !isFree(p));
     if (n >= 3 && busy.length === 1 && overlap && fits) {
       return { date, status: 'Almost', people: day, busyUserId: busy[0]!.userId, summary: `${n - 1} of ${n} free${part === 'any' ? '' : ` in the ${part}`}` };
     }

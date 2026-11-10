@@ -66,7 +66,7 @@ describe('one person (port of scripts/try_roster.py)', () => {
   });
 
   it('frees the evening after training that ends by 18:00, but not after standby', () => {
-    const duties = [buildTimedDuty({ kind: 'training', date: '2026-11-03', start: '0900', end: '1700' }), buildTimedDuty({ kind: 'standby', date: '2026-11-04', start: '0600', end: '1400' })];
+    const duties = [buildTimedDuty({ kind: 'training', date: '2026-11-03', start: '0900', end: '1700' }), buildTimedDuty({ kind: 'standby', date: '2026-11-04', start: '0900', end: '1700' })];
     const [trg, sby] = classifyPersonDays({ userId: 'x', duties, holidays: [] }, '2026-11-03', '2026-11-04');
     expect(trg).toMatchObject({ status: 'Evening', note: 'Training until 17:00' });
     expect(sby).toMatchObject({ status: 'Busy' });
@@ -283,5 +283,65 @@ describe('a phone calendar on top of a crew roster', () => {
 
   it('a partner with only busy entries is classified as before', () => {
     expect(day([busy('2026-12-03', '0900', '1700')]).status).toBe('Evening');
+  });
+});
+
+describe('an early start the next morning', () => {
+  const day = (duties: PersonRoster['duties'], date: string) => classifyPersonDays({ userId: 'u', duties, holidays: [] }, date, date)[0]!;
+  const standby = (date: string, start: string) => buildTimedDuty({ kind: 'standby', date, start, end: '2359' });
+
+  it('a day off before a 06:00 standby is free in the day only', () => {
+    const r = day([buildOffDuty('2026-12-15'), standby('2026-12-16', '0600')], '2026-12-15');
+    expect(r).toMatchObject({ status: 'Daytime', note: 'Off, but reports 0600 next morning' });
+  });
+
+  it('an empty day counts the same way, because days with nothing on count as off', () => {
+    expect(day([standby('2026-12-16', '0600')], '2026-12-15').status).toBe('Daytime');
+  });
+
+  it('a start at 07:00 or later changes nothing', () => {
+    expect(day([buildOffDuty('2026-12-15'), standby('2026-12-16', '0700')], '2026-12-15').status).toBe('Great');
+    expect(day([buildOffDuty('2026-12-15'), standby('2026-12-16', '0900')], '2026-12-15').status).toBe('Great');
+  });
+
+  it('a flight report, training and sim count as a start too', () => {
+    const flight = buildFlightDuties({ date: '2026-12-16', flightNumber: 'SQ 248', to: 'MEL', reportTime: '0540', departTime: '0740', arriveTime: '1300' });
+    expect(day([buildOffDuty('2026-12-15'), ...flight], '2026-12-15').status).toBe('Daytime');
+    expect(day([buildOffDuty('2026-12-15'), buildTimedDuty({ kind: 'sim', date: '2026-12-16', start: '0630', end: '1200' })], '2026-12-15').status).toBe('Daytime');
+  });
+
+  it('a day off or leave tomorrow is not a start', () => {
+    expect(day([buildOffDuty('2026-12-15'), buildOffDuty('2026-12-16')], '2026-12-15').status).toBe('Great');
+  });
+
+  it('a day that was free from the evening alone becomes busy', () => {
+    const duties = [buildTimedDuty({ kind: 'training', date: '2026-12-15', start: '0900', end: '1700' }), standby('2026-12-16', '0600')];
+    expect(day(duties, '2026-12-15')).toMatchObject({ status: 'Busy', note: 'Training until 17:00 · reports 06:00 next morning' });
+  });
+
+  it('a day after long-haul stays Tired but loses the evening', () => {
+    const long = buildFlightDuties({ date: '2026-12-09', flightNumber: 'SQ 34', to: 'SFO', reportTime: '1755', departTime: '1955', arriveTime: '1835', returnFlight: { date: '2026-12-10', flightNumber: 'SQ 33', departTime: '2340', arriveTime: '0500', arrivesNextDay: true } });
+    const r = day([...long, buildOffDuty('2026-12-12'), standby('2026-12-13', '0600')], '2026-12-12');
+    expect(r).toMatchObject({ status: 'Tired', noEvening: true });
+  });
+
+  it('meeting up: both off the 15th, one has a 06:00 standby the 16th, so the evening is out but the day works', () => {
+    const me: PersonRoster = { userId: 'me', duties: [buildOffDuty('2026-12-15'), buildOffDuty('2026-12-16')], holidays: [] };
+    const her: PersonRoster = { userId: 'her', duties: [buildOffDuty('2026-12-15'), standby('2026-12-16', '0600')], holidays: [] };
+    const any = rankDays([me, her], '2026-12-15', '2026-12-15')[0]!;
+    expect(any).toMatchObject({ status: 'Daytime' });
+    expect(any.summary).toBe('Both free in the day');
+    expect(rankDays([me, her], '2026-12-15', '2026-12-15', 'evening')[0]!.status).toBe('NoMatch');
+    expect(rankDays([me, her], '2026-12-15', '2026-12-15', 'morning')[0]!.status).toBe('Daytime');
+    expect(rankDays([me, her], '2026-12-15', '2026-12-15', 'afternoon')[0]!.status).toBe('Daytime');
+  });
+
+  it('the day after long-haul with an early start tomorrow is a daytime match that says someone just landed', () => {
+    const long = buildFlightDuties({ date: '2026-12-09', flightNumber: 'SQ 34', to: 'SFO', reportTime: '1755', departTime: '1955', arriveTime: '1835', returnFlight: { date: '2026-12-10', flightNumber: 'SQ 33', departTime: '2340', arriveTime: '0500', arrivesNextDay: true } });
+    const tired: PersonRoster = { userId: 't', duties: [...long, buildOffDuty('2026-12-12'), standby('2026-12-13', '0600')], holidays: [] };
+    const free: PersonRoster = { userId: 'f', duties: [buildOffDuty('2026-12-12')], holidays: [] };
+    const r = rankDays([tired, free], '2026-12-12', '2026-12-12')[0]!;
+    expect(r.status).toBe('Daytime');
+    expect(r.summary).toContain('1 just landed');
   });
 });

@@ -65,6 +65,7 @@ Domain: crewjio.com · Brand: CrewJio ("jio" = Singlish for inviting someone out
 - People are combined by the part of the day each is free (morning, afternoon, evening). Training that ends by 18:00 frees the evening. **SameLayover** (everyone on a layover in the same city) is an extra match type.
 - **Almost** needs 3+ people and the busy one must not be on leave.
 - Busy for part of the day (`other` duties with category `busy` and hours: work, phone calendar) leaves the rest free: ending by 18:00 is **Evening**, starting from 18:00 is **Daytime**, starting from 12:00 is **Morning**. Without hours the whole day is busy.
+- **The day after counts too** (`limitByNextDay`, `EARLY_START` in `shared/src/ranking.ts`): a start before 07:00 the next morning (a report, standby, reserve, training, sim or ground school) rules out a late evening. A day free all day becomes Daytime ("Off, but reports 0600 next morning"), a day that was free from the evening alone becomes Busy, and a day after long-haul stays Tired but loses the evening (`noEvening`). Starting at 07:00 or later changes nothing. The ranking loads the day after the range for this. It needs times, so a friend shared at "off days only" can't trigger it; a partner (full detail) can.
 - Friends are ranked only from what `get_shared_roster` gives the viewer (`sharedEntriesToRoster`): at "off days only" a duty is just Busy, and an unexplained Away or Unavailable counts as untouchable.
 
 For a set of people and a date, classify as:
