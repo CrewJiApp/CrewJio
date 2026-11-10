@@ -1,7 +1,7 @@
 // Turns list-view roster rows (the shape Claude returns from a screenshot, see
 // samples/nov-2026-roster.json) into duties. Every Duty value is cross-checked against
 // roster-codes.json; unknown codes are kept but flagged "needs a look", never guessed.
-import { friendsLabel, lookupCode, type CodeCategory } from './roster-codes';
+import { friendsLabel, hoursInDescription, lookupCode, type CodeCategory } from './roster-codes';
 import { addDays } from './dates';
 import type { DutyKind, HHMM, IsoDate } from './duty';
 import type { NewDuty } from './duty-entry';
@@ -94,6 +94,9 @@ export function rowsToDuties(rows: RosterRow[]): NewDuty[] {
     const category: CodeCategory = known?.category ?? 'busy';
     const isFlight = category === 'flight';
     const timed = category === 'standby' || category === 'reserve' || category === 'training';
+    // A standby or reserve row with no times uses the hours its code states (SS60 is 06:00 to
+    // 23:59), so an early start is known even when the roster view only shows the code.
+    const stated = timed && category !== 'training' && !row.rpt && !row.std && !row.sta && known ? hoursInDescription(known.description) : null;
     out.push({
       date: row.date,
       kind: CATEGORY_KIND[category],
@@ -102,9 +105,9 @@ export function rowsToDuties(rows: RosterRow[]): NewDuty[] {
       friendsLabel: known ? friendsLabel(known) : 'Busy',
       flightNumber: isFlight ? normaliseFlight(row.flight) : null,
       sector,
-      reportTime: isFlight ? time(row.rpt) : timed ? time(row.rpt ?? row.std) : null,
+      reportTime: isFlight ? time(row.rpt) : timed ? (stated?.start ?? time(row.rpt ?? row.std)) : null,
       departTime: isFlight ? time(row.std) : null,
-      arriveTime: isFlight || timed ? time(row.sta) : null,
+      arriveTime: isFlight || timed ? (stated?.end ?? time(row.sta)) : null,
       arriveDate: null,
       note: null,
       source: 'import',

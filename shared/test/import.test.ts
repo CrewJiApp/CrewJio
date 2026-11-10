@@ -93,3 +93,31 @@ describe('the review step', () => {
     expect(importedDays([])).toEqual([]);
   });
 });
+
+describe('standby imported without times', () => {
+  const one = (row: RosterRow) => rowsToDuties([row])[0]!;
+
+  it('uses the hours the code states when the row shows none (SS60 is 06:00 to 23:59)', () => {
+    expect(one({ date: '2026-12-16', duty: 'SS60' })).toMatchObject({ kind: 'standby', reportTime: '0600', arriveTime: '2359' });
+    expect(one({ date: '2026-12-16', duty: 'SN15' })).toMatchObject({ reportTime: '0000', arriveTime: '1500' });
+  });
+
+  it('keeps the times on the row when it has them', () => {
+    expect(one({ date: '2026-12-16', duty: 'SS60', rpt: '0900', sta: '1700' })).toMatchObject({ reportTime: '0900', arriveTime: '1700' });
+    expect(one({ date: '2026-12-16', duty: 'SS60', rpt: '0900' })).toMatchObject({ reportTime: '0900' });
+  });
+
+  it('leaves the time empty for a standby code that states none, never guessing', () => {
+    expect(one({ date: '2026-12-16', duty: 'SS55' })).toMatchObject({ kind: 'standby', reportTime: null, arriveTime: null });
+  });
+
+  it('does not touch flights, training or days off', () => {
+    expect(one({ date: '2026-12-16', duty: 'OFFD' })).toMatchObject({ reportTime: null });
+  });
+
+  it('so the evening before a 06:00 standby is no longer offered, even from a calendar-view import', () => {
+    const duties = rowsToDuties([{ date: '2026-12-15', duty: 'OFFD' }, { date: '2026-12-16', duty: 'SS60' }]);
+    const roster: PersonRoster = { userId: 'megs', duties, holidays: [] };
+    expect(classifyPersonDays(roster, '2026-12-15', '2026-12-15')[0]).toMatchObject({ status: 'Daytime', note: 'Off, but reports 0600 next morning' });
+  });
+});
