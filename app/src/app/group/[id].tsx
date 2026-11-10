@@ -24,6 +24,7 @@ import { LEVEL_EXPLAIN, LevelPicker } from '@/components/sheets';
 import { Button, Chip } from '@/components/ui';
 import { social, socialErrorMessage } from '@/lib/social';
 import { useAuth } from '@/state/auth';
+import { BETA_URL } from '@/lib/links';
 import { monthBounds } from '@/state/roster';
 import { explainDay, joinNames, useGroups, useRanking } from '@/state/social';
 import { colors, fonts, radius, space, touch, type } from '@/theme';
@@ -84,7 +85,7 @@ export default function GroupPlan() {
   const name = monthName(month);
   const best = bestDays(ranking.days, 5);
   const people = [profile, ...others];
-  const inviteText = `Join "${group.name}" on CrewJio so we can find days we’re all home. In the app: Crew → Join with a code → ${group.inviteCode}`;
+  const inviteText = `Join "${group.name}" on CrewJio so we can find days we’re all home. In the app: Crew → Join with a code → ${group.inviteCode}. Need the app? ${BETA_URL}`;
 
   const share = (message: string) => Share.share({ message }).catch(() => undefined);
   const shareBest = () =>

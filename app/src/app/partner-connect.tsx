@@ -9,6 +9,7 @@ import { TextField } from '@/components/fields';
 import { HeartIcon, LockSimpleIcon } from '@/components/icons';
 import { SheetHeader } from '@/components/sheets';
 import { Button, InfoNote } from '@/components/ui';
+import { BETA_URL } from '@/lib/links';
 import { social, socialErrorMessage } from '@/lib/social';
 import { useAuth } from '@/state/auth';
 import { colors, fonts, radius, space, type } from '@/theme';
@@ -68,7 +69,7 @@ export default function PartnerConnect() {
               </Text>
               <Button
                 label="Send to my partner"
-                onPress={() => Share.share({ message: `Let’s connect on CrewJio. In the app: Crew → Add your partner → enter ${code}` }).catch(() => undefined)}
+                onPress={() => Share.share({ message: `Let’s connect on CrewJio. In the app: Crew → Add your partner → enter ${code}. Need the app? ${BETA_URL}` }).catch(() => undefined)}
               />
             </View>
           ) : (
