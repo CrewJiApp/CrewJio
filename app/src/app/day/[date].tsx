@@ -1,5 +1,5 @@
 // One day of the roster: what's on, delete an entry, or add another duty on this date.
-import { HOLIDAY_LABELS, displayTime, isIsoDate, longDate, shortDate, type Duty, type Holiday } from '@crewjio/shared';
+import { HOLIDAY_LABELS, addDays, displayTime, isIsoDate, longDate, shortDate, type Duty, type Holiday } from '@crewjio/shared';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -61,7 +61,12 @@ function confirm(title: string, message: string, onYes: () => void) {
 export default function DayScreen() {
   const params = useLocalSearchParams<{ date: string }>();
   const date = params.date && isIsoDate(params.date) ? params.date : null;
-  const { duties, holidays, loading, reload } = useRoster(date ?? '1970-01-01', date ?? '1970-01-01');
+  // The day before is loaded too, for flights that left yesterday and land today.
+  const day = date ?? '1970-01-01';
+  const { duties: loaded, holidays: loadedHolidays, loading, reload } = useRoster(addDays(day, -1), day);
+  const duties = loaded.filter((d) => d.date === day);
+  const holidays = loadedHolidays.filter((h) => h.startDate <= day && day <= h.endDate);
+  const landing = loaded.filter((d) => d.kind === 'flight' && d.arriveDate === day && d.date !== day);
   const [busy, setBusy] = useState<string | null>(null);
   if (!date) return null;
 
@@ -78,7 +83,7 @@ export default function DayScreen() {
   };
 
   const leaveRange = (h: Holiday) => (h.startDate === h.endDate ? shortDate(h.startDate) : `${shortDate(h.startDate)} to ${shortDate(h.endDate)}`);
-  const empty = !loading && duties.length === 0 && holidays.length === 0;
+  const empty = !loading && duties.length === 0 && holidays.length === 0 && landing.length === 0;
 
   return (
     <SafeAreaView style={styles.screen} edges={['top', 'left', 'right', 'bottom']}>
@@ -102,6 +107,19 @@ export default function DayScreen() {
             onDelete={() => confirm('Delete this leave?', `This removes the whole entry, ${leaveRange(h)}.`, () => remove(h.id, 'holiday'))}
           />
         ))}
+        {landing.map((d) => {
+          const [from, to] = (d.sector ?? '').split('-');
+          return (
+            <Row
+              key={`landing-${d.id}`}
+              tone="flight"
+              title={`${d.flightNumber ?? 'Flight'} · ${from} → ${to}`}
+              detail={[d.arriveTime ? `Lands ${displayTime(d.arriveTime)}` : 'Lands today', `left ${shortDate(d.date)}`].join(' · ')}
+              mono
+              busy={false}
+            />
+          );
+        })}
         {duties.map((d) => {
           const info = describe(d);
           return (
@@ -136,7 +154,8 @@ function Row({
   detail: string | null;
   mono?: boolean;
   busy: boolean;
-  onDelete: () => void;
+  /** Left out for a flight that landed today: delete it from the day it left. */
+  onDelete?: () => void;
 }) {
   return (
     <View style={styles.row}>
@@ -145,9 +164,11 @@ function Row({
         <Text style={mono ? styles.mono : type.bodyStrong}>{title}</Text>
         {detail ? <Text style={type.small}>{detail}</Text> : null}
       </View>
-      <Pressable onPress={onDelete} disabled={busy} accessibilityRole="button" accessibilityLabel={`Delete ${title}`} style={({ pressed }) => [styles.trash, (pressed || busy) && { opacity: 0.5 }]}>
-        <TrashIcon size={22} color={colors.muted} />
-      </Pressable>
+      {onDelete ? (
+        <Pressable onPress={onDelete} disabled={busy} accessibilityRole="button" accessibilityLabel={`Delete ${title}`} style={({ pressed }) => [styles.trash, (pressed || busy) && { opacity: 0.5 }]}>
+          <TrashIcon size={22} color={colors.muted} />
+        </Pressable>
+      ) : null}
     </View>
   );
 }

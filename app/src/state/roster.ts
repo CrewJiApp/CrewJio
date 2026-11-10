@@ -40,9 +40,12 @@ export function useRoster(from: IsoDate, to: IsoDate) {
   return { ...roster, loading, error, reload: load };
 }
 
-/** Range for the roster screen: the visible month, and today through the next four months. */
+/**
+ * Range for the roster screen: the visible month, and today through the next four months. It
+ * starts a day early so a flight that left the day before and lands on the first still shows.
+ */
 export function rosterRange(year: number, month: number, today: IsoDate = todayInSingapore()) {
   const { first, last } = monthBounds(year, month);
   const ahead = addDays(today, 120);
-  return { from: first < today ? first : today, to: last > ahead ? last : ahead };
+  return { from: addDays(first < today ? first : today, -1), to: last > ahead ? last : ahead };
 }

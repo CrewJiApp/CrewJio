@@ -24,7 +24,7 @@ export interface DayBadge {
   code: string | null;
 }
 
-type DutyLike = Pick<NewDuty, 'date' | 'kind' | 'sector'> & Partial<Pick<NewDuty, 'category' | 'code' | 'friendsLabel'>>;
+type DutyLike = Pick<NewDuty, 'date' | 'kind' | 'sector'> & Partial<Pick<NewDuty, 'category' | 'code' | 'friendsLabel' | 'arriveDate'>>;
 type HolidayLike = Pick<Holiday, 'kind' | 'startDate' | 'endDate'>;
 
 const HOLIDAY_CODE: Record<Holiday['kind'], string> = { holiday: 'HOL', annual_leave: 'AL', busy_personal: 'BUSY', reservist: 'NS' };
@@ -38,7 +38,9 @@ export function awayAirport(sector: string | null): string | null {
 
 /**
  * What a day cell shows. Leave always wins (it blocks matching even on a roster day), then
- * flying and layovers, then training, then standby or reserve, then a day off.
+ * flying and layovers, then a flight that lands on this day, then training, then standby or
+ * reserve, then a day off. A trip home that lands in the early hours still counts as a flight
+ * day, like the airline's own roster: the cell shows the airport she lands at.
  */
 export function dayBadge(date: IsoDate, duties: DutyLike[], holidays: HolidayLike[]): DayBadge {
   const leave = holidays.find((h) => h.startDate <= date && date <= h.endDate);
@@ -49,6 +51,8 @@ export function dayBadge(date: IsoDate, duties: DutyLike[], holidays: HolidayLik
   if (today.some((d) => d.category === 'leave')) return { tone: 'leave', code: 'AL' };
   const away = today.find((d) => d.kind === 'flight' || d.kind === 'layover');
   if (away) return { tone: 'flight', code: awayAirport(away.sector) };
+  const landing = duties.find((d) => d.kind === 'flight' && d.arriveDate === date && d.date !== date);
+  if (landing) return { tone: 'flight', code: landing.sector?.split('-')[1] ?? null };
   const training = today.find((d) => d.kind === 'training' || d.kind === 'sim' || d.kind === 'ground_school');
   if (training) return { tone: 'training', code: training.kind === 'sim' ? 'SIM' : training.kind === 'ground_school' ? 'GND' : 'TRG' };
   const standby = today.find((d) => d.kind === 'standby' || d.kind === 'reserve');

@@ -229,3 +229,39 @@ describe('database rows', () => {
     expect(back).toEqual({ ...f, id: 'x', userId: 'u' });
   });
 });
+
+describe('a trip that lands in the early hours', () => {
+  // SQ 367 leaves Milan at 22:30 on the 4th and lands in Singapore at 05:20 on the 5th.
+  const home = buildFlightDuties({ date: '2026-11-04', flightNumber: 'SQ 367', from: 'MXP', to: 'SIN', departTime: '2230', arriveTime: '0520', arrivesNextDay: true });
+
+  it('keeps the flight on the day it leaves, with the day it lands on it', () => {
+    expect(home[0]).toMatchObject({ date: '2026-11-04', arriveDate: '2026-11-05', arriveTime: '0520' });
+  });
+
+  it('shows the day it leaves as Milan, and the day it lands as a flight day at Singapore', () => {
+    expect(dayBadge('2026-11-04', home, [])).toEqual({ tone: 'flight', code: 'MXP' });
+    expect(dayBadge('2026-11-05', home, [])).toEqual({ tone: 'flight', code: 'SIN' });
+  });
+
+  it('leaves the day after as empty', () => {
+    expect(dayBadge('2026-11-06', home, [])).toEqual({ tone: 'empty', code: null });
+  });
+
+  it('beats a day off or standby on the day it lands', () => {
+    expect(dayBadge('2026-11-05', [...home, buildOffDuty('2026-11-05')], []).tone).toBe('flight');
+  });
+
+  it('keeps leave on top, because leave blocks the day', () => {
+    expect(dayBadge('2026-11-05', home, [{ kind: 'holiday', startDate: '2026-11-05', endDate: '2026-11-05' }]).tone).toBe('leave');
+  });
+
+  it('keeps a flight of its own on the landing day', () => {
+    const next = buildFlightDuties({ date: '2026-11-05', flightNumber: 'SQ 978', to: 'BKK', reportTime: '1830', departTime: '2030', arriveTime: '2359' });
+    expect(dayBadge('2026-11-05', [...home, ...next], []).code).toBe('BKK');
+  });
+
+  it('does not change a flight that lands the same day', () => {
+    const turn = buildFlightDuties({ date: '2026-11-12', flightNumber: 'SQ 740', to: 'HKT', reportTime: '1635', departTime: '1835', arriveTime: '1935' });
+    expect(dayBadge('2026-11-13', turn, [])).toEqual({ tone: 'empty', code: null });
+  });
+});
