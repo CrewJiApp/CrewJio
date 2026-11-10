@@ -51,8 +51,7 @@ export function classifyPersonDays(roster: PersonRoster, start: IsoDate, end: Is
   const landsLongHaul = (date: IsoDate) =>
     flights.some((f) => to(f.sector) === BASE_AIRPORT && f.arriveTime && arrivalDate(f) === date && LONG_HAUL_AIRPORTS.has(from(f.sector) ?? ''));
 
-  return dateRange(start, end).map((date): PersonDay => {
-    const day = duties.filter((d) => d.date === date);
+  const classifyDay = (date: IsoDate, day: typeof duties): PersonDay => {
     const cats = new Set(day.map((d) => d.category));
 
     // Holidays, leave, reservist and private days are untouchable.
@@ -121,7 +120,47 @@ export function classifyPersonDays(roster: PersonRoster, start: IsoDate, end: Is
     }
 
     return { date, status: 'Busy', note: [...cats].sort().join(', ') };
+  };
+
+  return dateRange(start, end).map((date): PersonDay => {
+    const all = duties.filter((d) => d.date === date);
+    const busy = all.filter(isBusyEntry);
+    // Work and phone-calendar busy entries sit on top of the roster. A day with nothing but
+    // busy entries (a partner's calendar) is classified on its own, below.
+    if (busy.length === 0 || busy.length === all.length) return classifyDay(date, all);
+    return limitByBusy(classifyDay(date, all.filter((d) => !isBusyEntry(d))), busy);
   });
+}
+
+type DutyLike = PersonRoster['duties'][number];
+/** Work or a phone-calendar event: an `other` duty in the busy category. */
+const isBusyEntry = (d: DutyLike) => d.kind === 'other' && d.category === 'busy';
+const isTimedBusy = (d: DutyLike) => !!d.reportTime && !!d.arriveTime && !d.arriveDate;
+
+/**
+ * Takes busy entries (work or a phone calendar) off a day the roster says is free. A busy entry
+ * without hours takes the whole day. With hours it takes the parts of the day it touches
+ * (morning before 12:00, afternoon 12:00 to 18:00, evening from 18:00), and what is left decides
+ * the status. There is no afternoon-only status, so an afternoon on its own counts as busy.
+ */
+function limitByBusy(day: PersonDay, busy: DutyLike[]): PersonDay {
+  const w = WINDOWS[day.status];
+  if (!(w.m || w.a || w.e)) return day; // away, blocked or busy already: nothing to take off
+  if (busy.some((d) => !isTimedBusy(d))) return { date: day.date, status: 'Busy', note: 'Busy all day' };
+  const free = { m: w.m, a: w.a, e: w.e };
+  for (const d of busy) {
+    const start = d.reportTime!;
+    const end = d.arriveTime!;
+    if (start < '1200') free.m = false;
+    if (start < '1800' && end > '1200') free.a = false;
+    if (end > '1800') free.e = false;
+  }
+  const first = busy.map((d) => d.reportTime!).sort()[0]!;
+  const last = busy.map((d) => d.arriveTime!).sort().at(-1)!;
+  const note = `${day.note} · busy ${displayTime(first)} to ${displayTime(last)}`;
+  if (free.m === w.m && free.a === w.a && free.e === w.e) return { ...day, note };
+  const status: PersonDayStatus = free.e ? 'Evening' : free.m && free.a ? 'Daytime' : free.m ? 'Morning' : 'Busy';
+  return { date: day.date, status, note, ...(day.layover ? { layover: day.layover } : {}) };
 }
 
 /** True when the person has anything on their roster in the range, i.e. they've added that month. */

@@ -42,7 +42,8 @@ function toPhoneEvent(e: Calendar.Event): PhoneEvent {
 }
 
 export default function CalendarSync() {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
+  const crew = profile?.role !== 'partner';
   const [phase, setPhase] = useState<Phase>(Platform.OS === 'web' ? 'unsupported' : 'intro');
   const [calendars, setCalendars] = useState<Calendar.Calendar[]>([]);
   const [picked, setPicked] = useState<string[]>([]);
@@ -105,13 +106,19 @@ export default function CalendarSync() {
           <Text style={type.body}>
             {phase === 'done'
               ? `${copied === 0 ? 'No busy days' : copied === 1 ? '1 busy day' : `${copied} busy days`} in the next ${DAYS_AHEAD} days. Days with nothing on count as free. Copy again any time to update.`
-              : `We look at the next ${DAYS_AHEAD} days and copy only the times you’re busy, so your partner can see when you’re both free.`}
+              : `We look at the next ${DAYS_AHEAD} days and copy only the times you’re busy, so your partner and friends can see when you’re all free.`}
           </Text>
         </View>
 
         <InfoNote icon={<LockSimpleIcon size={20} color={colors.muted} />}>
-          Event names, places and who’s invited are never copied. Your partner sees Busy and the times. Events marked as free are skipped.
+          {`Event names, places and who’s invited are never copied. ${crew ? 'Your groups only see Away, and your partner sees Busy and the times.' : 'Your partner sees Busy and the times.'} Events marked as free are skipped.`}
         </InfoNote>
+
+        {phase === 'intro' || phase === 'denied' ? (
+          <InfoNote icon={<CalendarCheckIcon size={20} color={colors.muted} />}>
+            Using Google Calendar? On your iPhone open Settings, then Calendar, then Accounts, tap Add Account, choose Google and turn Calendars on. It then shows up here. On Android it is already there.
+          </InfoNote>
+        ) : null}
 
         {phase === 'unsupported' ? <Text style={type.body}>Copying a calendar works in the CrewJio app on iPhone and Android.</Text> : null}
 

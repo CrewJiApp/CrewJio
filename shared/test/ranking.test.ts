@@ -231,3 +231,57 @@ describe('choosing a time of day', () => {
     expect(only('2026-11-23', 'evening').status).toBe('Blocked'); // Nick's reservist
   });
 });
+
+describe('a phone calendar on top of a crew roster', () => {
+  const busy = (date: string, reportTime: string, arriveTime: string) => ({
+    ...buildOffDuty(date),
+    kind: 'other' as const,
+    category: 'busy' as const,
+    friendsLabel: 'Busy',
+    reportTime,
+    departTime: null,
+    arriveTime,
+  });
+  const day = (duties: PersonRoster['duties'], date = '2026-12-03') => classifyPersonDays({ userId: 'u', duties, holidays: [] }, date, date)[0]!;
+
+  it('a day off with a dinner at 19:00 is free until the evening', () => {
+    expect(day([buildOffDuty('2026-12-03'), busy('2026-12-03', '1900', '2100')])).toMatchObject({ status: 'Daytime' });
+  });
+
+  it('a day off with a morning appointment is free from the afternoon, so it counts as evening', () => {
+    expect(day([buildOffDuty('2026-12-03'), busy('2026-12-03', '0900', '1130')]).status).toBe('Evening');
+  });
+
+  it('a day off busy from the afternoon into the night is free in the morning only', () => {
+    expect(day([buildOffDuty('2026-12-03'), busy('2026-12-03', '1300', '2100')]).status).toBe('Morning');
+  });
+
+  it('a day off busy in the middle of the afternoon is still free in the evening', () => {
+    expect(day([buildOffDuty('2026-12-03'), busy('2026-12-03', '1400', '1600')]).status).toBe('Evening'); // morning and evening stay free, evening is the one we keep
+  });
+
+  it('an all-day event takes the whole day', () => {
+    const allDay = { ...busy('2026-12-03', '0000', '2359'), reportTime: null, arriveTime: null };
+    expect(day([buildOffDuty('2026-12-03'), allDay])).toMatchObject({ status: 'Busy', note: 'Busy all day' });
+  });
+
+  it('an early event takes the morning part of the day', () => {
+    const r = day([buildOffDuty('2026-12-03'), busy('2026-12-03', '0200', '0300')]);
+    expect(r.status).toBe('Evening'); // afternoon and evening stay free, evening is the one we keep
+  });
+
+  it('a turnaround that is back in the afternoon is busy if there is a dinner that evening', () => {
+    const duties = buildFlightDuties({ date: '2026-12-03', flightNumber: 'SQ 978', to: 'BKK', reportTime: '0730', departTime: '0930', arriveTime: '1100', returnFlight: { date: '2026-12-03', flightNumber: 'SQ 979', departTime: '1230', arriveTime: '1600' } });
+    expect(day(duties).status).toBe('Evening');
+    expect(day([...duties, busy('2026-12-03', '1900', '2100')]).status).toBe('Busy');
+  });
+
+  it('leaves and a phone calendar together stay blocked', () => {
+    const r = classifyPersonDays({ userId: 'u', duties: [busy('2026-12-03', '1900', '2100')], holidays: [{ kind: 'holiday', startDate: '2026-12-03', endDate: '2026-12-03' }] }, '2026-12-03', '2026-12-03')[0]!;
+    expect(r.status).toBe('Blocked');
+  });
+
+  it('a partner with only busy entries is classified as before', () => {
+    expect(day([busy('2026-12-03', '0900', '1700')]).status).toBe('Evening');
+  });
+});

@@ -25,7 +25,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { CodeEntryForm, WherePicker, type Saver } from '@/components/code-entry';
 import { DateField, TextField } from '@/components/fields';
 import { PartnerEntryForm } from '@/components/partner-entry';
-import { CameraIcon, LockSimpleIcon } from '@/components/icons';
+import { CalendarCheckIcon, CameraIcon, LockSimpleIcon } from '@/components/icons';
 import { Chip, InfoNote, ToggleRow } from '@/components/ui';
 import { backend } from '@/lib/backend';
 import { useAuth } from '@/state/auth';
@@ -169,6 +169,19 @@ export default function AddDuty() {
             <View style={styles.flex}>
               <Text style={type.heading}>Import whole month</Text>
               <Text style={type.small}>Screenshot your roster and we read it for you. You check it before it is saved.</Text>
+            </View>
+          </Pressable>
+
+          <Pressable
+            onPress={() => router.push('/calendar-sync')}
+            accessibilityRole="button"
+            style={({ pressed }) => [styles.import, pressed && { opacity: 0.85 }]}>
+            <View style={styles.importIcon}>
+              <CalendarCheckIcon size={26} color={colors.amber} />
+            </View>
+            <View style={styles.flex}>
+              <Text style={type.heading}>Copy your phone calendar</Text>
+              <Text style={type.small}>Dinners and appointments, so we skip those times. Only the times, never event names.</Text>
             </View>
           </Pressable>
 

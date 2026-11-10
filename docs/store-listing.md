@@ -58,7 +58,7 @@ FIND THE BEST DAY
 
 PARTNERS AND FAMILY
 • Connect with your partner to see their roster next to yours and the days you are both home.
-• Not crew? Add your own work or busy time, or copy your phone calendar (only the times, never event names), and see when you are both free.
+• Copy your phone calendar (only the times, never event names) so we skip your busy times. Not crew? Add your own work or busy time too, and see when you are both free.
 
 CrewJio is independent and is not affiliated with any airline. It never changes your roster and never swaps duties for you.
 ```
@@ -93,7 +93,7 @@ The same list is built into the app's privacy manifest (`app.json`).
 - Does the app collect or share data? **Collects, does not share** (providers that process data for us, such as Supabase and Resend, are not "sharing").
 - Collected data types:
   - Personal info: **Name**, **Email address**, **Phone number**, **User IDs**
-  - Calendar: **Calendar events** (only for people who choose "copy my phone calendar": busy times, no titles)
+  - Calendar: **Calendar events** (only when someone taps "Copy your phone calendar": busy times, no titles)
   - App activity: **Other user-generated content** (roster)
 - Photos: processed ephemerally (roster screenshots are read and discarded), so they are **not** collected.
 - All data is **encrypted in transit**: Yes.
@@ -122,6 +122,6 @@ WHAT TO TRY
 
 NOTES
 • "Import whole month" reads screenshots of an airline's crew roster app, which reviewers will not have. Everything else works without it, and manual entry is on the + button. Screenshots are processed by an AI service to read the rows and are not stored.
-• Phone calendar access is only used when a non-crew user taps "Copy your phone calendar". It copies busy times only (no event names).
+• Phone calendar access is only used when a user taps "Copy your phone calendar" (crew and non-crew alike). It copies busy times only (no event names).
 • CrewJio is independent and not affiliated with any airline.
 ```
