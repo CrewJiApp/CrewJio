@@ -50,8 +50,8 @@ export default function PrivacyPage() {
             may see of you, any person you have chosen to show less to, and your connection with your partner.
           </li>
           <li>
-            <strong className="text-cloud">Busy times from your phone calendar</strong> (only if you are not crew and choose
-            to copy it): the start and end times of when you are busy. We never read or store event names, places or who is
+            <strong className="text-cloud">Busy times from your phone calendar</strong> (only if you choose to copy
+            it): the start and end times of when you are busy. We never read or store event names, places or who is
             invited.
           </li>
           <li>
