@@ -191,6 +191,7 @@ export function CodeEntryForm({
             <TextField label="Starts" value={start} onChangeText={setStart} placeholder="hh:mm" keyboardType="numbers-and-punctuation" mono maxLength={5} error={errors.start} style={styles.flex} />
             <TextField label="Ends" value={end} onChangeText={setEnd} placeholder="hh:mm" keyboardType="numbers-and-punctuation" mono maxLength={5} error={errors.end} style={styles.flex} />
           </View>
+          {onCall ? <Text style={type.small}>Add when it starts. If it starts early, friends and your partner can then see that the evening before is not free.</Text> : null}
           {onCall ? <WherePicker away={away} onAway={setAway} airport={airport} onAirport={setAirport} error={errors.where} /> : null}
         </>
       ) : null}

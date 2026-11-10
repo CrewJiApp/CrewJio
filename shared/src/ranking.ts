@@ -147,7 +147,11 @@ export function classifyPersonDays(roster: PersonRoster, start: IsoDate, end: Is
     return starts[0] ?? null;
   };
 
-  return dateRange(start, end).map((date): PersonDay => limitByNextDay(withBusy(date), nextStart(date)));
+  // A standby or reserve tomorrow with no start time saved: we can't tell if it starts early.
+  const untimedStandbyTomorrow = (date: IsoDate): boolean =>
+    duties.some((d) => d.date === addDays(date, 1) && (d.kind === 'standby' || d.kind === 'reserve') && !d.reportTime && !d.departTime);
+
+  return dateRange(start, end).map((date): PersonDay => limitByNextDay(withBusy(date), nextStart(date), untimedStandbyTomorrow(date)));
 }
 
 type DutyLike = PersonRoster['duties'][number];
@@ -161,7 +165,9 @@ const isTimedBusy = (d: DutyLike) => !!d.reportTime && !!d.arriveTime && !d.arri
  * only; a day that was free from the evening alone becomes busy. Someone just back from a
  * long-haul flight stays Tired, but without the evening (`noEvening`).
  */
-function limitByNextDay(day: PersonDay, nextStart: HHMM | null): PersonDay {
+function limitByNextDay(day: PersonDay, nextStart: HHMM | null, untimedStandby = false): PersonDay {
+  // Standby tomorrow with no start time: the day stays as it is, but says why it might be wrong.
+  if (!nextStart && untimedStandby && WINDOWS[day.status].e) return { ...day, note: `${day.note} · standby tomorrow, start time not set` };
   if (!nextStart || nextStart >= EARLY_START || !WINDOWS[day.status].e) return day;
   if (day.status === 'Great') {
     const note = day.note === 'Off' ? `Off, but reports ${nextStart} next morning` : `${day.note} · reports ${displayTime(nextStart)} next morning`;

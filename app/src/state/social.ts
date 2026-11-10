@@ -126,6 +126,16 @@ export function joinNames(people: Profile[], me: Profile): string {
 
 /** One line explaining a ranked day, e.g. "Mei and Jia back from turnarounds". */
 export function explainDay(day: RankedDay, people: Profile[], me: Profile): string {
+  const base = explainStatus(day, people, me);
+  // Someone is on standby tomorrow but has not set when it starts, so an early start can't be known.
+  const untimed = day.people.filter((p) => p.note.includes('start time not set')).map((p) => p.userId);
+  if (untimed.length === 0) return base;
+  const names = joinNames(untimed.map((id) => people.find((p) => p.id === id)).filter((p): p is Profile => !!p), me);
+  const verb = untimed.length > 1 || untimed[0] === me.id ? 'are' : 'is';
+  return `${base}. ${names} ${verb} on standby tomorrow, start time not set`;
+}
+
+function explainStatus(day: RankedDay, people: Profile[], me: Profile): string {
   const named = (ids: string[]) => joinNames(ids.map((id) => people.find((p) => p.id === id)).filter((p): p is Profile => !!p), me);
   const with_ = (status: string) => day.people.filter((p) => p.status === status);
   const plural = (ids: string[]) => ids.length > 1 || ids[0] === me.id;

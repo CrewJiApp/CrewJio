@@ -267,6 +267,7 @@ export default function AddDuty() {
                 <TextField label="From" value={start} onChangeText={setStart} placeholder="hh:mm" keyboardType="numbers-and-punctuation" mono maxLength={5} error={errors.start} style={styles.flex} />
                 <TextField label="Until" value={end} onChangeText={setEnd} placeholder="hh:mm" keyboardType="numbers-and-punctuation" mono maxLength={5} error={errors.end} style={styles.flex} />
               </View>
+              <Text style={type.small}>Add when it starts. If it starts early, friends and your partner can then see that the evening before is not free.</Text>
               <WherePicker away={standbyAway} onAway={setStandbyAway} airport={standbyAirport} onAirport={setStandbyAirport} error={errors.where} />
             </>
           ) : null}

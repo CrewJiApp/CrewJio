@@ -299,6 +299,17 @@ describe('an early start the next morning', () => {
     expect(day([standby('2026-12-16', '0600')], '2026-12-15').status).toBe('Daytime');
   });
 
+  it('a standby tomorrow with no start time is flagged, but the day stays as it was', () => {
+    const untimed = buildTimedDuty({ kind: 'standby', date: '2026-12-16' });
+    const r = day([buildOffDuty('2026-12-15'), untimed], '2026-12-15');
+    expect(r.status).toBe('Great');
+    expect(r.note).toBe('Off · standby tomorrow, start time not set');
+  });
+
+  it('a standby with a start time is not flagged', () => {
+    expect(day([buildOffDuty('2026-12-15'), standby('2026-12-16', '0900')], '2026-12-15').note).toBe('Off');
+  });
+
   it('a start at 07:00 or later changes nothing', () => {
     expect(day([buildOffDuty('2026-12-15'), standby('2026-12-16', '0700')], '2026-12-15').status).toBe('Great');
     expect(day([buildOffDuty('2026-12-15'), standby('2026-12-16', '0900')], '2026-12-15').status).toBe('Great');
