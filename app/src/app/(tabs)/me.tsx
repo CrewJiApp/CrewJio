@@ -1,4 +1,5 @@
 // Me: the saved profile, edit it, legal links, sign out, and delete the account (required by Apple and Google).
+import Constants from 'expo-constants';
 import { AIRLINE_LABELS, FLEETS, ROLE_LABELS, ranksForRole } from '@crewjio/shared';
 import { router } from 'expo-router';
 import { useState } from 'react';
@@ -13,6 +14,10 @@ import { PRIVACY_URL, SUPPORT_EMAIL, SUPPORT_URL, TERMS_URL } from '@/lib/links'
 import { useAuth } from '@/state/auth';
 import { useOnboarding } from '@/state/onboarding';
 import { colors, fonts, radius, space, type } from '@/theme';
+
+// Which build this is, e.g. "CrewJio 1.0.0 (10)": the build number is what TestFlight shows too.
+const BUILD = Constants.platform?.ios?.buildNumber;
+const VERSION_LINE = `CrewJio ${Constants.expoConfig?.version ?? ''}${BUILD ? ` (${BUILD})` : ''}`.trim();
 
 export default function MeTab() {
   const { profile, demo, signOut, deleteAccount } = useAuth();
@@ -119,6 +124,7 @@ export default function MeTab() {
 
         <Button label={busy ? 'Please wait…' : 'Sign out'} variant="text" disabled={busy} icon={<SignOutIcon size={20} color={colors.amber} />} onPress={confirmSignOut} />
         <Button label="Delete my account" variant="text" disabled={busy} icon={<TrashIcon size={20} color="#F07A7A" />} onPress={confirmDelete} />
+        <Text style={[type.small, styles.note]}>{VERSION_LINE}</Text>
         <Text style={[type.small, styles.note]}>Not affiliated with any airline.</Text>
       </ScrollView>
     </SafeAreaView>
