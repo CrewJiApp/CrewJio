@@ -24,7 +24,7 @@ export interface DayBadge {
   code: string | null;
 }
 
-type DutyLike = Pick<NewDuty, 'date' | 'kind' | 'sector'> & Partial<Pick<NewDuty, 'category' | 'code' | 'friendsLabel' | 'arriveDate'>>;
+type DutyLike = Pick<NewDuty, 'date' | 'kind' | 'sector'> & Partial<Pick<NewDuty, 'category' | 'code' | 'friendsLabel' | 'arriveDate' | 'reportTime' | 'departTime'>>;
 type HolidayLike = Pick<Holiday, 'kind' | 'startDate' | 'endDate'>;
 
 const HOLIDAY_CODE: Record<Holiday['kind'], string> = { holiday: 'HOL', annual_leave: 'AL', busy_personal: 'BUSY', reservist: 'NS' };
@@ -34,6 +34,20 @@ export function awayAirport(sector: string | null): string | null {
   if (!sector) return null;
   const ends = sector.split('-');
   return ends.find((a) => a !== BASE_AIRPORT) ?? ends[0] ?? null;
+}
+
+/**
+ * The airports away from base that a day touches, in the order they happen, at most two:
+ * "JNB CPT" for a layover in Johannesburg with a Cape Town shuttle, "BKK" for a turnaround.
+ */
+export function dayAirports(legs: DutyLike[]): string | null {
+  // A layover has no time, so it comes first; flights follow in the order they report or depart.
+  const when = (d: DutyLike) => d.reportTime ?? d.departTime ?? '';
+  const out: string[] = [];
+  for (const d of [...legs].sort((a, b) => when(a).localeCompare(when(b)))) {
+    for (const airport of (d.sector ?? '').split('-')) if (airport && airport !== BASE_AIRPORT && !out.includes(airport)) out.push(airport);
+  }
+  return out.length > 0 ? out.slice(0, 2).join(' ') : awayAirport(legs[0]?.sector ?? null);
 }
 
 /**
@@ -49,8 +63,8 @@ export function dayBadge(date: IsoDate, duties: DutyLike[], holidays: HolidayLik
   // Leave and reservist typed as roster codes are duties, but they win the same way.
   if (today.some((d) => d.category === 'national_service')) return { tone: 'leave', code: 'NS' };
   if (today.some((d) => d.category === 'leave')) return { tone: 'leave', code: 'AL' };
-  const away = today.find((d) => d.kind === 'flight' || d.kind === 'layover');
-  if (away) return { tone: 'flight', code: awayAirport(away.sector) };
+  const legs = today.filter((d) => d.kind === 'flight' || d.kind === 'layover');
+  if (legs.length > 0) return { tone: 'flight', code: dayAirports(legs) };
   const landing = duties.find((d) => d.kind === 'flight' && d.arriveDate === date && d.date !== date);
   if (landing) return { tone: 'flight', code: landing.sector?.split('-')[1] ?? null };
   const training = today.find((d) => d.kind === 'training' || d.kind === 'sim' || d.kind === 'ground_school');

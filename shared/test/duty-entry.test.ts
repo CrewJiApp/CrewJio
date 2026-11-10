@@ -265,3 +265,32 @@ describe('a trip that lands in the early hours', () => {
     expect(dayBadge('2026-11-13', turn, [])).toEqual({ tone: 'empty', code: null });
   });
 });
+
+describe('a day with more than one place in it', () => {
+  // Astro's shuttle: a layover in Johannesburg, out to Cape Town and back the same day.
+  const layover = { ...buildOffDuty('2026-12-26'), kind: 'layover' as const, category: 'layover' as const, sector: 'JNB' };
+  const out = { ...buildFlightDuties({ date: '2026-12-26', flightNumber: 'SQ 478', from: 'JNB', to: 'CPT', reportTime: '0610', departTime: '0710', arriveTime: '0925' })[0]! };
+  const back = { ...buildFlightDuties({ date: '2026-12-26', flightNumber: 'SQ 479', from: 'CPT', to: 'JNB', departTime: '1040', arriveTime: '1240' })[0]! };
+
+  it('shows both airports on the shuttle day', () => {
+    expect(dayBadge('2026-12-26', [layover, out, back], [])).toEqual({ tone: 'flight', code: 'JNB CPT' });
+  });
+
+  it('keeps them in the order they happen, whatever order they were added in', () => {
+    expect(dayBadge('2026-12-26', [back, out, layover], []).code).toBe('JNB CPT');
+  });
+
+  it('a layover day with nothing else still shows one airport', () => {
+    expect(dayBadge('2026-12-25', [{ ...layover, date: '2026-12-25' }], []).code).toBe('JNB');
+  });
+
+  it('a turnaround from Singapore shows only where she went', () => {
+    const turn = buildFlightDuties({ date: '2026-12-12', flightNumber: 'SQ 740', to: 'HKT', reportTime: '1635', departTime: '1835', arriveTime: '1935', returnFlight: { date: '2026-12-12', flightNumber: 'SQ 739', departTime: '2035', arriveTime: '2335' } });
+    expect(dayBadge('2026-12-12', turn, []).code).toBe('HKT');
+  });
+
+  it('shows at most two airports', () => {
+    const third = buildFlightDuties({ date: '2026-12-26', flightNumber: 'SQ 480', from: 'JNB', to: 'DUR', departTime: '1400', arriveTime: '1500' })[0]!;
+    expect(dayBadge('2026-12-26', [layover, out, back, third], []).code).toBe('JNB CPT');
+  });
+});

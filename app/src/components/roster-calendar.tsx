@@ -65,7 +65,7 @@ export function RosterCalendar({
                   pressed && { opacity: 0.75 },
                 ]}>
                 <Text style={[styles.num, { color: tone.fg }]}>{Number(date.slice(8))}</Text>
-                {badge.code ? <Text style={[styles.code, { color: tone.fg }]}>{badge.code}</Text> : null}
+                {badge.code ? <Text style={[styles.code, badge.code.length > 4 && styles.codeTwo, { color: tone.fg }]}>{badge.code}</Text> : null}
               </Pressable>
             );
           })}
@@ -112,6 +112,8 @@ const styles = StyleSheet.create({
   today: { borderColor: colors.cloud, borderWidth: 2.5 },
   num: { fontFamily: fonts.medium, fontSize: 17 },
   code: { fontFamily: fonts.monoBold, fontSize: 10.5, marginTop: 1, letterSpacing: 0.3 },
+  // Two airports, like "JNB CPT", in the same width.
+  codeTwo: { fontSize: 8.5, letterSpacing: 0 },
   legend: { flexDirection: 'row', flexWrap: 'wrap', columnGap: 12, rowGap: 6 },
   legendItem: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   swatch: { width: 12, height: 12, borderRadius: 3, borderWidth: 1.5 },
